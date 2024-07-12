@@ -74,7 +74,7 @@
                     break;
                 case "16":
                     exit = true;
-                    Environment.Exit(0); // Add this line to exit the console
+                    Environment.Exit(0);
                     break;
                 default:
                     Console.WriteLine("Invalid option. Try it again.");

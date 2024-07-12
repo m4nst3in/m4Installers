@@ -80,6 +80,8 @@ class MenuTools
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(winrarSaveLocation); // Delete the setup file
+
                     }
                 }
                 break;
@@ -146,6 +148,8 @@ class MenuTools
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(sevenZipSaveLocation); // Delete the setup file
+
                     }
                 }
                 break;
@@ -212,6 +216,8 @@ class MenuTools
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(aida64SaveLocation); // Delete the setup file
+
                     }
                 }
                 break;
@@ -278,6 +284,8 @@ class MenuTools
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(cpuZSaveLocation); // Delete the setup file
+
                     }
                 }
                 break;

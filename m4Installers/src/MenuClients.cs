@@ -78,6 +78,7 @@ class MenuClients
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(steamSaveLocation); // Delete the setup file
                     }
                 }
                 break;
@@ -143,6 +144,7 @@ class MenuClients
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(epicSaveLocation); // Delete the setup file
                     }
                 }
                 break;
@@ -208,6 +210,7 @@ class MenuClients
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(originSaveLocation); // Delete the setup file
                     }
                 }
                 break;
@@ -273,6 +276,7 @@ class MenuClients
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(gogSaveLocation); // Delete the setup file
                     }
                 }
                 break;

@@ -80,6 +80,7 @@ class MenuExtra
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(discordSaveLocation); // Delete the setup file
                     }
                 }
                 break;
@@ -146,6 +147,7 @@ class MenuExtra
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(telegramSaveLocation); // Delete the setup file
                     }
                 }
                 break;
@@ -212,6 +214,7 @@ class MenuExtra
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(githubSaveLocation); // Delete the setup file
                     }
                 }
                 break;
@@ -279,6 +282,7 @@ class MenuExtra
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(paintnetSaveLocation); // Delete the setup file
                     }
                 }
                 break;

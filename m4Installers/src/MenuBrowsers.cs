@@ -85,6 +85,7 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(braveSaveLocation);
                     }
                 }
 
@@ -151,11 +152,10 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(firefoxSaveLocation);
                     }
                 }
 
-                // Delete the setup file
-                File.Delete(firefoxSaveLocation);
                 break;
 
             case "3":
@@ -219,11 +219,10 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(vivaldiSaveLocation);
                     }
                 }
 
-                // Delete the setup file
-                File.Delete(vivaldiSaveLocation);
                 break;
 
             case "4":
@@ -288,11 +287,10 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(operaSaveLocation);
                     }
                 }
 
-                // Delete the setup file
-                File.Delete(operaSaveLocation);
                 break;
 
             case "5":
@@ -357,11 +355,14 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(operaGXSaveLocation);
                     }
                 }
 
-                // Delete the setup file
-                File.Delete(operaGXSaveLocation);
+                break;
+
+            default:
+                Console.WriteLine("Invalid option!");
                 break;
         }
     }

@@ -79,14 +79,45 @@ class MenuRuntimes
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(allinoneSaveLocation);
                     }
                 }
                 break;
 
             case "2":
                 Console.Clear();
-                string dotneturl = "https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net481-offline-installer";
-                string dotnetSaveLocation = "C:\\m4Installers\\Net481Setup.exe";
+                Console.WriteLine("Choose the version of .NET Framework to install:");
+                Console.WriteLine("[1] - .NET Framework 4.5.1");
+                Console.WriteLine("[2] - .NET Framework 4.6.1");
+                Console.WriteLine("[3] - .NET Framework 4.8.1");
+                Console.WriteLine("[4] - Return to main menu");
+
+                string dotnetVersionOption = Console.ReadLine();
+                string dotneturl = "";
+                string dotnetSaveLocation = "C:\\m4Installers\\NetSetup.exe";
+
+                switch (dotnetVersionOption)
+                {
+                    case "1":
+                        dotneturl = "https://download.microsoft.com/download/1/6/7/167F0D79-9317-48AE-AEDB-17120579F8E2/NDP451-KB2858728-x86-x64-AllOS-ENU.exe";
+                        break;
+                    case "2":
+                        dotneturl = "https://download.microsoft.com/download/E/4/1/E4173890-A24A-4936-9FC9-AF930FE3FA40/NDP461-KB3102436-x86-x64-AllOS-ENU.exe";
+                        break;
+                    case "3":
+                        dotneturl = "https://download.microsoft.com/download/4/b/2/cd00d4ed-ebdd-49ee-8a33-eabc3d1030e3/NDP481-x86-x64-AllOS-ENU.exe";
+                        break;
+                    case "4":
+                        Console.Clear();
+                        ShowMenu();
+                        return;
+                    default:
+                        Console.WriteLine("Invalid option. Try it again.");
+                        System.Threading.Thread.Sleep(2500);
+                        Console.Clear();
+                        ShowMenu();
+                        return;
+                }
                 Console.WriteLine("Downloading .NET Framework...");
 
                 // Download .NET Framework
@@ -144,20 +175,48 @@ class MenuRuntimes
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(dotnetSaveLocation);
                     }
                 }
                 break;
 
             case "3":
                 Console.Clear();
-                string vcurl = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
-                string vcSaveLocation = "C:\\m4Installers\\VcRedistSetup.exe";
-                Console.WriteLine("Downloading Visual C++ Redist...");
+                Console.WriteLine("Choose the version of Visual C++ Redistributable to install:");
+                Console.WriteLine("[1] - Visual C++ Redistributable 15-17-19-22 x64");
+                Console.WriteLine("[2] - Visual C++ Redistributable 15-17-19-22 x86");
+                Console.WriteLine("[3] - Return to main menu");
 
-                // Download Visual C++ Redist
+                string vcVersionOption = Console.ReadLine();
+                string vcUrl = "";
+
+                switch (vcVersionOption)
+                {
+                    case "1":
+                        vcUrl = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
+                        break;
+                    case "2":
+                        vcUrl = "https://aka.ms/vs/17/release/vc_redist.x86.exe";
+                        break;
+                    case "3":
+                        Console.Clear();
+                        ShowMenu();
+                        return;
+                    default:
+                        Console.WriteLine("Invalid option. Try it again.");
+                        System.Threading.Thread.Sleep(2500);
+                        Console.Clear();
+                        ShowMenu();
+                        return;
+                }
+
+                string vcSaveLocation = "C:\\m4Installers\\VcRedistSetup.exe";
+                Console.WriteLine("Downloading Visual C++ Redistributable...");
+
+                // Download Visual C++ Redistributable
                 using (HttpClient client = new HttpClient())
                 {
-                    using (HttpResponseMessage response = client.GetAsync(vcurl).Result)
+                    using (HttpResponseMessage response = client.GetAsync(vcUrl).Result)
                     {
                         using (HttpContent content = response.Content)
                         {
@@ -180,7 +239,7 @@ class MenuRuntimes
                                         {
                                             int progress = (int)((totalBytesRead * 100) / totalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -189,7 +248,7 @@ class MenuRuntimes
                     }
                 }
 
-                Console.WriteLine("\nVisual C++ was downloaded succesfully!");
+                Console.WriteLine("\nVisual C++ Redistributable was downloaded successfully!");
                 Process vcInstallerProcess = Process.Start(new ProcessStartInfo(vcSaveLocation) { UseShellExecute = true });
 
                 if (vcInstallerProcess != null && !vcInstallerProcess.HasExited)
@@ -209,6 +268,7 @@ class MenuRuntimes
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(vcSaveLocation);
                     }
                 }
                 break;
@@ -275,6 +335,7 @@ class MenuRuntimes
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(dxSaveLocation);
                     }
                 }
                 break;

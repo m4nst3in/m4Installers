@@ -79,6 +79,7 @@ class MenuAntivirus
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(avastSaveLocation);
                     }
                 }
                 break;
@@ -145,6 +146,7 @@ class MenuAntivirus
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(kasperskySaveLocation);
                     }
                 }
 
@@ -212,6 +214,7 @@ class MenuAntivirus
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(malwarebytesSaveLocation);
                     }
                 }
                 break;
@@ -278,6 +281,7 @@ class MenuAntivirus
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(bitdefenderSaveLocation);
                     }
                 }
                 break;

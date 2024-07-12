@@ -81,6 +81,7 @@ class MenuTextIDE
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(sublimeSaveLocation); // Delete the setup file
                     }
                 }
                 break;
@@ -147,6 +148,8 @@ class MenuTextIDE
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(notepadSaveLocation); // Delete the setup file
+
                     }
                 }
                 break;
@@ -213,6 +216,8 @@ class MenuTextIDE
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(vscodeSaveLocation); // Delete the setup file
+
                     }
                 }
                 break;
@@ -280,6 +285,8 @@ class MenuTextIDE
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
+                        File.Delete(jetbrainsSaveLocation); // Delete the setup file
+
                     }
                 }
                 break;
