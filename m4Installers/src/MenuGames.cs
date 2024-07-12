@@ -1,13 +1,8 @@
 ﻿using System.Diagnostics;
-using System.Net.Http;
-using System.IO;
-using System;
 
 class MenuGames
 {
-    private static readonly HttpClient httpClient = new HttpClient();
-
-    public static void ShowMenu()
+    public static async Task ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
@@ -31,36 +26,38 @@ class MenuGames
         switch (option)
         {
             case "1":
-                DownloadAndInstall("https://skmedix.pl/binaries/skl/3.2.8/x64/SKlauncher-3.2.exe", "SKLauncherSetup.exe");
+                await DownloadAndInstallAsync("https://skmedix.pl/binaries/skl/3.2.8/x64/SKlauncher-3.2.exe", "SKLauncherSetup.exe");
                 break;
             case "2":
-                DownloadAndInstall("https://github.com/PrismLauncher/PrismLauncher/releases/download/8.4/PrismLauncher-Windows-MSVC-Setup-8.4.exe", "PrismaSetup.exe");
+                await DownloadAndInstallAsync("https://github.com/PrismLauncher/PrismLauncher/releases/download/8.4/PrismLauncher-Windows-MSVC-Setup-8.4.exe", "PrismaSetup.exe");
                 break;
             case "3":
-                DownloadAndInstall("https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.14.1/Heroic-2.14.1-Setup-x64.exe", "HeroicSetup.exe");
+                await DownloadAndInstallAsync("https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.14.1/Heroic-2.14.1-Setup-x64.exe", "HeroicSetup.exe");
                 break;
             case "4":
-                DownloadAndInstall("https://github.com/JosefNemec/Playnite/releases/download/10.33/Playnite1033.exe", "PlayniteSetup.exe");
+                await DownloadAndInstallAsync("https://github.com/JosefNemec/Playnite/releases/download/10.33/Playnite1033.exe", "PlayniteSetup.exe");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                await Task.Delay(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                ShowMenu();
+                await ShowMenu();
                 break;
         }
     }
 
-    private static async void DownloadAndInstall(string url, string fileName)
+    private static async Task DownloadAndInstallAsync(string url, string fileName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
         Console.WriteLine($"Downloading {fileName}...");
 
-        using (HttpResponseMessage response = await httpClient.GetAsync(url))
+        using (HttpClient client = new HttpClient())
+
+        using (HttpResponseMessage response = await client.GetAsync(url))
         {
             using (Stream stream = await response.Content.ReadAsStreamAsync())
             {
@@ -73,7 +70,7 @@ class MenuGames
 
                     while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                     {
-                        fileStream.Write(buffer, 0, bytesRead);
+                        await fileStream.WriteAsync(buffer, 0, bytesRead);
                         totalBytesRead += bytesRead;
 
                         if (totalBytes > 0)

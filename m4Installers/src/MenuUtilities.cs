@@ -1,11 +1,8 @@
 ﻿using System.Diagnostics;
-using System.Net.Http;
-using System.IO;
-using System;
 
 class MenuUtilities
 {
-    public static void ShowMenu()
+    public static async Task ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
@@ -29,44 +26,44 @@ class MenuUtilities
         switch (option)
         {
             case "1":
-                DownloadAndInstall("CCleaner", "https://www.dropbox.com/scl/fi/5ytqjerss5wpmi2mz48vf/ccsetup625.exe?rlkey=rnr3b0r4pvwpoxbchlitw267s&st=ks9kk1lv&dl=1");
+                await DownloadAndInstall("CCleaner", "https://www.dropbox.com/scl/fi/5ytqjerss5wpmi2mz48vf/ccsetup625.exe?rlkey=rnr3b0r4pvwpoxbchlitw267s&st=ks9kk1lv&dl=1", "CCleanerInstaller.exe");
                 break;
             case "2":
-                DownloadAndInstall("PuTTY", "https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.81-installer.msi");
+                await DownloadAndInstall("PuTTY", "https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.81-installer.msi", "PuttyInstaller.msi");
                 break;
             case "3":
-                DownloadAndInstall("Filezilla", "https://download.filezilla-project.org/client/FileZilla_3.67.1_win64_sponsored2-setup.exe");
+                await DownloadAndInstall("Filezilla", "https://www.dropbox.com/scl/fi/ff5czb4u1c3tonxl5ozim/FileZilla_3.67.1_win64_sponsored2-setup.exe?rlkey=8o2is5rh7yobjqe26khj5d1o0&st=dxbcftmg&dl=1", "FilezillaInstaller.exe");
                 break;
             case "4":
-                DownloadAndInstall("Recuva", "https://github.com/paintdotnet/release/releases/download/v5.0.13/paint.net.5.0.13.install.anycpu.web.zip");
+                await DownloadAndInstall("Recuva", "https://download.ccleaner.com/rcsetup154.exe", "RecuvaInstaller.exe");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try it again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                await Task.Delay(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                ShowMenu();
+                await ShowMenu();
                 break;
         }
     }
 
-    private static void DownloadAndInstall(string softwareName, string url)
+    private static async Task DownloadAndInstall(string softwareName, string url, string fileName)
     {
         Console.Clear();
-        string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", $"{softwareName}Setup.exe");
+        string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
         Console.WriteLine($"Downloading {softwareName}...");
 
         using (HttpClient client = new HttpClient())
         {
-            var response = client.GetAsync(url).Result;
+            var response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
-                using (var stream = response.Content.ReadAsStreamAsync().Result)
+                using (var stream = await response.Content.ReadAsStreamAsync())
                 using (var fileStream = new FileStream(saveLocation, FileMode.Create))
                 {
-                    stream.CopyTo(fileStream);
+                    await stream.CopyToAsync(fileStream);
                 }
 
                 Console.WriteLine($"\n{softwareName} was downloaded successfully!");
@@ -92,6 +89,9 @@ class MenuUtilities
             else
             {
                 Console.WriteLine($"Failed to download {softwareName}. Please try again later.");
+                await Task.Delay(2500);
+                Console.Clear();
+                await ShowMenu();
             }
         }
     }

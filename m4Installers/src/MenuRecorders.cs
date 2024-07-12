@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 class MenuRecorders
 {
-    public static void ShowMenu()
+    public static async Task ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
@@ -24,30 +24,30 @@ class MenuRecorders
         switch (option)
         {
             case "1":
-                DownloadAndInstall("https://cdn-fastly.obsproject.com/downloads/OBS-Studio-30.1.2-Full-Installer-x64.exe", "OBSStudioSetup.exe");
+                await DownloadAndInstall("https://cdn-fastly.obsproject.com/downloads/OBS-Studio-30.1.2-Full-Installer-x64.exe", "OBSStudioSetup.exe");
                 break;
             case "2":
-                DownloadAndInstall("https://slobs-cdn.streamlabs.com/Streamlabs+Desktop+Setup+1.16.7.exe", "StreamlabsSetup.exe");
+                await DownloadAndInstall("https://slobs-cdn.streamlabs.com/Streamlabs+Desktop+Setup+1.16.7.exe", "StreamlabsSetup.exe");
                 break;
             case "3":
-                DownloadAndInstall("https://beepa.com/free/setup.exe", "FrapsSetup.exe");
+                await DownloadAndInstall("https://beepa.com/free/setup.exe", "FrapsSetup.exe");
                 break;
             case "4":
-                DownloadAndInstall("https://dl.bandicam.com/bdcamsetup.exe", "BandicamSetup.exe");
+                await DownloadAndInstall("https://dl.bandicam.com/bdcamsetup.exe", "BandicamSetup.exe");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                await Task.Delay(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                ShowMenu();
+                await ShowMenu();
                 break;
         }
     }
 
-    private static void DownloadAndInstall(string url, string fileName)
+    private static async Task DownloadAndInstall(string url, string fileName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
@@ -55,18 +55,18 @@ class MenuRecorders
 
         using (HttpClient client = new HttpClient())
         {
-            var response = client.GetAsync(url).Result;
+            var response = await client.GetAsync(url);
             var totalBytes = response.Content.Headers.ContentLength ?? -1L;
-            using (var stream = response.Content.ReadAsStreamAsync().Result)
+            using (var stream = await response.Content.ReadAsStreamAsync())
             using (var fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
             {
                 byte[] buffer = new byte[8192];
                 int bytesRead;
                 long totalBytesRead = 0;
 
-                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
-                    fileStream.Write(buffer, 0, bytesRead);
+                    await fileStream.WriteAsync(buffer, 0, bytesRead);
                     totalBytesRead += bytesRead;
 
                     if (totalBytes > 0)

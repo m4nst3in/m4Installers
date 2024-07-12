@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 class MenuTorrents
 {
-    public static void ShowMenu()
+    public static async Task ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
@@ -24,19 +24,19 @@ class MenuTorrents
         switch (option)
         {
             case "1":
-                DownloadAndInstall("https://download-hr.utorrent.com/track/beta/endpoint/utorrent/os/windows", "UTorrentSetup.exe");
+                await DownloadAndInstall("https://download-hr.utorrent.com/track/beta/endpoint/utorrent/os/windows", "UTorrentSetup.exe");
                 break;
 
             case "2":
-                DownloadAndInstall("https://download-new.utorrent.com/endpoint/bittorrent/os/windows/track/stable/", "BittorrentSetup.exe");
+                await DownloadAndInstall("https://download-new.utorrent.com/endpoint/bittorrent/os/windows/track/stable/", "BittorrentSetup.exe");
                 break;
 
             case "3":
-                DownloadAndInstall("https://www.dropbox.com/scl/fi/bbthely0e6m64nmmav0yj/qbittorrent_4.6.5_x64_setup.exe?rlkey=qg8wt0lll4l0ppda094todubk&st=7ee8soaw&dl=01", "QBittorrentSetup.exe");
+                await DownloadAndInstall("https://www.dropbox.com/scl/fi/bbthely0e6m64nmmav0yj/qbittorrent_4.6.5_x64_setup.exe?rlkey=qg8wt0lll4l0ppda094todubk&st=7ee8soaw&dl=01", "QBittorrentSetup.exe");
                 break;
 
             case "4":
-                DownloadAndInstall("https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6-x64.msi", "TransmissionSetup.msi");
+                await DownloadAndInstall("https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6-x64.msi", "TransmissionSetup.msi");
                 break;
 
             case "5":
@@ -45,14 +45,14 @@ class MenuTorrents
 
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                await Task.Delay(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                ShowMenu();
+                await ShowMenu();
                 break;
         }
     }
 
-    private static void DownloadAndInstall(string url, string fileName)
+    private static async Task DownloadAndInstall(string url, string fileName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
@@ -60,11 +60,11 @@ class MenuTorrents
 
         using (HttpClient client = new HttpClient())
         {
-            using (HttpResponseMessage response = client.GetAsync(url).Result)
+            using (HttpResponseMessage response = await client.GetAsync(url))
             {
                 using (HttpContent content = response.Content)
                 {
-                    using (Stream stream = content.ReadAsStreamAsync().Result)
+                    using (Stream stream = await content.ReadAsStreamAsync())
                     {
                         using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
                         {
@@ -73,9 +73,9 @@ class MenuTorrents
                             long totalBytesRead = 0;
                             long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-                            while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                             {
-                                fileStream.Write(buffer, 0, bytesRead);
+                                await fileStream.WriteAsync(buffer, 0, bytesRead);
                                 totalBytesRead += bytesRead;
 
                                 if (totalBytes > 0)

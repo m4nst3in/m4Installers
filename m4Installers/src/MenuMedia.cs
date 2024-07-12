@@ -1,11 +1,8 @@
 ﻿using System.Diagnostics;
-using System.Net.Http;
-using System.IO;
-using System;
 
 class MenuMedia
 {
-    public static void ShowMenu()
+    public static async Task ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
@@ -29,39 +26,39 @@ class MenuMedia
         switch (option)
         {
             case "1":
-                DownloadAndInstall("https://download.scdn.co/SpotifySetup.exe", "SpotifySetup.exe", "Spotify");
+                await DownloadAndInstall("https://download.scdn.co/SpotifySetup.exe", "SpotifySetup.exe", "Spotify");
                 break;
             case "2":
-                DownloadAndInstall("https://www.deezer.com/desktop/download?platform=win32&architecture=x86", "deezerSetup.exe", "Deezer");
+                await DownloadAndInstall("https://www.deezer.com/desktop/download?platform=win32&architecture=x86", "deezerSetup.exe", "Deezer");
                 break;
             case "3":
-                DownloadAndInstall("https://get.videolan.org/vlc/3.0.21/win32/vlc-3.0.21-win32.exe", "vlcSetup.exe", "VLC Media Player");
+                await DownloadAndInstall("https://get.videolan.org/vlc/3.0.21/win32/vlc-3.0.21-win32.exe", "vlcSetup.exe", "VLC Media Player");
                 break;
             case "4":
-                DownloadAndInstall("https://mirrors.kodi.tv/releases/windows/win64/kodi-21.0-Omega-x64.exe?https=1", "kodiSetup.exe", "Kodi");
+                await DownloadAndInstall("https://mirrors.kodi.tv/releases/windows/win64/kodi-21.0-Omega-x64.exe?https=1", "kodiSetup.exe", "Kodi");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                await Task.Delay(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                ShowMenu();
+                await ShowMenu();
                 break;
         }
     }
 
-    private static void DownloadAndInstall(string url, string fileName, string appName)
+    private static async Task DownloadAndInstall(string url, string fileName, string appName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
         Console.WriteLine($"Downloading {appName}...");
 
         using (HttpClient client = new HttpClient())
-        using (HttpResponseMessage response = client.GetAsync(url).Result)
+        using (HttpResponseMessage response = await client.GetAsync(url))
         using (HttpContent content = response.Content)
-        using (Stream stream = content.ReadAsStreamAsync().Result)
+        using (Stream stream = await content.ReadAsStreamAsync())
         using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
         {
             byte[] buffer = new byte[1024];
@@ -69,9 +66,9 @@ class MenuMedia
             long totalBytesRead = 0;
             long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-            while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
             {
-                fileStream.Write(buffer, 0, bytesRead);
+                await fileStream.WriteAsync(buffer, 0, bytesRead);
                 totalBytesRead += bytesRead;
 
                 if (totalBytes > 0)

@@ -1,11 +1,8 @@
 ﻿using System.Diagnostics;
-using System.Net.Http;
-using System.IO;
-using System;
 
 class MenuClients
 {
-    public static void ShowMenu()
+    public static async Task ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
@@ -30,30 +27,30 @@ class MenuClients
         switch (option)
         {
             case "1":
-                DownloadAndInstall("https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe", "SteamSetup.exe", "Steam");
+                await DownloadAndInstall("https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe", "SteamSetup.exe", "Steam");
                 break;
             case "2":
-                DownloadAndInstall("https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi", "EGSSetup.msi", "Epic Games Launcher");
+                await DownloadAndInstall("https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi", "EGSSetup.msi", "Epic Games Launcher");
                 break;
             case "3":
-                DownloadAndInstall("https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe", "OriginSetup.exe", "EA App");
+                await DownloadAndInstall("https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe", "OriginSetup.exe", "EA App");
                 break;
             case "4":
-                DownloadAndInstall("https://cdn.gog.com/open/galaxy/client/2.0.74.352/setup_galaxy_2.0.74.352.exe", "GOGSetup.exe", "GOG Galaxy");
+                await DownloadAndInstall("https://cdn.gog.com/open/galaxy/client/2.0.74.352/setup_galaxy_2.0.74.352.exe", "GOGSetup.exe", "GOG Galaxy");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(3000); // Add a delay of 3 seconds
+                await Task.Delay(3000); // Add a delay of 3 seconds
                 Console.Clear();
-                ShowMenu();
+                await ShowMenu();
                 break;
         }
     }
 
-    private static void DownloadAndInstall(string url, string fileName, string appName)
+    private static async Task DownloadAndInstall(string url, string fileName, string appName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
@@ -61,13 +58,13 @@ class MenuClients
 
         using (HttpClient client = new HttpClient())
         {
-            var response = client.GetAsync(url).Result;
+            var response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
-                using (var stream = response.Content.ReadAsStreamAsync().Result)
+                using (var stream = await response.Content.ReadAsStreamAsync())
                 using (var fileStream = new FileStream(saveLocation, FileMode.Create))
                 {
-                    stream.CopyTo(fileStream);
+                    await stream.CopyToAsync(fileStream);
                 }
 
                 Console.WriteLine($"\n{appName} was downloaded successfully!");

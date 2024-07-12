@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 class MenuTextIDE
 {
@@ -72,7 +70,7 @@ class MenuTextIDE
 
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
-                    fileStream.Write(buffer, 0, bytesRead);
+                    await fileStream.WriteAsync(buffer, 0, bytesRead);
                     totalBytesRead += bytesRead;
 
                     if (totalBytes > 0)

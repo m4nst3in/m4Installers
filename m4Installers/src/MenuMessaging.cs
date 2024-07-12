@@ -1,7 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Net.Http;
-using System.IO;
-using System;
 
 class MenuMessaging
 {
@@ -46,9 +43,9 @@ class MenuMessaging
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                await Task.Delay(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                ShowMenu();
+                await ShowMenu();
                 break;
         }
     }
@@ -63,12 +60,12 @@ class MenuMessaging
         {
             HttpResponseMessage response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
-            long totalBytes = response.Content.Headers.ContentLength ?? -1;
             using (Stream contentStream = await response.Content.ReadAsStreamAsync(), fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
             {
                 byte[] buffer = new byte[81920];
                 int bytesRead;
                 long totalBytesRead = 0;
+                long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
                 while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {

@@ -1,24 +1,16 @@
 ﻿using System.Diagnostics;
-using System.Net.Http;
-using System.IO;
-using System;
 
 class MenuDocuments
 {
-    public static void ShowMenu()
+    public static async Task ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
-
-
  ____                                        _       
 |  _ \  ___   ___ _   _ _ __ ___   ___ _ __ | |_ ___ 
 | | | |/ _ \ / __| | | | '_ ` _ \ / _ \ '_ \| __/ __|
 | |_| | (_) | (__| |_| | | | | | |  __/ | | | |_\__ \
 |____/ \___/ \___|\__,_|_| |_| |_|\___|_| |_|\__|___/
-
-
-
 
 ");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -33,30 +25,30 @@ class MenuDocuments
         switch (option)
         {
             case "1":
-                DownloadAndInstall("https://sourceforge.net/projects/openofficeorg.mirror/files/4.1.15/binaries/pt-BR/Apache_OpenOffice_4.1.15_Win_x86_install_pt-BR.exe/download", "OpenOfficeSetup.exe", "OpenOffice");
+                await DownloadAndInstall("https://sourceforge.net/projects/openofficeorg.mirror/files/4.1.15/binaries/pt-BR/Apache_OpenOffice_4.1.15_Win_x86_install_pt-BR.exe/download", "OpenOfficeSetup.exe", "OpenOffice");
                 break;
             case "2":
-                DownloadAndInstall("https://www.libreoffice.org/download/download/", "LibreOfficeSetup.exe", "LibreOffice Writer");
+                await DownloadAndInstall("https://www.libreoffice.org/download/download/", "LibreOfficeSetup.exe", "LibreOffice Writer");
                 break;
             case "3":
-                DownloadAndInstall("https://www.wps.com/office-free", "WPSOfficeSetup.exe", "WPS Office");
+                await DownloadAndInstall("https://www.wps.com/office-free", "WPSOfficeSetup.exe", "WPS Office");
                 break;
             case "4":
-                DownloadAndInstall("https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.5/Obsidian-1.6.5.exe", "ObsidianSetup.exe", "Obsidian (Vault)");
+                await DownloadAndInstall("https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.5/Obsidian-1.6.5.exe", "ObsidianSetup.exe", "Obsidian (Vault)");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                await Task.Delay(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                ShowMenu();
+                await ShowMenu();
                 break;
         }
     }
 
-    private static void DownloadAndInstall(string url, string fileName, string softwareName)
+    private static async Task DownloadAndInstall(string url, string fileName, string softwareName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
@@ -64,13 +56,13 @@ class MenuDocuments
 
         using (HttpClient client = new HttpClient())
         {
-            var response = client.GetAsync(url).Result;
+            var response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
-                using (var stream = response.Content.ReadAsStreamAsync().Result)
+                using (var stream = await response.Content.ReadAsStreamAsync())
                 using (var fileStream = new FileStream(saveLocation, FileMode.Create))
                 {
-                    stream.CopyTo(fileStream);
+                    await stream.CopyToAsync(fileStream);
                 }
 
                 Console.WriteLine($"\n{softwareName} was downloaded successfully!");

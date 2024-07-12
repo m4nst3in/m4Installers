@@ -1,6 +1,6 @@
 ﻿class Installers
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         Console.Title = "m4Installers - Install your essential programs with ease!"; // Set the console title to "m4Installers"
 
@@ -47,63 +47,63 @@
             {
                 case "1":
                     ClearConsole();
-                    MenuBrowsers.ShowMenu();
+                    await MenuBrowsers.ShowMenu();
                     break;
                 case "2":
                     ClearConsole();
-                    MenuTools.ShowMenu();
+                    await MenuTools.ShowMenu();
                     break;
                 case "3":
                     ClearConsole();
-                    MenuClients.ShowMenu();
+                    await MenuClients.ShowMenu();
                     break;
                 case "4":
                     ClearConsole();
-                    MenuRuntimes.ShowMenu();
+                    await MenuRuntimes.ShowMenu();
                     break;
                 case "5":
                     ClearConsole();
-                    MenuTextIDE.ShowMenu();
+                    await MenuTextIDE.ShowMenu();
                     break;
                 case "6":
                     ClearConsole();
-                    MenuAntivirus.ShowMenu();
+                    await MenuAntivirus.ShowMenu();
                     break;
                 case "7":
                     ClearConsole();
-                    MenuUtilities.ShowMenu();
+                    await MenuUtilities.ShowMenu();
                     break;
                 case "8":
                     ClearConsole();
-                    MenuGames.ShowMenu();
+                    await MenuGames.ShowMenu();
                     break;
                 case "9":
                     ClearConsole();
-                    MenuMessaging.ShowMenu();
+                    await MenuMessaging.ShowMenu();
                     break;
                 case "10":
                     ClearConsole();
-                    MenuMedia.ShowMenu();
+                    await MenuMedia.ShowMenu();
                     break;
                 case "11":
                     ClearConsole();
-                    MenuDocuments.ShowMenu();
+                    await MenuDocuments.ShowMenu();
                     break;
                 case "12":
                     ClearConsole();
-                    MenuTorrents.ShowMenu();
+                    await MenuTorrents.ShowMenu();
                     break;
                 case "13":
                     ClearConsole();
-                    MenuStorage.ShowMenu();
+                    await MenuStorage.ShowMenu();
                     break;
                 case "14":
                     ClearConsole();
-                    MenuRecorders.ShowMenu();
+                    await MenuRecorders.ShowMenu();
                     break;
                 case "15":
                     ClearConsole();
-                    MenuPVEditor.ShowMenu();
+                    await MenuPVEditor.ShowMenu();
                     break;
                 case "16":
                     exit = true;
@@ -111,7 +111,7 @@
                     break;
                 default:
                     Console.WriteLine("Invalid option. Try it again.");
-                    System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                    await Task.Delay(2500); // Add a delay of 2.5 seconds
                     Console.Clear();
                     break;
             }

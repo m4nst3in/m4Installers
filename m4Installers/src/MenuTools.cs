@@ -49,7 +49,7 @@ class MenuTools
                 Console.WriteLine("Invalid option. Try again.");
                 System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                ShowMenu();
+                await ShowMenu();
                 break;
         }
     }

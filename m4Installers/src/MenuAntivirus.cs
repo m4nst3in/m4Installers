@@ -2,7 +2,7 @@
 
 class MenuAntivirus
 {
-    public static void ShowMenu()
+    public static async Task ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
@@ -25,19 +25,19 @@ class MenuAntivirus
         switch (option)
         {
             case "1":
-                DownloadAndInstall("Avast", "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN/installertype_FULL/build_RELEASE/", "AvastSetup.exe");
+                await DownloadAndInstall("Avast", "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN/installertype_FULL/build_RELEASE/", "AvastSetup.exe");
                 break;
 
             case "2":
-                DownloadAndInstall("Kaspersky", "https://www.dropbox.com/scl/fi/mz69m452jlwbsjxedub7h/KasperskySetup.exe?rlkey=rw3nbq698ua3s9is53mt9zs1m&st=lvho0p8p&dl=1", "KasperskySetup.exe");
+                await DownloadAndInstall("Kaspersky", "https://www.dropbox.com/scl/fi/mz69m452jlwbsjxedub7h/KasperskySetup.exe?rlkey=rw3nbq698ua3s9is53mt9zs1m&st=lvho0p8p&dl=1", "KasperskySetup.exe");
                 break;
 
             case "3":
-                DownloadAndInstall("Malwarebytes", "https://www.malwarebytes.com/api/downloads/mb-windows?filename=MBSetup.exe&t=1720763650278", "Malwarebytesetup.exe");
+                await DownloadAndInstall("Malwarebytes", "https://www.malwarebytes.com/api/downloads/mb-windows?filename=MBSetup.exe&t=1720763650278", "Malwarebytesetup.exe");
                 break;
 
             case "4":
-                DownloadAndInstall("Bitdefender", "https://download.bitdefender.com/windows/installer/pt-br/bitdefender_avfree.exe", "BitdefenderSetup.exe");
+                await DownloadAndInstall("Bitdefender", "https://download.bitdefender.com/windows/installer/pt-br/bitdefender_avfree.exe", "BitdefenderSetup.exe");
                 break;
 
             case "5":
@@ -46,14 +46,14 @@ class MenuAntivirus
 
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                await Task.Delay(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                ShowMenu();
+                await ShowMenu();
                 break;
         }
     }
 
-    private static void DownloadAndInstall(string antivirusName, string downloadUrl, string fileName)
+    private static async Task DownloadAndInstall(string antivirusName, string downloadUrl, string fileName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
@@ -61,11 +61,11 @@ class MenuAntivirus
 
         using (HttpClient client = new HttpClient())
         {
-            using (HttpResponseMessage response = client.GetAsync(downloadUrl).Result)
+            using (HttpResponseMessage response = await client.GetAsync(downloadUrl))
             {
                 using (HttpContent content = response.Content)
                 {
-                    using (Stream stream = content.ReadAsStreamAsync().Result)
+                    using (Stream stream = await content.ReadAsStreamAsync())
                     {
                         using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
                         {
@@ -74,9 +74,9 @@ class MenuAntivirus
                             long totalBytesRead = 0;
                             long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-                            while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                             {
-                                fileStream.Write(buffer, 0, bytesRead);
+                                await fileStream.WriteAsync(buffer, 0, bytesRead);
                                 totalBytesRead += bytesRead;
 
                                 if (totalBytes > 0)
