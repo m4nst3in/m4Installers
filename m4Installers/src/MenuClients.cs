@@ -7,7 +7,9 @@ class MenuClients
 {
     public static void ShowMenu()
     {
-        Console.WriteLine("Game Clients");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Game Clients \n");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Steam");
         Console.WriteLine("[2] - Epic Games Launcher");
         Console.WriteLine("[3] - EA App (Origin)");
@@ -249,6 +251,9 @@ class MenuClients
         else
         {
             Console.WriteLine("Invalid option. Try it again.");
+            Thread.Sleep(3000); // Add a delay of 2 seconds
+            Console.Clear();
+            ShowMenu();
         }
     }
 }

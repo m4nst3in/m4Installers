@@ -4,7 +4,9 @@ class MenuAntivirus
 {
     public static void ShowMenu()
     {
-        Console.WriteLine("Antivirus");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Antivirus \n");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Avast");
         Console.WriteLine("[2] - Kaspersky");
         Console.WriteLine("[3] - MalwareBytes");
@@ -246,6 +248,9 @@ class MenuAntivirus
         else
         {
             Console.WriteLine("Invalid option. Try it again.");
+            Thread.Sleep(2500); // Add a delay of 2.5 seconds
+            Console.Clear();
+            ShowMenu();
         }
     }
 }

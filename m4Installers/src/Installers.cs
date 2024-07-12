@@ -5,6 +5,8 @@ class Installers
 {
     static void Main(string[] args)
     {
+        Console.Title = "m4Installers - Install your essential programs with ease!"; // Set the console title to "m4Installers"
+
         bool exit = false;
 
         static void ClearConsole()
@@ -15,7 +17,9 @@ class Installers
         Directory.CreateDirectory("C:\\m4Installers");
         while (!exit)
         {
-            Console.WriteLine("Select an option:");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Select an option: \n");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("[1] - Browsers");
             Console.WriteLine("[2] - Tools");
             Console.WriteLine("[3] - Game Clients");
@@ -63,6 +67,8 @@ class Installers
                     break;
                 default:
                     Console.WriteLine("Invalid option. Try it again.");
+                    Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                    Console.Clear();
                     break;
             }
         }

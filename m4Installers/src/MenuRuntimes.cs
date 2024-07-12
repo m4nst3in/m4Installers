@@ -7,7 +7,9 @@ class MenuRuntimes
 {
     public static void ShowMenu()
     {
-        Console.WriteLine("Runtimes");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Runtimes \n");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - AllinOne Runtimes");
         Console.WriteLine("[2] - .NET Framework");
         Console.WriteLine("[3] - Visual C++");
@@ -249,6 +251,9 @@ class MenuRuntimes
         else
         {
             Console.WriteLine("Invalid option. Try it again.");
+            Thread.Sleep(2500); // Add a delay of 2.5 seconds
+            Console.Clear();
+            ShowMenu();
         }
     }
 }

@@ -7,7 +7,9 @@ class MenuTools
 {
     public static void ShowMenu()
     {
-        Console.WriteLine("Tools");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Tools \n");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - WinRAR");
         Console.WriteLine("[2] - 7zip");
         Console.WriteLine("[3] - AIDA64");
@@ -249,6 +251,9 @@ class MenuTools
         else
         {
             Console.WriteLine("Invalid option. Try it again.");
+            Thread.Sleep(2500); // Add a delay of 2.5 seconds
+            Console.Clear();
+            ShowMenu();
         }
     }
 }

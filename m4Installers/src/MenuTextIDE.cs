@@ -7,12 +7,14 @@ class MenuTextIDE
 {
     public static void ShowMenu()
     {
-        Console.WriteLine("Text Editors/IDEs");
-        Console.WriteLine("1 - Sublime Text");
-        Console.WriteLine("2 - Notepad++");
-        Console.WriteLine("3 - Visual Studio Code");
-        Console.WriteLine("4 - JetBrains IDEs");
-        Console.WriteLine("5 - Return to Main Menu");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Text Editors/IDEs \n");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine("[1] - Sublime Text");
+        Console.WriteLine("[2] - Notepad++");
+        Console.WriteLine("[3] - Visual Studio Code");
+        Console.WriteLine("[4] - JetBrains IDEs");
+        Console.WriteLine("[5] - Return to Main Menu");
 
         string option = Console.ReadLine();
 
@@ -249,6 +251,9 @@ class MenuTextIDE
         else
         {
             Console.WriteLine("Invalid option. Try it again.");
+            Thread.Sleep(2500); // Add a delay of 2.5 seconds
+            Console.Clear();
+            ShowMenu();
         }
     }
 }

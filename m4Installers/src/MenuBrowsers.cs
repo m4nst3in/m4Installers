@@ -7,7 +7,9 @@ class MenuBrowsers
 {
     public static void ShowMenu()
     {
-        Console.WriteLine("Browsers");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Browsers \n");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Brave");
         Console.WriteLine("[2] - Firefox");
         Console.WriteLine("[3] - Vivaldi");
@@ -249,6 +251,9 @@ class MenuBrowsers
         else
         {
             Console.WriteLine("Invalid option. Try it again.");
+            Thread.Sleep(2500); // Add a delay of 2.5 seconds
+            Console.Clear();
+            ShowMenu();
         }
     }
 }

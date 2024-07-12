@@ -7,7 +7,9 @@ class MenuExtra
 {
     public static void ShowMenu()
     {
-        Console.WriteLine("Extra");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Extra \n");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Discord");
         Console.WriteLine("[2] - Telegram");
         Console.WriteLine("[3] - GitHub Desktop");
@@ -249,6 +251,9 @@ class MenuExtra
         else
         {
             Console.WriteLine("Invalid option. Try it again.");
+            Thread.Sleep(2500); // Add a delay of 2.5 seconds
+            Console.Clear();
+            ShowMenu();
         }
     }
 }
