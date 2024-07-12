@@ -72,6 +72,14 @@
                     ClearConsole();
                     MenuExtra.ShowMenu();
                     break;
+                case "8":
+                    ClearConsole();
+                    MenuGames.ShowMenu();
+                    break;
+                case "9":
+                    ClearConsole();
+                    MenuMessaging.ShowMenu();
+                    break;
                 case "16":
                     exit = true;
                     Environment.Exit(0);
