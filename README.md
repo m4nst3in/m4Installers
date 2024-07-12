@@ -50,7 +50,7 @@ Launch the application and follow the on-screen instructions to select and insta
 - **Web Browsers**: Brave, Firefox, Vivaldi, Opera, OperaGX, Google Chrome, Microsoft Edge, Thorium, Librewolf.
 - **Tools**: WinRAR, 7zip, AIDA64, CPU-Z.
 - **Game Clients**: Steam, Epic Games Launcher, EA App (Origin), GOG Galaxy.
-- **Runtimes**: All-in-one Runtimes, .NET Framework 4.*.*, Visual C++ Redistributable, DirectX.
+- **Runtimes**: All-in-one Runtimes, .NET Framework 4.x.x, Visual C++ Redistributable, DirectX.
 - **Text Editors/IDEs**: Sublime Text, Notepad++, Visual Studio Code, JetBrains Toolbox.
 - **Antivirus**: Avast, Kaspersky, MalwareBytes, Bitdefender.
 - **Utilities**: CCleaner, PuTTY, Filezilla, Recuva.
@@ -69,7 +69,7 @@ Launch the application and follow the on-screen instructions to select and insta
 - **I have a error. What i can do to solve it?** - You can freely open a issue or contribute to the code! You also can contact me via my Discord.
 - **Is this virus safe?** - Yes, it is. You can check the code for any malware yourself if you want.
 - **I have a suggestion. How i can contact you?** - You can contact me via my Discord: m4ns._
-- **I want my software removed from m4Installer.** - You can ask me to freely remove it, just contact me via Discord.
+- **I want my software removed from m4Installers.** - You can ask me to freely remove it, just contact me via Discord.
 
 ## Contributing
 
