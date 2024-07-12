@@ -92,7 +92,7 @@ class MenuAntivirus
         }
 
         Console.WriteLine($"\n{antivirusName} was downloaded successfully!");
-        Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
         if (installerProcess != null && !installerProcess.HasExited)
         {
@@ -103,13 +103,15 @@ class MenuAntivirus
             if (installerProcess.ExitCode == 0)
             {
                 Console.WriteLine("Installation was concluded with success!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
             else
             {
                 Console.WriteLine("Installation has failed!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
-            Console.Clear();
-            File.Delete(saveLocation);
         }
     }
 }

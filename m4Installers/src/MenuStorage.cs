@@ -58,7 +58,7 @@ class MenuStorage
         }
     }
 
-    private static async Task DownloadAndInstall(string url, string fileName, string appName)
+    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
@@ -66,13 +66,14 @@ class MenuStorage
 
         using (HttpClient client = new HttpClient())
         {
-            using (HttpResponseMessage response = await client.GetAsync(url))
+            using (HttpResponseMessage response = await client.GetAsync(downloadUrl))
             {
                 using (HttpContent content = response.Content)
                 {
                     using (Stream stream = await content.ReadAsStreamAsync())
                     {
-                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
+                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write,
+                                   FileShare.None))
                         {
                             byte[] buffer = new byte[1024];
                             int bytesRead;
@@ -87,7 +88,8 @@ class MenuStorage
                                 if (totalBytes > 0)
                                 {
                                     int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                    Console.Write($"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                                    Console.Write(
+                                        $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                 }
                             }
                         }
@@ -97,7 +99,7 @@ class MenuStorage
         }
 
         Console.WriteLine($"\n{appName} was downloaded successfully!");
-        Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
         if (installerProcess != null && !installerProcess.HasExited)
         {
@@ -108,13 +110,15 @@ class MenuStorage
             if (installerProcess.ExitCode == 0)
             {
                 Console.WriteLine("Installation was concluded with success!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
             else
             {
                 Console.WriteLine("Installation has failed!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
-            Console.Clear();
-            File.Delete(saveLocation); // Delete the setup file
         }
     }
 }

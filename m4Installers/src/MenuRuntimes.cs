@@ -27,7 +27,7 @@ class MenuRuntimes
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://media.computerbase.de/s/GMGpZJyVj9vYs5IosY2y_w/1720764360/download/758/aio-runtimes_v2.5.0.exe", "AIOSetup.exe");
+                await DownloadAndInstall("https://media.computerbase.de/s/GMGpZJyVj9vYs5IosY2y_w/1720764360/download/758/aio-runtimes_v2.5.0.exe", "AIOSetup.exe", "AllInOneRuntimes");
                 break;
 
             case "2":
@@ -39,7 +39,7 @@ class MenuRuntimes
                 break;
 
             case "4":
-                await DownloadAndInstall("https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe", "DXWebSetup.exe");
+                await DownloadAndInstall("https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe", "DXWebSetup.exe", "DirectX");
                 break;
 
             case "5":
@@ -55,62 +55,67 @@ class MenuRuntimes
         }
     }
 
-    private static async Task DownloadAndInstall(string url, string fileName)
+    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
     {
         Console.Clear();
-        string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "m4Installers", fileName);
-        Console.WriteLine($"Downloading {fileName}...");
+        string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
+        Console.WriteLine($"Downloading {appName}...");
 
         using (HttpClient client = new HttpClient())
         {
-
-            HttpResponseMessage response = await client.GetAsync(url);
-            Stream stream = await response.Content.ReadAsStreamAsync();
-            FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None);
-
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            long totalBytesRead = 0;
-            long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+            using (HttpResponseMessage response = await client.GetAsync(downloadUrl))
             {
-                await fileStream.WriteAsync(buffer, 0, bytesRead);
-                totalBytesRead += bytesRead;
-
-                if (totalBytes > 0)
+                using (HttpContent content = response.Content)
                 {
-                    int progress = (int)((totalBytesRead * 100) / totalBytes);
-                    Console.Write(
-                        $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                    using (Stream stream = await content.ReadAsStreamAsync())
+                    {
+                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write,
+                                   FileShare.None))
+                        {
+                            byte[] buffer = new byte[1024];
+                            int bytesRead;
+                            long totalBytesRead = 0;
+                            long totalBytes = response.Content.Headers.ContentLength ?? -1;
+
+                            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                            {
+                                await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                totalBytesRead += bytesRead;
+
+                                if (totalBytes > 0)
+                                {
+                                    int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                    Console.Write(
+                                        $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                                }
+                            }
+                        }
+                    }
                 }
             }
+        }
 
-            fileStream.Close();
-            stream.Close();
-            response.Dispose();
+        Console.WriteLine($"\n{fileName} was downloaded successfully!");
+        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
-            Console.WriteLine($"\n{fileName} was downloaded successfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+        if (installerProcess != null && !installerProcess.HasExited)
+        {
+            Console.WriteLine("Installing...");
+            installerProcess.WaitForExit();
 
-            if (installerProcess != null && !installerProcess.HasExited)
+            if (installerProcess.ExitCode == 0)
             {
-                Console.WriteLine("Installing...");
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
-                {
-                    Console.WriteLine("Installation was concluded with success!");
-                }
-                else
-                {
-                    Console.WriteLine("Installation has failed!");
-                }
-
+                Console.WriteLine("Installation was concluded with success!");
                 Console.Clear();
-                File.Delete(saveLocation);
+                File.Delete(saveLocation); // Delete the setup file
             }
+            else
+            {
+                Console.WriteLine("Installation has failed!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
+            }
+
         }
     }
 
@@ -148,7 +153,7 @@ class MenuRuntimes
                 await ShowMenu();
                 return;
         }
-        await DownloadAndInstall(dotneturl, "DotNetSetup.exe");
+        await DownloadAndInstall(dotneturl, "DotNetSetup.exe", ".NET Framework");
     }
 
     private static async Task HandleVisualCPlusPlusInstallation()
@@ -181,6 +186,6 @@ class MenuRuntimes
                 await ShowMenu();
                 return;
         }
-        await DownloadAndInstall(vcUrl, "VCRSetup.exe");
+        await DownloadAndInstall(vcUrl, "VCRSetup.exe", "Visual C++ Redistributable");
     }
 }

@@ -54,24 +54,48 @@ class MenuTools
         }
     }
 
-    private static async Task DownloadAndInstall(string softwareName, string url, string fileName)
+    private static async Task DownloadAndInstall(string appName, string downloadUrl, string fileName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
-        Console.WriteLine($"Downloading {softwareName}...");
+        Console.WriteLine($"Downloading {appName}...");
 
         using (HttpClient client = new HttpClient())
         {
-            HttpResponseMessage response = await client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
+            using (HttpResponseMessage response = await client.GetAsync(downloadUrl))
             {
-                using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (HttpContent content = response.Content)
                 {
-                    await response.Content.CopyToAsync(fileStream);
-                }
+                    using (Stream stream = await content.ReadAsStreamAsync())
+                    {
+                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write,
+                                   FileShare.None))
+                        {
+                            byte[] buffer = new byte[1024];
+                            int bytesRead;
+                            long totalBytesRead = 0;
+                            long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-                Console.WriteLine($"\n{softwareName} was downloaded successfully!");
-                Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                            {
+                                await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                totalBytesRead += bytesRead;
+
+                                if (totalBytes > 0)
+                                {
+                                    int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                    Console.Write(
+                                        $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        Console.WriteLine($"\n{appName} was downloaded successfully!");
+                Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
                 if (installerProcess != null && !installerProcess.HasExited)
                 {
@@ -81,19 +105,19 @@ class MenuTools
                     if (installerProcess.ExitCode == 0)
                     {
                         Console.WriteLine("Installation was concluded with success!");
-                    }
+                        Console.Clear();
+                        File.Delete(saveLocation); // Delete the setup file
+            }
                     else
                     {
                         Console.WriteLine("Installation has failed!");
-                    }
-                    Console.Clear();
-                    File.Delete(saveLocation); // Delete the setup file
-                }
+                        Console.Clear();
+                        File.Delete(saveLocation); // Delete the setup file
             }
+                }
             else
             {
-                Console.WriteLine($"Failed to download {softwareName}. Please try again.");
+                Console.WriteLine($"Failed to download {appName}. Please try again.");
             }
         }
     }
-}

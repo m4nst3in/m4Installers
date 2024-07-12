@@ -26,16 +26,16 @@ class MenuGames
         switch (option)
         {
             case "1":
-                await DownloadAndInstallAsync("https://skmedix.pl/binaries/skl/3.2.8/x64/SKlauncher-3.2.exe", "SKLauncherSetup.exe");
+                await DownloadAndInstall("https://skmedix.pl/binaries/skl/3.2.8/x64/SKlauncher-3.2.exe", "SKLauncherSetup.exe", "SKLauncher");
                 break;
             case "2":
-                await DownloadAndInstallAsync("https://github.com/PrismLauncher/PrismLauncher/releases/download/8.4/PrismLauncher-Windows-MSVC-Setup-8.4.exe", "PrismaSetup.exe");
+                await DownloadAndInstall("https://github.com/PrismLauncher/PrismLauncher/releases/download/8.4/PrismLauncher-Windows-MSVC-Setup-8.4.exe", "PrismaSetup.exe", "Prisma Launcher");
                 break;
             case "3":
-                await DownloadAndInstallAsync("https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.14.1/Heroic-2.14.1-Setup-x64.exe", "HeroicSetup.exe");
+                await DownloadAndInstall("https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.14.1/Heroic-2.14.1-Setup-x64.exe", "HeroicSetup.exe", "Heroic Games Launcher");
                 break;
             case "4":
-                await DownloadAndInstallAsync("https://github.com/JosefNemec/Playnite/releases/download/10.33/Playnite1033.exe", "PlayniteSetup.exe");
+                await DownloadAndInstall("https://github.com/JosefNemec/Playnite/releases/download/10.33/Playnite1033.exe", "PlayniteSetup.exe", "Playnite");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
@@ -49,34 +49,40 @@ class MenuGames
         }
     }
 
-    private static async Task DownloadAndInstallAsync(string url, string fileName)
+    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
-        Console.WriteLine($"Downloading {fileName}...");
+        Console.WriteLine($"Downloading {appName}...");
 
         using (HttpClient client = new HttpClient())
-
-        using (HttpResponseMessage response = await client.GetAsync(url))
         {
-            using (Stream stream = await response.Content.ReadAsStreamAsync())
+            using (HttpResponseMessage response = await client.GetAsync(downloadUrl))
             {
-                using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (HttpContent content = response.Content)
                 {
-                    byte[] buffer = new byte[1024];
-                    int bytesRead;
-                    long totalBytesRead = 0;
-                    long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                    while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                    using (Stream stream = await content.ReadAsStreamAsync())
                     {
-                        await fileStream.WriteAsync(buffer, 0, bytesRead);
-                        totalBytesRead += bytesRead;
-
-                        if (totalBytes > 0)
+                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write,
+                                   FileShare.None))
                         {
-                            int progress = (int)((totalBytesRead * 100) / totalBytes);
-                            Console.Write($"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                            byte[] buffer = new byte[1024];
+                            int bytesRead;
+                            long totalBytesRead = 0;
+                            long totalBytes = response.Content.Headers.ContentLength ?? -1;
+
+                            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                            {
+                                await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                totalBytesRead += bytesRead;
+
+                                if (totalBytes > 0)
+                                {
+                                    int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                    Console.Write(
+                                        $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                                }
+                            }
                         }
                     }
                 }
@@ -84,7 +90,7 @@ class MenuGames
         }
 
         Console.WriteLine($"\n{fileName} was downloaded successfully!");
-        Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
         if (installerProcess != null && !installerProcess.HasExited)
         {
@@ -101,6 +107,10 @@ class MenuGames
             }
             Console.Clear();
             File.Delete(saveLocation); // Delete the setup file
+        }
+        else
+        {
+            Console.WriteLine($"Failed to download {appName}. Please try again.");
         }
     }
 }

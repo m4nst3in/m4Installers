@@ -24,16 +24,16 @@ class MenuRecorders
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://cdn-fastly.obsproject.com/downloads/OBS-Studio-30.1.2-Full-Installer-x64.exe", "OBSStudioSetup.exe");
+                await DownloadAndInstall("https://cdn-fastly.obsproject.com/downloads/OBS-Studio-30.1.2-Full-Installer-x64.exe", "OBSStudioSetup.exe", "OBSStudio");
                 break;
             case "2":
-                await DownloadAndInstall("https://slobs-cdn.streamlabs.com/Streamlabs+Desktop+Setup+1.16.7.exe", "StreamlabsSetup.exe");
+                await DownloadAndInstall("https://slobs-cdn.streamlabs.com/Streamlabs+Desktop+Setup+1.16.7.exe", "StreamlabsSetup.exe", "Streamlabs");
                 break;
             case "3":
-                await DownloadAndInstall("https://beepa.com/free/setup.exe", "FrapsSetup.exe");
+                await DownloadAndInstall("https://beepa.com/free/setup.exe", "FrapsSetup.exe", "Fraps");
                 break;
             case "4":
-                await DownloadAndInstall("https://dl.bandicam.com/bdcamsetup.exe", "BandicamSetup.exe");
+                await DownloadAndInstall("https://dl.bandicam.com/bdcamsetup.exe", "BandicamSetup.exe", "Bandicam");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
@@ -47,39 +47,48 @@ class MenuRecorders
         }
     }
 
-    private static async Task DownloadAndInstall(string url, string fileName)
+    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
-        Console.WriteLine($"Downloading {fileName}...");
+        Console.WriteLine($"Downloading {appName}...");
 
         using (HttpClient client = new HttpClient())
         {
-            var response = await client.GetAsync(url);
-            var totalBytes = response.Content.Headers.ContentLength ?? -1L;
-            using (var stream = await response.Content.ReadAsStreamAsync())
-            using (var fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
+            using (HttpResponseMessage response = await client.GetAsync(downloadUrl))
             {
-                byte[] buffer = new byte[8192];
-                int bytesRead;
-                long totalBytesRead = 0;
-
-                while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                using (HttpContent content = response.Content)
                 {
-                    await fileStream.WriteAsync(buffer, 0, bytesRead);
-                    totalBytesRead += bytesRead;
-
-                    if (totalBytes > 0)
+                    using (Stream stream = await content.ReadAsStreamAsync())
                     {
-                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                        Console.Write($"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write,
+                                   FileShare.None))
+                        {
+                            byte[] buffer = new byte[1024];
+                            int bytesRead;
+                            long totalBytesRead = 0;
+                            long totalBytes = response.Content.Headers.ContentLength ?? -1;
+
+                            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                            {
+                                await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                totalBytesRead += bytesRead;
+
+                                if (totalBytes > 0)
+                                {
+                                    int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                    Console.Write(
+                                        $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
 
         Console.WriteLine($"\n{fileName} was downloaded successfully!");
-        Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
         if (installerProcess != null && !installerProcess.HasExited)
         {
@@ -89,13 +98,15 @@ class MenuRecorders
             if (installerProcess.ExitCode == 0)
             {
                 Console.WriteLine("Installation was concluded with success!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
             else
             {
                 Console.WriteLine("Installation has failed!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
-            Console.Clear();
-            File.Delete(saveLocation); // Delete the setup file
         }
     }
 }

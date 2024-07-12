@@ -24,19 +24,19 @@ class MenuTorrents
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://download-hr.utorrent.com/track/beta/endpoint/utorrent/os/windows", "UTorrentSetup.exe");
+                await DownloadAndInstall("https://download-hr.utorrent.com/track/beta/endpoint/utorrent/os/windows", "UTorrentSetup.exe", "UTorrent");
                 break;
 
             case "2":
-                await DownloadAndInstall("https://download-new.utorrent.com/endpoint/bittorrent/os/windows/track/stable/", "BittorrentSetup.exe");
+                await DownloadAndInstall("https://download-new.utorrent.com/endpoint/bittorrent/os/windows/track/stable/", "BittorrentSetup.exe", "BitTorrent");
                 break;
 
             case "3":
-                await DownloadAndInstall("https://www.dropbox.com/scl/fi/bbthely0e6m64nmmav0yj/qbittorrent_4.6.5_x64_setup.exe?rlkey=qg8wt0lll4l0ppda094todubk&st=7ee8soaw&dl=01", "QBittorrentSetup.exe");
+                await DownloadAndInstall("https://www.dropbox.com/scl/fi/bbthely0e6m64nmmav0yj/qbittorrent_4.6.5_x64_setup.exe?rlkey=qg8wt0lll4l0ppda094todubk&st=7ee8soaw&dl=01", "QBittorrentSetup.exe", "qBitTorrent");
                 break;
 
             case "4":
-                await DownloadAndInstall("https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6-x64.msi", "TransmissionSetup.msi");
+                await DownloadAndInstall("https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6-x64.msi", "TransmissionSetup.msi", "Transmission");
                 break;
 
             case "5":
@@ -52,21 +52,22 @@ class MenuTorrents
         }
     }
 
-    private static async Task DownloadAndInstall(string url, string fileName)
+    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
-        Console.WriteLine($"Downloading {fileName}...");
+        Console.WriteLine($"Downloading {appName}...");
 
         using (HttpClient client = new HttpClient())
         {
-            using (HttpResponseMessage response = await client.GetAsync(url))
+            using (HttpResponseMessage response = await client.GetAsync(downloadUrl))
             {
                 using (HttpContent content = response.Content)
                 {
                     using (Stream stream = await content.ReadAsStreamAsync())
                     {
-                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
+                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write,
+                                   FileShare.None))
                         {
                             byte[] buffer = new byte[1024];
                             int bytesRead;
@@ -81,7 +82,8 @@ class MenuTorrents
                                 if (totalBytes > 0)
                                 {
                                     int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                    Console.Write($"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                                    Console.Write(
+                                        $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                 }
                             }
                         }
@@ -91,7 +93,7 @@ class MenuTorrents
         }
 
         Console.WriteLine($"\n{fileName} was downloaded successfully!");
-        Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
         if (installerProcess != null && !installerProcess.HasExited)
         {
