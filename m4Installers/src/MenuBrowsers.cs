@@ -8,7 +8,7 @@ class MenuBrowsers
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Browsers \n");
+        Console.WriteLine("Browsers\n");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Brave");
         Console.WriteLine("[2] - Firefox");

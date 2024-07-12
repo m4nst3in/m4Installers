@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-
-
-class Installers
+﻿class Installers
 {
     static void Main(string[] args)
     {
@@ -18,16 +15,26 @@ class Installers
         while (!exit)
         {
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Select an option: \n");
+            Console.WriteLine(@"
+                ███    ███ ██   ██ ██ ███    ██ ███████ ████████  █████  ██      ██      ███████ ██████  
+                ████  ████ ██   ██ ██ ████   ██ ██         ██    ██   ██ ██      ██      ██      ██   ██ 
+                ██ ████ ██ ███████ ██ ██ ██  ██ ███████    ██    ███████ ██      ██      █████   ██████  
+                ██  ██  ██      ██ ██ ██  ██ ██      ██    ██    ██   ██ ██      ██      ██      ██   ██ 
+                ██      ██      ██ ██ ██   ████ ███████    ██    ██   ██ ███████ ███████ ███████ ██   ██ 
+
+
+                                                  Select an option: 
+
+");                                            
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("[1] - Browsers");
-            Console.WriteLine("[2] - Tools");
-            Console.WriteLine("[3] - Game Clients");
-            Console.WriteLine("[4] - Runtimes");
-            Console.WriteLine("[5] - Text Editors/IDE");
-            Console.WriteLine("[6] - Anti-Virus");
-            Console.WriteLine("[7] - Extra");
-            Console.WriteLine("[8] - Exit");
+            Console.WriteLine("                                [1] - Browsers                  [9]  - Messaging");
+            Console.WriteLine("                                [2] - Tools                     [10] - Media");
+            Console.WriteLine("                                [3] - Game Clients              [11] - Documents");
+            Console.WriteLine("                                [4] - Runtimes                  [12] - Torrent Clients");
+            Console.WriteLine("                                [5] - Text Editors/IDE          [13] - File Storage");
+            Console.WriteLine("                                [6] - Anti-Virus                [14] - Youtube Downloader");
+            Console.WriteLine("                                [7] - Utilities                 [15] - Photo Editors");
+            Console.WriteLine("                                [8] - Games                     [16] - Exit");
 
             string option = Console.ReadLine();
 
@@ -61,7 +68,7 @@ class Installers
                     ClearConsole();
                     MenuExtra.ShowMenu();
                     break;
-                case "8":
+                case "16":
                     exit = true;
                     Environment.Exit(0); // Add this line to exit the console
                     break;

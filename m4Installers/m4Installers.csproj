@@ -13,4 +13,8 @@
     <Content Include="src\icon\icon.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ConsoleHelper" Version="1.2.0" />
+  </ItemGroup>
+
 </Project>
