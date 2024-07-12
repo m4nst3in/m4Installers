@@ -30,7 +30,7 @@ class MenuBrowsers
                 string braveSaveLocation = "C:\\m4Installers\\BraveSetup.exe";
                 Console.WriteLine("Downloading Brave...");
 
-                // Download Brave installer
+                // Download Brave
                 using (HttpClient braveClient = new HttpClient())
                 {
                     using (HttpResponseMessage braveResponse = braveClient.GetAsync(braveUrl).Result)
@@ -47,13 +47,11 @@ class MenuBrowsers
                                     long braveTotalBytesRead = 0;
                                     long braveTotalBytes = braveResponse.Content.Headers.ContentLength ?? -1;
 
-                                    // Write downloaded bytes to file
                                     while ((braveBytesRead = braveStream.Read(braveBuffer, 0, braveBuffer.Length)) > 0)
                                     {
                                         braveFileStream.Write(braveBuffer, 0, braveBytesRead);
                                         braveTotalBytesRead += braveBytesRead;
 
-                                        // Display download progress
                                         if (braveTotalBytes > 0)
                                         {
                                             int braveProgress = (int)((braveTotalBytesRead * 100) / braveTotalBytes);
@@ -98,7 +96,7 @@ class MenuBrowsers
                 string firefoxSaveLocation = "C:\\m4Installers\\FirefoxSetup.exe";
                 Console.WriteLine("Downloading Firefox...");
 
-                // Download Firefox installer
+                // Download Firefox
                 using (HttpClient firefoxClient = new HttpClient())
                 {
                     using (HttpResponseMessage firefoxResponse = firefoxClient.GetAsync(firefoxUrl).Result)
@@ -115,13 +113,11 @@ class MenuBrowsers
                                     long firefoxTotalBytesRead = 0;
                                     long firefoxTotalBytes = firefoxResponse.Content.Headers.ContentLength ?? -1;
 
-                                    // Write downloaded bytes to file
                                     while ((firefoxBytesRead = firefoxStream.Read(firefoxBuffer, 0, firefoxBuffer.Length)) > 0)
                                     {
                                         firefoxFileStream.Write(firefoxBuffer, 0, firefoxBytesRead);
                                         firefoxTotalBytesRead += firefoxBytesRead;
 
-                                        // Display download progress
                                         if (firefoxTotalBytes > 0)
                                         {
                                             int firefoxProgress = (int)((firefoxTotalBytesRead * 100) / firefoxTotalBytes);
@@ -168,7 +164,7 @@ class MenuBrowsers
                 string vivaldiSaveLocation = "C:\\m4Installers\\VivaldiSetup.exe";
                 Console.WriteLine("Downloading Vivaldi...");
 
-                // Download Vivaldi installer
+                // Download Vivaldi
                 using (HttpClient vivaldiClient = new HttpClient())
                 {
                     using (HttpResponseMessage vivaldiResponse = vivaldiClient.GetAsync(vivaldiUrl).Result)
@@ -185,13 +181,11 @@ class MenuBrowsers
                                     long vivaldiTotalBytesRead = 0;
                                     long vivaldiTotalBytes = vivaldiResponse.Content.Headers.ContentLength ?? -1;
 
-                                    // Write downloaded bytes to file
                                     while ((vivaldiBytesRead = vivaldiStream.Read(vivaldiBuffer, 0, vivaldiBuffer.Length)) > 0)
                                     {
                                         vivaldiFileStream.Write(vivaldiBuffer, 0, vivaldiBytesRead);
                                         vivaldiTotalBytesRead += vivaldiBytesRead;
 
-                                        // Display download progress
                                         if (vivaldiTotalBytes > 0)
                                         {
                                             int vivaldiProgress = (int)((vivaldiTotalBytesRead * 100) / vivaldiTotalBytes);
@@ -239,7 +233,7 @@ class MenuBrowsers
                 string operaSaveLocation = "C:\\m4Installers\\OperaSetup.exe";
                 Console.WriteLine("Downloading Opera...");
 
-                // Download Opera installer
+                // Download Opera
                 using (HttpClient operaClient = new HttpClient())
                 {
                     using (HttpResponseMessage operaResponse = operaClient.GetAsync(operaUrl).Result)
@@ -256,13 +250,11 @@ class MenuBrowsers
                                     long operaTotalBytesRead = 0;
                                     long operaTotalBytes = operaResponse.Content.Headers.ContentLength ?? -1;
 
-                                    // Write downloaded bytes to file
                                     while ((operaBytesRead = operaStream.Read(operaBuffer, 0, operaBuffer.Length)) > 0)
                                     {
                                         operaFileStream.Write(operaBuffer, 0, operaBytesRead);
                                         operaTotalBytesRead += operaBytesRead;
 
-                                        // Display download progress
                                         if (operaTotalBytes > 0)
                                         {
                                             int operaProgress = (int)((operaTotalBytesRead * 100) / operaTotalBytes);
@@ -310,7 +302,7 @@ class MenuBrowsers
                 string operaGXSaveLocation = "C:\\m4Installers\\OperaGXSetup.exe";
                 Console.WriteLine("Downloading OperaGX...");
 
-                // Download Opera GX installer
+                // Download OperaGX
                 using (HttpClient operaGXClient = new HttpClient())
                 {
                     using (HttpResponseMessage operaGXResponse = operaGXClient.GetAsync(operaGXUrl).Result)
@@ -327,13 +319,11 @@ class MenuBrowsers
                                     long operaGXTotalBytesRead = 0;
                                     long operaGXTotalBytes = operaGXResponse.Content.Headers.ContentLength ?? -1;
 
-                                    // Write downloaded bytes to file
                                     while ((operaGXBytesRead = operaGXStream.Read(operaGXBuffer, 0, operaGXBuffer.Length)) > 0)
                                     {
                                         operaGXFileStream.Write(operaGXBuffer, 0, operaGXBytesRead);
                                         operaGXTotalBytesRead += operaGXBytesRead;
 
-                                        // Display download progress
                                         if (operaGXTotalBytes > 0)
                                         {
                                             int operaGXProgress = (int)((operaGXTotalBytesRead * 100) / operaGXTotalBytes);
@@ -372,11 +362,6 @@ class MenuBrowsers
 
                 // Delete the setup file
                 File.Delete(operaGXSaveLocation);
-                break;
-
-            default:
-                // Handle invalid option
-                Console.WriteLine("Invalid option. Please try again.");
                 break;
         }
     }
