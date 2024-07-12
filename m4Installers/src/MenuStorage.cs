@@ -26,338 +26,23 @@ class MenuStorage
         switch (option)
         {
             case "1":
-                Console.Clear();
-                string dropboxUrl = "https://www.dropbox.com/download?plat=win&type=full";
-                string dropboxSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "DropboxSetup.exe");
-                Console.WriteLine("Downloading Dropbox...");
-
-                // Download Dropbox installer
-                using (HttpClient dropboxClient = new HttpClient())
-                {
-                    using (HttpResponseMessage dropboxResponse = dropboxClient.GetAsync(dropboxUrl).Result)
-                    {
-                        using (HttpContent dropboxContent = dropboxResponse.Content)
-                        {
-                            using (Stream dropboxStream = dropboxContent.ReadAsStreamAsync().Result)
-                            {
-                                using (FileStream dropboxFileStream = new FileStream(dropboxSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
-                                {
-                                    byte[] dropboxBuffer = new byte[1024];
-                                    int dropboxBytesRead;
-                                    long dropboxTotalBytesRead = 0;
-                                    long dropboxTotalBytes = dropboxResponse.Content.Headers.ContentLength ?? -1;
-
-                                    // Read and write Dropbox installer file
-                                    while ((dropboxBytesRead = dropboxStream.Read(dropboxBuffer, 0, dropboxBuffer.Length)) > 0)
-                                    {
-                                        dropboxFileStream.Write(dropboxBuffer, 0, dropboxBytesRead);
-                                        dropboxTotalBytesRead += dropboxBytesRead;
-
-                                        if (dropboxTotalBytes > 0)
-                                        {
-                                            int dropboxProgress = (int)((dropboxTotalBytesRead * 100) / dropboxTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {dropboxProgress}% ({dropboxTotalBytesRead / 1024} KB of {dropboxTotalBytes / 1024} KB)");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                Console.WriteLine("\nDropbox was downloaded successfully!");
-                Process dropboxInstallerProcess = Process.Start(new ProcessStartInfo(dropboxSaveLocation) { UseShellExecute = true });
-
-                if (dropboxInstallerProcess != null && !dropboxInstallerProcess.HasExited)
-                {
-                    Console.WriteLine("Installing...");
-
-                    // Wait until installation process has finished
-                    dropboxInstallerProcess.WaitForExit();
-
-                    if (dropboxInstallerProcess.ExitCode == 0)
-                    {
-                        Console.WriteLine("Installation was concluded with success!");
-                        Console.Clear();
-                        File.Delete(dropboxSaveLocation); // Delete the setup file
-                    }
-                    else
-                    {
-                        Console.WriteLine("Installation has failed!");
-                        Console.Clear();
-                        File.Delete(dropboxSaveLocation); // Delete the setup file
-                    }
-                }
+                DownloadAndInstall("https://www.dropbox.com/download?plat=win&type=full", "DropboxSetup.exe", "Dropbox");
                 break;
 
             case "2":
-                Console.Clear();
-                string megaUrl = "https://mega.nz/MEGAsyncSetup.exe";
-                string megaSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "MEGASyncSetup.exe");
-                Console.WriteLine("Downloading MEGA...");
-
-                // Download MEGA installer
-                using (HttpClient megaClient = new HttpClient())
-                {
-                    using (HttpResponseMessage megaResponse = megaClient.GetAsync(megaUrl).Result)
-                    {
-                        using (HttpContent megaContent = megaResponse.Content)
-                        {
-                            using (Stream megaStream = megaContent.ReadAsStreamAsync().Result)
-                            {
-                                using (FileStream megaFileStream = new FileStream(megaSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
-                                {
-                                    byte[] megaBuffer = new byte[1024];
-                                    int megaBytesRead;
-                                    long megaTotalBytesRead = 0;
-                                    long megaTotalBytes = megaResponse.Content.Headers.ContentLength ?? -1;
-
-                                    // Read and write MEGA installer file
-                                    while ((megaBytesRead = megaStream.Read(megaBuffer, 0, megaBuffer.Length)) > 0)
-                                    {
-                                        megaFileStream.Write(megaBuffer, 0, megaBytesRead);
-                                        megaTotalBytesRead += megaBytesRead;
-
-                                        if (megaTotalBytes > 0)
-                                        {
-                                            int megaProgress = (int)((megaTotalBytesRead * 100) / megaTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {megaProgress}% ({megaTotalBytesRead / 1024} KB of {megaTotalBytes / 1024} KB)");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                Console.WriteLine("\nMEGA was downloaded successfully!");
-                Process megaInstallerProcess = Process.Start(new ProcessStartInfo(megaSaveLocation) { UseShellExecute = true });
-
-                if (megaInstallerProcess != null && !megaInstallerProcess.HasExited)
-                {
-                    Console.WriteLine("Installing...");
-
-                    // Wait until installation process has finished
-                    megaInstallerProcess.WaitForExit();
-
-                    if (megaInstallerProcess.ExitCode == 0)
-                    {
-                        Console.WriteLine("Installation was concluded with success!");
-                        Console.Clear();
-                        File.Delete(megaSaveLocation); // Delete the setup file
-                    }
-                    else
-                    {
-                        Console.WriteLine("Installation has failed!");
-                        Console.Clear();
-                        File.Delete(megaSaveLocation); // Delete the setup file
-                    }
-                }
+                DownloadAndInstall("https://mega.nz/MEGAsyncSetup.exe", "MEGASyncSetup.exe", "MEGA");
                 break;
 
             case "3":
-                Console.Clear();
-                string sugarsyncUrl = "https://sugarsync.com/downloads/p/SugarSyncSetup.exe";
-                string sugarsyncSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "SugarSyncSetup.exe");
-                Console.WriteLine("Downloading SugarSync...");
-
-                // Download SugarSync installer
-                using (HttpClient sugarsyncClient = new HttpClient())
-                {
-                    using (HttpResponseMessage sugarsyncResponse = sugarsyncClient.GetAsync(sugarsyncUrl).Result)
-                    {
-                        using (HttpContent sugarsyncContent = sugarsyncResponse.Content)
-                        {
-                            using (Stream sugarsyncStream = sugarsyncContent.ReadAsStreamAsync().Result)
-                            {
-                                using (FileStream sugarsyncFileStream = new FileStream(sugarsyncSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
-                                {
-                                    byte[] sugarsyncBuffer = new byte[1024];
-                                    int sugarsyncBytesRead;
-                                    long sugarsyncTotalBytesRead = 0;
-                                    long sugarsyncTotalBytes = sugarsyncResponse.Content.Headers.ContentLength ?? -1;
-
-                                    // Read and write SugarSync installer file
-                                    while ((sugarsyncBytesRead = sugarsyncStream.Read(sugarsyncBuffer, 0, sugarsyncBuffer.Length)) > 0)
-                                    {
-                                        sugarsyncFileStream.Write(sugarsyncBuffer, 0, sugarsyncBytesRead);
-                                        sugarsyncTotalBytesRead += sugarsyncBytesRead;
-
-                                        if (sugarsyncTotalBytes > 0)
-                                        {
-                                            int sugarsyncProgress = (int)((sugarsyncTotalBytesRead * 100) / sugarsyncTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {sugarsyncProgress}% ({sugarsyncTotalBytesRead / 1024} KB of {sugarsyncTotalBytes / 1024} KB)");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                Console.WriteLine("\nSugarSync was downloaded successfully!");
-                Process sugarsyncInstallerProcess = Process.Start(new ProcessStartInfo(sugarsyncSaveLocation) { UseShellExecute = true });
-
-                if (sugarsyncInstallerProcess != null && !sugarsyncInstallerProcess.HasExited)
-                {
-                    Console.WriteLine("Installing...");
-
-                    // Wait until installation process has finished
-                    sugarsyncInstallerProcess.WaitForExit();
-
-                    if (sugarsyncInstallerProcess.ExitCode == 0)
-                    {
-                        Console.WriteLine("Installation was concluded with success!");
-                        Console.Clear();
-                        File.Delete(sugarsyncSaveLocation); // Delete the setup file
-                    }
-                    else
-                    {
-                        Console.WriteLine("Installation has failed!");
-                        Console.Clear();
-                        File.Delete(sugarsyncSaveLocation); // Delete the setup file
-                    }
-                }
+                DownloadAndInstall("https://sugarsync.com/downloads/p/SugarSyncSetup.exe", "SugarSyncSetup.exe", "SugarSync");
                 break;
 
             case "4":
-                Console.Clear();
-                string googleDriveUrl = "https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe";
-                string googleDriveSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "GoogleDriveSetup.exe");
-                Console.WriteLine("Downloading Google Drive...");
-
-                // Download Google Drive installer
-                using (HttpClient googleDriveClient = new HttpClient())
-                {
-                    using (HttpResponseMessage googleDriveResponse = googleDriveClient.GetAsync(googleDriveUrl).Result)
-                    {
-                        using (HttpContent googleDriveContent = googleDriveResponse.Content)
-                        {
-                            using (Stream googleDriveStream = googleDriveContent.ReadAsStreamAsync().Result)
-                            {
-                                using (FileStream googleDriveFileStream = new FileStream(googleDriveSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
-                                {
-                                    byte[] googleDriveBuffer = new byte[1024];
-                                    int googleDriveBytesRead;
-                                    long googleDriveTotalBytesRead = 0;
-                                    long googleDriveTotalBytes = googleDriveResponse.Content.Headers.ContentLength ?? -1;
-
-                                    // Read and write Google Drive installer file
-                                    while ((googleDriveBytesRead = googleDriveStream.Read(googleDriveBuffer, 0, googleDriveBuffer.Length)) > 0)
-                                    {
-                                        googleDriveFileStream.Write(googleDriveBuffer, 0, googleDriveBytesRead);
-                                        googleDriveTotalBytesRead += googleDriveBytesRead;
-
-                                        if (googleDriveTotalBytes > 0)
-                                        {
-                                            int googleDriveProgress = (int)((googleDriveTotalBytesRead * 100) / googleDriveTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {googleDriveProgress}% ({googleDriveTotalBytesRead / 1024} KB of {googleDriveTotalBytes / 1024} KB)");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                Console.WriteLine("\nGoogle Drive was downloaded successfully!");
-                Process googleDriveInstallerProcess = Process.Start(new ProcessStartInfo(googleDriveSaveLocation) { UseShellExecute = true });
-
-                if (googleDriveInstallerProcess != null && !googleDriveInstallerProcess.HasExited)
-                {
-                    Console.WriteLine("Installing...");
-
-                    // Wait until installation process has finished
-                    googleDriveInstallerProcess.WaitForExit();
-
-                    if (googleDriveInstallerProcess.ExitCode == 0)
-                    {
-                        Console.WriteLine("Installation was concluded with success!");
-                        Console.Clear();
-                        File.Delete(googleDriveSaveLocation); // Delete the setup file
-                    }
-                    else
-                    {
-                        Console.WriteLine("Installation has failed!");
-                        Console.Clear();
-                        File.Delete(googleDriveSaveLocation); // Delete the setup file
-                    }
-                }
+                DownloadAndInstall("https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe", "GoogleDriveSetup.exe", "Google Drive");
                 break;
 
             case "5":
-                Console.Clear();
-                string oneDriveUrl = "https://oneclient.sfx.ms/Win/Installers/24.126.0623.0001/amd64/OneDriveSetup.exe";
-                string oneDriveSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "OneDriveSetup.exe");
-                Console.WriteLine("Downloading OneDrive...");
-
-                // Download OneDrive installer
-                using (HttpClient oneDriveClient = new HttpClient())
-                {
-                    using (HttpResponseMessage oneDriveResponse = oneDriveClient.GetAsync(oneDriveUrl).Result)
-                    {
-                        using (HttpContent oneDriveContent = oneDriveResponse.Content)
-                        {
-                            using (Stream oneDriveStream = oneDriveContent.ReadAsStreamAsync().Result)
-                            {
-                                using (FileStream oneDriveFileStream = new FileStream(oneDriveSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
-                                {
-                                    byte[] oneDriveBuffer = new byte[1024];
-                                    int oneDriveBytesRead;
-                                    long oneDriveTotalBytesRead = 0;
-                                    long oneDriveTotalBytes = oneDriveResponse.Content.Headers.ContentLength ?? -1;
-
-                                    // Read and write OneDrive installer file
-                                    while ((oneDriveBytesRead = oneDriveStream.Read(oneDriveBuffer, 0, oneDriveBuffer.Length)) > 0)
-                                    {
-                                        oneDriveFileStream.Write(oneDriveBuffer, 0, oneDriveBytesRead);
-                                        oneDriveTotalBytesRead += oneDriveBytesRead;
-
-                                        if (oneDriveTotalBytes > 0)
-                                        {
-                                            int oneDriveProgress = (int)((oneDriveTotalBytesRead * 100) / oneDriveTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {oneDriveProgress}% ({oneDriveTotalBytesRead / 1024} KB of {oneDriveTotalBytes / 1024} KB)");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                Console.WriteLine("\nOneDrive was downloaded successfully!");
-                Process oneDriveInstallerProcess = Process.Start(new ProcessStartInfo(oneDriveSaveLocation) { UseShellExecute = true });
-
-                if (oneDriveInstallerProcess != null && !oneDriveInstallerProcess.HasExited)
-                {
-                    Console.WriteLine("Installing...");
-
-                    // Wait until installation process has finished
-                    oneDriveInstallerProcess.WaitForExit();
-
-                    if (oneDriveInstallerProcess.ExitCode == 0)
-                    {
-                        Console.WriteLine("Installation was concluded with success!");
-                        Console.Clear();
-                        File.Delete(oneDriveSaveLocation); // Delete the setup file
-                    }
-                    else
-                    {
-                        Console.WriteLine("Installation has failed!");
-                        Console.Clear();
-                        File.Delete(oneDriveSaveLocation); // Delete the setup file
-                    }
-                }
+                DownloadAndInstall("https://oneclient.sfx.ms/Win/Installers/24.126.0623.0001/amd64/OneDriveSetup.exe", "OneDriveSetup.exe", "OneDrive");
                 break;
 
             case "6":
@@ -370,6 +55,66 @@ class MenuStorage
                 Console.Clear();
                 ShowMenu();
                 break;
+        }
+    }
+
+    private static void DownloadAndInstall(string url, string fileName, string appName)
+    {
+        Console.Clear();
+        string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
+        Console.WriteLine($"Downloading {appName}...");
+
+        using (HttpClient client = new HttpClient())
+        {
+            using (HttpResponseMessage response = client.GetAsync(url).Result)
+            {
+                using (HttpContent content = response.Content)
+                {
+                    using (Stream stream = content.ReadAsStreamAsync().Result)
+                    {
+                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
+                        {
+                            byte[] buffer = new byte[1024];
+                            int bytesRead;
+                            long totalBytesRead = 0;
+                            long totalBytes = response.Content.Headers.ContentLength ?? -1;
+
+                            while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                fileStream.Write(buffer, 0, bytesRead);
+                                totalBytesRead += bytesRead;
+
+                                if (totalBytes > 0)
+                                {
+                                    int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                    Console.Write($"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        Console.WriteLine($"\n{appName} was downloaded successfully!");
+        Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+        if (installerProcess != null && !installerProcess.HasExited)
+        {
+            Console.WriteLine("Installing...");
+
+            installerProcess.WaitForExit();
+
+            if (installerProcess.ExitCode == 0)
+            {
+                Console.WriteLine("Installation was concluded with success!");
+            }
+            else
+            {
+                Console.WriteLine("Installation has failed!");
+            }
+            Console.Clear();
+            File.Delete(saveLocation); // Delete the setup file
         }
     }
 }
