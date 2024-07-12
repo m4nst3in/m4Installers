@@ -63,12 +63,13 @@ Launch the application and follow the on-screen instructions to select and insta
 - **Recorders/Live Software**: OBS Studio, Streamlabs, Fraps, Bandicam.
 - **Photo/Video Editors**: GIMP, Paint.NET, OpenShot, Krita.
 ## FAQ
-- **Where the downloaded files are stored?** - It downloads the setup files directly to the C:/m4Installers folder.
+- **Where the downloaded files are stored?** - It downloads the setup files directly to the AppData/Local/m4Installers folder.
 - **Do you plan adding more programs to m4Installers?** - Yes, i do. Even new categories!
 - **Is this coded with which version of .NET?** - It's coded with .NET 8.0.
 - **I have a error. What i can do to solve it?** - You can freely open a issue or contribute to the code! You also can contact me via my Discord.
 - **Is this virus safe?** - Yes, it is. You can check the code for any malware yourself if you want.
 - **I have a suggestion. How i can contact you?** - You can contact me via my Discord: m4ns._
+- **I want my software removed from m4Installer.** - You can ask me to freely remove it, just contact me via Discord.
 
 ## Contributing
 
