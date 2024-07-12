@@ -18,6 +18,7 @@ class MenuClients
         switch (option)
         {
             case "1":
+                Console.Clear();
                 string steamUrl = "https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe";
                 string steamSaveLocation = "C:\\m4Installers\\SteamSetup.exe";
                 Console.WriteLine("Downloading Steam...");
@@ -69,6 +70,7 @@ class MenuClients
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(steamSaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -79,6 +81,7 @@ class MenuClients
                 break;
 
             case "2":
+                Console.Clear();
                 string epicUrl = "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi";
                 string epicSaveLocation = "C:\\m4Installers\\EGSSetup.msi";
                 Console.WriteLine("Downloading Epic Games Launcher...");
@@ -130,6 +133,7 @@ class MenuClients
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(epicSaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -140,6 +144,7 @@ class MenuClients
                 break;
 
             case "3":
+                Console.Clear();
                 string originUrl = "https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe";
                 string originSaveLocation = "C:\\m4Installers\\OriginSetup.exe";
                 Console.WriteLine("Downloading EA App...");
@@ -191,6 +196,7 @@ class MenuClients
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(originSaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -201,6 +207,7 @@ class MenuClients
                 break;
 
             case "4":
+                Console.Clear();
                 string gogUrl = "https://cdn.gog.com/open/galaxy/client/2.0.74.352/setup_galaxy_2.0.74.352.exe";
                 string gogSaveLocation = "C:\\m4Installers\\GOGSetup.exe";
                 Console.WriteLine("Downloading GOG Galaxy...");
@@ -252,6 +259,7 @@ class MenuClients
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(gogSaveLocation); // Delete the setup file
                     }
                     else
                     {

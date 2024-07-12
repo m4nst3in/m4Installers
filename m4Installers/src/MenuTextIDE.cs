@@ -18,6 +18,7 @@ class MenuTextIDE
         switch (option)
         {
             case "1":
+                Console.Clear();
                 string sublimeUrl =
                     "https://download.sublimetext.com/sublime_text_build_4169_x64_setup.exe";
                 string sublimeSaveLocation = "C:\\m4Installers\\SublimeTextSetup.exe";
@@ -70,6 +71,7 @@ class MenuTextIDE
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(sublimeSaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -80,6 +82,7 @@ class MenuTextIDE
                 break;
 
             case "2":
+                Console.Clear();
                 string notepadUrl = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.7/npp.8.6.7.Installer.x64.exe";
                 string notepadSaveLocation = "C:\\m4Installers\\NotepadSetup.exe";
                 Console.WriteLine("Downloading Notepad++...");
@@ -131,6 +134,7 @@ class MenuTextIDE
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(notepadSaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -141,6 +145,7 @@ class MenuTextIDE
                 break;
 
             case "3":
+                Console.Clear();
                 string vscodeUrl = "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user";
                 string vscodeSaveLocation = "C:\\m4Installers\\VSCodeSetup.exe";
                 Console.WriteLine("Downloading Visual Studio Code...");
@@ -192,6 +197,7 @@ class MenuTextIDE
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(vscodeSaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -202,6 +208,7 @@ class MenuTextIDE
                 break;
 
             case "4":
+                Console.Clear();
                 string jetbrainsUrl =
                     "https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.4.0.32175.exe";
                 string jetbrainsSaveLocation = "C:\\m4Installers\\JetBrainsIDESetup.exe";
@@ -254,6 +261,7 @@ class MenuTextIDE
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(jetbrainsSaveLocation); // Delete the setup file
                     }
                     else
                     {

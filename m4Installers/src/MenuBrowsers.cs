@@ -19,6 +19,7 @@ class MenuBrowsers
         switch (option)
         {
             case "1":
+                Console.Clear();
                 string braveUrl =
                     "https://github.com/brave/brave-browser/releases/download/v1.67.123/BraveBrowserStandaloneSetup.exe";
                 string braveSaveLocation = "C:\\m4Installers\\BraveSetup.exe";
@@ -71,6 +72,7 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(braveSaveLocation);
                     }
                     else
                     {
@@ -78,9 +80,11 @@ class MenuBrowsers
                         Console.Clear();
                     }
                 }
+
                 break;
 
             case "2":
+                Console.Clear();
                 string firefoxUrl = "https://download.mozilla.org/?product=firefox-latest&os=win64";
                 string firefoxSaveLocation = "C:\\m4Installers\\FirefoxSetup.exe";
                 Console.WriteLine("Downloading Firefox...");
@@ -132,6 +136,7 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(firefoxSaveLocation);
                     }
                     else
                     {
@@ -139,9 +144,13 @@ class MenuBrowsers
                         Console.Clear();
                     }
                 }
+
+                // Delete the setup file
+                File.Delete(firefoxSaveLocation);
                 break;
 
             case "3":
+                Console.Clear();
                 string vivaldiUrl = "https://downloads.vivaldi.com/stable/Vivaldi.6.8.3381.46.x64.exe";
                 string vivaldiSaveLocation = "C:\\m4Installers\\VivaldiSetup.exe";
                 Console.WriteLine("Downloading Vivaldi...");
@@ -193,6 +202,7 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(vivaldiSaveLocation);
                     }
                     else
                     {
@@ -200,9 +210,13 @@ class MenuBrowsers
                         Console.Clear();
                     }
                 }
+
+                // Delete the setup file
+                File.Delete(vivaldiSaveLocation);
                 break;
 
             case "4":
+                Console.Clear();
                 string operaGXUrl =
                     "https://download3.operacdn.com/pub/opera_gx/100.0.4815.44/win/Opera_GX_100.0.4815.44_Setup_x64.exe";
                 string operaGXSaveLocation = "C:\\m4Installers\\OperaGXSetup.exe";
@@ -255,6 +269,7 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(operaGXSaveLocation);
                     }
                     else
                     {
@@ -262,6 +277,9 @@ class MenuBrowsers
                         Console.Clear();
                     }
                 }
+
+                // Delete the setup file
+                File.Delete(operaGXSaveLocation);
                 break;
 
             case "5":

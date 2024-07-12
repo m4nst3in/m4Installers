@@ -19,6 +19,7 @@ class MenuTools
         switch (option)
         {
             case "1":
+                Console.Clear();
                 string winrarUrl = "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-701.exe";
                 string winrarSaveLocation = "C:\\m4Installers\\WinRARSetup.exe";
                 Console.WriteLine("Downloading WinRAR...");
@@ -70,6 +71,7 @@ class MenuTools
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(winrarSaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -80,6 +82,7 @@ class MenuTools
                 break;
 
             case "2":
+                Console.Clear();
                 string sevenZipUrl = "https://www.7-zip.org/a/7z2407-x64.exe";
                 string sevenZipSaveLocation = "C:\\m4Installers\\7zipSetup.exe";
                 Console.WriteLine("Downloading 7zip...");
@@ -131,6 +134,7 @@ class MenuTools
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(sevenZipSaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -141,6 +145,7 @@ class MenuTools
                 break;
 
             case "3":
+                Console.Clear();
                 string aida64Url = "https://download2.aida64.com/aida64extreme730.exe";
                 string aida64SaveLocation = "C:\\m4Installers\\AIDA64Setup.exe";
                 Console.WriteLine("Downloading AIDA64...");
@@ -192,6 +197,7 @@ class MenuTools
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(aida64SaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -202,6 +208,7 @@ class MenuTools
                 break;
 
             case "4":
+                Console.Clear();
                 string cpuZUrl = "https://download.cpuid.com/cpu-z/cpu-z_1.79-en.exe";
                 string cpuZSaveLocation = "C:\\m4Installers\\CPUZSetup.exe";
                 Console.WriteLine("Downloading CPU-Z...");
@@ -253,6 +260,7 @@ class MenuTools
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(cpuZSaveLocation); // Delete the setup file
                     }
                     else
                     {

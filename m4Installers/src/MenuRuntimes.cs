@@ -18,6 +18,7 @@ class MenuRuntimes
         switch (option)
         {
             case "1":
+                Console.Clear();
                 string allinoneurl =
                     "https://media.computerbase.de/s/GMGpZJyVj9vYs5IosY2y_w/1720764360/download/758/aio-runtimes_v2.5.0.exe";
                 string allinoneSaveLocation = "C:\\m4Installers\\AIOSetup.exe";
@@ -70,6 +71,7 @@ class MenuRuntimes
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(allinoneSaveLocation);
                     }
                     else
                     {
@@ -80,6 +82,7 @@ class MenuRuntimes
                 break;
 
             case "2":
+                Console.Clear();
                 string dotneturl = "https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net481-offline-installer";
                 string dotnetSaveLocation = "C:\\m4Installers\\Net481Setup.exe";
                 Console.WriteLine("Downloading .NET Framework...");
@@ -131,6 +134,7 @@ class MenuRuntimes
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(dotnetSaveLocation);
                     }
                     else
                     {
@@ -141,6 +145,7 @@ class MenuRuntimes
                 break;
 
             case "3":
+                Console.Clear();
                 string vcurl = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
                 string vcSaveLocation = "C:\\m4Installers\\VcRedistSetup.exe";
                 Console.WriteLine("Downloading Visual C++ Redist...");
@@ -192,6 +197,7 @@ class MenuRuntimes
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(vcSaveLocation);
                     }
                     else
                     {
@@ -202,6 +208,7 @@ class MenuRuntimes
                 break;
 
             case "4":
+                Console.Clear();
                 string dxurl =
                     "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe";
                 string dxSaveLocation = "C:\\m4Installers\\DXWebSetup.exe";
@@ -254,6 +261,7 @@ class MenuRuntimes
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(dxSaveLocation);
                     }
                     else
                     {

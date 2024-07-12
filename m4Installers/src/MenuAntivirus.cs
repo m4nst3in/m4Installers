@@ -18,6 +18,7 @@ class MenuAntivirus
         switch (option)
         {
             case "1":
+                Console.Clear();
                 string avastUrl = "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN/installertype_FULL/build_RELEASE/";
                 string avastSaveLocation = "C:\\m4Installers\\AvastSetup.exe";
                 Console.WriteLine("Downloading Avast...");
@@ -69,6 +70,7 @@ class MenuAntivirus
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(avastSaveLocation);
                     }
                     else
                     {
@@ -79,6 +81,7 @@ class MenuAntivirus
                 break;
 
             case "2":
+                Console.Clear();
                 string kasperskyUrl = "https://www.dropbox.com/scl/fi/mz69m452jlwbsjxedub7h/KasperskySetup.exe?rlkey=rw3nbq698ua3s9is53mt9zs1m&st=lvho0p8p&dl=1";
                 string kasperskySaveLocation = "C:\\m4Installers\\KasperskySetup.exe";
                 Console.WriteLine("Downloading Kaspersky...");
@@ -130,6 +133,7 @@ class MenuAntivirus
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(kasperskySaveLocation);
                     }
                     else
                     {
@@ -141,6 +145,7 @@ class MenuAntivirus
                 break;
 
             case "3":
+                Console.Clear();
                 string malwarebytesUrl = "https://www.malwarebytes.com/api/downloads/mb-windows?filename=MBSetup.exe&t=1720763650278";
                 string malwarebytesSaveLocation = "C:\\m4Installers\\Malwarebytesetup.exe";
                 Console.WriteLine("Downloading Malwarebytes...");
@@ -192,6 +197,7 @@ class MenuAntivirus
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(malwarebytesSaveLocation);
                     }
                     else
                     {
@@ -202,6 +208,7 @@ class MenuAntivirus
                 break;
 
             case "4":
+                Console.Clear();
                 string bitdefenderUrl = "https://download.bitdefender.com/windows/installer/pt-br/bitdefender_avfree.exe";
                 string bitdefenderSaveLocation = "C:\\m4Installers\\BitdefenderSetup.exe";
                 Console.WriteLine("Downloading Bitdefender...");
@@ -253,6 +260,7 @@ class MenuAntivirus
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(bitdefenderSaveLocation);
                     }
                     else
                     {

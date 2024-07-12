@@ -18,6 +18,7 @@ class MenuExtra
         switch (option)
         {
             case "1":
+                Console.Clear();
                 string discordUrl =
                     "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x64";
                 string discordSaveLocation = "C:\\m4Installers\\DiscordSetup.exe";
@@ -70,6 +71,7 @@ class MenuExtra
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(discordSaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -80,6 +82,7 @@ class MenuExtra
                 break;
 
             case "2":
+                Console.Clear();
                 string telegramUrl = "https://telegram.org/dl/desktop/win64";
                 string telegramSaveLocation = "C:\\m4Installers\\TelegramSetup.exe";
                 Console.WriteLine("Downloading Telegram...");
@@ -131,6 +134,7 @@ class MenuExtra
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(telegramSaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -141,6 +145,7 @@ class MenuExtra
                 break;
 
             case "3":
+                Console.Clear();
                 string githubUrl = "https://central.github.com/deployments/desktop/desktop/latest/win32";
                 string githubSaveLocation = "C:\\m4Installers\\GitHubSetup.exe";
                 Console.WriteLine("Downloading GitHub Desktop...");
@@ -192,6 +197,7 @@ class MenuExtra
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(githubSaveLocation); // Delete the setup file
                     }
                     else
                     {
@@ -202,6 +208,7 @@ class MenuExtra
                 break;
 
             case "4":
+                Console.Clear();
                 string paintnetUrl =
                     "https://github.com/paintdotnet/release/releases/download/v5.0.13/paint.net.5.0.13.install.anycpu.web.zip";
                 string paintnetSaveLocation = "C:\\m4Installers\\PaintNETSetup.exe";
@@ -254,6 +261,7 @@ class MenuExtra
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
+                        File.Delete(paintnetSaveLocation); // Delete the setup file
                     }
                     else
                     {
