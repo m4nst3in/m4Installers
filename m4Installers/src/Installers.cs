@@ -36,8 +36,8 @@
             Console.WriteLine("                              [3] - Game Clients              [11] - Documents");
             Console.WriteLine("                              [4] - Runtimes                  [12] - Torrent Clients");
             Console.WriteLine("                              [5] - Text Editors/IDE          [13] - File Storage");
-            Console.WriteLine("                              [6] - Anti-Virus                [14] - Youtube Downloader");
-            Console.WriteLine("                              [7] - Utilities                 [15] - Photo Editors");
+            Console.WriteLine("                              [6] - Anti-Virus                [14] - Recorders/Live Software");
+            Console.WriteLine("                              [7] - Utilities                 [15] - Photo/Video Editors");
             Console.WriteLine("                              [8] - Games                     [16] - Exit");
 
             string option = Console.ReadLine();
@@ -91,6 +91,18 @@
                 case "12":
                     ClearConsole();
                     MenuTorrents.ShowMenu();
+                    break;
+                case "13":
+                    ClearConsole();
+                    MenuStorage.ShowMenu();
+                    break;
+                case "14":
+                    ClearConsole();
+                    MenuRecorders.ShowMenu();
+                    break;
+                case "15":
+                    ClearConsole();
+                    MenuPVEditor.ShowMenu();
                     break;
                 case "16":
                     exit = true;
