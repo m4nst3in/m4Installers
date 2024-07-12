@@ -16,25 +16,26 @@
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(@"
-                ███    ███ ██   ██ ██ ███    ██ ███████ ████████  █████  ██      ██      ███████ ██████  
-                ████  ████ ██   ██ ██ ████   ██ ██         ██    ██   ██ ██      ██      ██      ██   ██ 
-                ██ ████ ██ ███████ ██ ██ ██  ██ ███████    ██    ███████ ██      ██      █████   ██████  
-                ██  ██  ██      ██ ██ ██  ██ ██      ██    ██    ██   ██ ██      ██      ██      ██   ██ 
-                ██      ██      ██ ██ ██   ████ ███████    ██    ██   ██ ███████ ███████ ███████ ██   ██ 
+            ███╗   ███╗██╗  ██╗██╗███╗   ██╗███████╗████████╗ █████╗ ██╗     ██╗     ███████╗██████╗ ███████╗
+            ████╗ ████║██║  ██║██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██║     ██╔════╝██╔══██╗██╔════╝
+            ██╔████╔██║███████║██║██╔██╗ ██║███████╗   ██║   ███████║██║     ██║     █████╗  ██████╔╝███████╗
+            ██║╚██╔╝██║╚════██║██║██║╚██╗██║╚════██║   ██║   ██╔══██║██║     ██║     ██╔══╝  ██╔══██╗╚════██║
+            ██║ ╚═╝ ██║     ██║██║██║ ╚████║███████║   ██║   ██║  ██║███████╗███████╗███████╗██║  ██║███████║
+            ╚═╝     ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚══════╝
 
 
-                                                  Select an option: 
+                                                Select an option: 
 
 ");                                            
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("                                [1] - Browsers                  [9]  - Messaging");
-            Console.WriteLine("                                [2] - Tools                     [10] - Media");
-            Console.WriteLine("                                [3] - Game Clients              [11] - Documents");
-            Console.WriteLine("                                [4] - Runtimes                  [12] - Torrent Clients");
-            Console.WriteLine("                                [5] - Text Editors/IDE          [13] - File Storage");
-            Console.WriteLine("                                [6] - Anti-Virus                [14] - Youtube Downloader");
-            Console.WriteLine("                                [7] - Utilities                 [15] - Photo Editors");
-            Console.WriteLine("                                [8] - Games                     [16] - Exit");
+            Console.WriteLine("                              [1] - Browsers                  [9]  - Messaging");
+            Console.WriteLine("                              [2] - Tools                     [10] - Media");
+            Console.WriteLine("                              [3] - Game Clients              [11] - Documents");
+            Console.WriteLine("                              [4] - Runtimes                  [12] - Torrent Clients");
+            Console.WriteLine("                              [5] - Text Editors/IDE          [13] - File Storage");
+            Console.WriteLine("                              [6] - Anti-Virus                [14] - Youtube Downloader");
+            Console.WriteLine("                              [7] - Utilities                 [15] - Photo Editors");
+            Console.WriteLine("                              [8] - Games                     [16] - Exit");
 
             string option = Console.ReadLine();
 
