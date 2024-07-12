@@ -1,13 +1,8 @@
-```
-              __ __     _____   ________________    __    __    __________  _____
-   ____ ___  / // /    /  _/ | / / ___/_  __/   |  / /   / /   / ____/ __ \/ ___/
-  / __ `__ \/ // /_    / //  |/ /\__ \ / / / /| | / /   / /   / __/ / /_/ /\__ \ 
- / / / / / /__  __/  _/ // /|  /___/ // / / ___ |/ /___/ /___/ /___/ _, _/___/ / 
-/_/ /_/ /_/  /_/    /___/_/ |_//____//_/ /_/  |_/_____/_____/_____/_/ |_|/____/  
-                                                                                 
- ```
+
+
+![image](https://github.com/user-attachments/assets/25be5013-bcf3-465e-993f-7e73c1aa8af9)                                                                            
                                                                              
-This C# console application is designed to simplify the process of installing common programs on a Windows system. It provides a straightforward interface for selecting and installing programs such as browsers, tools, game clients and other essential software.
+This C# simple console application is designed to simplify the process of installing common programs on a Windows system. It provides a straightforward interface for selecting and installing programs such as browsers, tools, game clients and other essential software.
 
 ## Features
 
@@ -57,12 +52,8 @@ Launch the application and follow the on-screen instructions to select and insta
 - **Runtimes**: All-in-one Runtimes, .NET Framework 4.8.1, Visual C++ Redistributable, DirectX.
 - **Text Editors/IDEs**: Sublime Text, Notepad++, Visual Studio Code, JetBrains Toolbox.
 - **Antivirus**: Avast, Kaspersky, MalwareBytes, Bitdefender.
-- **Extra**: Discord, Telegram, GitHub Desktop, Paint.NET. 
-
-## Example
-![image](https://github.com/user-attachments/assets/a40135e8-2f7b-443c-a8f0-5800a4e70711)
-
-
+- **Extra**: Discord, Telegram, GitHub Desktop, Paint.NET.
+- 
 ## FAQ
 - **Where the downloaded files are stored?** - It downloads the setup files directly to the C:/m4Installers folder.
 - **Do you plan adding more programs to m4Installers?** - Yes, i do. Even new categories!
