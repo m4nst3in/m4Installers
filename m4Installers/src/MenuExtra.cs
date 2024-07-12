@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net.Http;
+﻿using System.Diagnostics;
 
 class MenuExtra
 {
@@ -18,242 +15,264 @@ class MenuExtra
 
         string option = Console.ReadLine();
 
-        if (option == "1")
+        switch (option)
         {
-            string url =
-                "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x64";
-            string saveLocation = "C:\\m4Installers\\DiscordSetup.exe";
-            Console.WriteLine("Downloading Discord...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
+            case "1":
+                string discordUrl =
+                    "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x64";
+                string discordSaveLocation = "C:\\m4Installers\\DiscordSetup.exe";
+                Console.WriteLine("Downloading Discord...");
+                using (HttpClient discordClient = new HttpClient())
                 {
-                    using (HttpContent content = response.Content)
+                    using (HttpResponseMessage discordResponse = discordClient.GetAsync(discordUrl).Result)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        using (HttpContent discordContent = discordResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream discordStream = discordContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream discordFileStream = new FileStream(discordSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] discordBuffer = new byte[1024];
+                                    int discordBytesRead;
+                                    long discordTotalBytesRead = 0;
+                                    long discordTotalBytes = discordResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((discordBytesRead = discordStream.Read(discordBuffer, 0, discordBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        discordFileStream.Write(discordBuffer, 0, discordBytesRead);
+                                        discordTotalBytesRead += discordBytesRead;
+
+                                        if (discordTotalBytes > 0)
+                                        {
+                                            int discordProgress = (int)((discordTotalBytesRead * 100) / discordTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {discordProgress}% ({discordTotalBytesRead / 1024} KB de {discordTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nDiscord was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nDiscord was downloaded succesfully!");
+                Process discordInstallerProcess = Process.Start(new ProcessStartInfo(discordSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (discordInstallerProcess != null && !discordInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "2")
-        {
-            string url = "https://telegram.org/dl/desktop/win64";
-            string saveLocation = "C:\\m4Installers\\TelegramSetup.exe";
-            Console.WriteLine("Downloading Telegram...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    discordInstallerProcess.WaitForExit();
+
+                    if (discordInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "2":
+                string telegramUrl = "https://telegram.org/dl/desktop/win64";
+                string telegramSaveLocation = "C:\\m4Installers\\TelegramSetup.exe";
+                Console.WriteLine("Downloading Telegram...");
+                using (HttpClient telegramClient = new HttpClient())
+                {
+                    using (HttpResponseMessage telegramResponse = telegramClient.GetAsync(telegramUrl).Result)
+                    {
+                        using (HttpContent telegramContent = telegramResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream telegramStream = telegramContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream telegramFileStream = new FileStream(telegramSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] telegramBuffer = new byte[1024];
+                                    int telegramBytesRead;
+                                    long telegramTotalBytesRead = 0;
+                                    long telegramTotalBytes = telegramResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((telegramBytesRead = telegramStream.Read(telegramBuffer, 0, telegramBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        telegramFileStream.Write(telegramBuffer, 0, telegramBytesRead);
+                                        telegramTotalBytesRead += telegramBytesRead;
+
+                                        if (telegramTotalBytes > 0)
+                                        {
+                                            int telegramProgress = (int)((telegramTotalBytesRead * 100) / telegramTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {telegramProgress}% ({telegramTotalBytesRead / 1024} KB de {telegramTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nTelegram was downloaded successfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nTelegram was downloaded successfully!");
+                Process telegramInstallerProcess = Process.Start(new ProcessStartInfo(telegramSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (telegramInstallerProcess != null && !telegramInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "3")
-        {
-            string url = "https://central.github.com/deployments/desktop/desktop/latest/win32";
-            string saveLocation = "C:\\m4Installers\\GitHubSetup.exe";
-            Console.WriteLine("Downloading GitHub Desktop...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    telegramInstallerProcess.WaitForExit();
+
+                    if (telegramInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "3":
+                string githubUrl = "https://central.github.com/deployments/desktop/desktop/latest/win32";
+                string githubSaveLocation = "C:\\m4Installers\\GitHubSetup.exe";
+                Console.WriteLine("Downloading GitHub Desktop...");
+                using (HttpClient githubClient = new HttpClient())
+                {
+                    using (HttpResponseMessage githubResponse = githubClient.GetAsync(githubUrl).Result)
+                    {
+                        using (HttpContent githubContent = githubResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream githubStream = githubContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream githubFileStream = new FileStream(githubSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] githubBuffer = new byte[1024];
+                                    int githubBytesRead;
+                                    long githubTotalBytesRead = 0;
+                                    long githubTotalBytes = githubResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((githubBytesRead = githubStream.Read(githubBuffer, 0, githubBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        githubFileStream.Write(githubBuffer, 0, githubBytesRead);
+                                        githubTotalBytesRead += githubBytesRead;
+
+                                        if (githubTotalBytes > 0)
+                                        {
+                                            int githubProgress = (int)((githubTotalBytesRead * 100) / githubTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {githubProgress}% ({githubTotalBytesRead / 1024} KB de {githubTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nGitHub Desktop was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nGitHub Desktop was downloaded succesfully!");
+                Process githubInstallerProcess = Process.Start(new ProcessStartInfo(githubSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (githubInstallerProcess != null && !githubInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "4")
-        {
-            string url =
-                "https://github.com/paintdotnet/release/releases/download/v5.0.13/paint.net.5.0.13.install.anycpu.web.zip";
-            string saveLocation = "C:\\m4Installers\\PaintNETSetup.exe";
-            Console.WriteLine("Downloading Paint.NET...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    githubInstallerProcess.WaitForExit();
+
+                    if (githubInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "4":
+                string paintnetUrl =
+                    "https://github.com/paintdotnet/release/releases/download/v5.0.13/paint.net.5.0.13.install.anycpu.web.zip";
+                string paintnetSaveLocation = "C:\\m4Installers\\PaintNETSetup.exe";
+                Console.WriteLine("Downloading Paint.NET...");
+                using (HttpClient paintnetClient = new HttpClient())
+                {
+                    using (HttpResponseMessage paintnetResponse = paintnetClient.GetAsync(paintnetUrl).Result)
+                    {
+                        using (HttpContent paintnetContent = paintnetResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream paintnetStream = paintnetContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream paintnetFileStream = new FileStream(paintnetSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] paintnetBuffer = new byte[1024];
+                                    int paintnetBytesRead;
+                                    long paintnetTotalBytesRead = 0;
+                                    long paintnetTotalBytes = paintnetResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((paintnetBytesRead = paintnetStream.Read(paintnetBuffer, 0, paintnetBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        paintnetFileStream.Write(paintnetBuffer, 0, paintnetBytesRead);
+                                        paintnetTotalBytesRead += paintnetBytesRead;
+
+                                        if (paintnetTotalBytes > 0)
+                                        {
+                                            int paintnetProgress = (int)((paintnetTotalBytesRead * 100) / paintnetTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {paintnetProgress}% ({paintnetTotalBytesRead / 1024} KB de {paintnetTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nPaint.NET was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nPaint.NET was downloaded succesfully!");
+                Process paintnetInstallerProcess = Process.Start(new ProcessStartInfo(paintnetSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (paintnetInstallerProcess != null && !paintnetInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    paintnetInstallerProcess.WaitForExit();
+
+                    if (paintnetInstallerProcess.ExitCode == 0)
+                    {
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
                 }
-            }
-        }
-        else if (option == "5")
-        {
-            Installers.ReturnToMainMenu();
-        }
-        else
-        {
-            Console.WriteLine("Invalid option. Try it again.");
-            Thread.Sleep(2500); // Add a delay of 2.5 seconds
-            Console.Clear();
-            ShowMenu();
+                break;
+
+            case "5":
+                Installers.ReturnToMainMenu();
+                break;
+
+            default:
+                Console.WriteLine("Invalid option. Try it again.");
+                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Console.Clear();
+                ShowMenu();
+                break;
         }
     }
 }

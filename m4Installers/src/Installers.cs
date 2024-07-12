@@ -6,12 +6,15 @@
 
         bool exit = false;
 
+        // Method to clear the console
         static void ClearConsole()
         {
             Console.Clear();
         }
 
+        // Create a directory if it doesn't exist
         Directory.CreateDirectory("C:\\m4Installers");
+
         while (!exit)
         {
             Console.ForegroundColor = ConsoleColor.White;
@@ -26,7 +29,7 @@
 
                                                 Select an option: 
 
-");                                            
+");
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("                              [1] - Browsers                  [9]  - Messaging");
             Console.WriteLine("                              [2] - Tools                     [10] - Media");

@@ -1,7 +1,5 @@
-using System;
 using System.Diagnostics;
-using System.IO;
-using System.Net.Http;
+
 
 class MenuBrowsers
 {
@@ -18,242 +16,264 @@ class MenuBrowsers
 
         string option = Console.ReadLine();
 
-        if (option == "1")
+        switch (option)
         {
-            string url =
-                "https://github.com/brave/brave-browser/releases/download/v1.67.123/BraveBrowserStandaloneSetup.exe";
-            string saveLocation = "C:\\m4Installers\\BraveSetup.exe";
-            Console.WriteLine("Downloading Brave...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
+            case "1":
+                string braveUrl =
+                    "https://github.com/brave/brave-browser/releases/download/v1.67.123/BraveBrowserStandaloneSetup.exe";
+                string braveSaveLocation = "C:\\m4Installers\\BraveSetup.exe";
+                Console.WriteLine("Downloading Brave...");
+                using (HttpClient braveClient = new HttpClient())
                 {
-                    using (HttpContent content = response.Content)
+                    using (HttpResponseMessage braveResponse = braveClient.GetAsync(braveUrl).Result)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        using (HttpContent braveContent = braveResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream braveStream = braveContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream braveFileStream = new FileStream(braveSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] braveBuffer = new byte[1024];
+                                    int braveBytesRead;
+                                    long braveTotalBytesRead = 0;
+                                    long braveTotalBytes = braveResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((braveBytesRead = braveStream.Read(braveBuffer, 0, braveBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        braveFileStream.Write(braveBuffer, 0, braveBytesRead);
+                                        braveTotalBytesRead += braveBytesRead;
+
+                                        if (braveTotalBytes > 0)
+                                        {
+                                            int braveProgress = (int)((braveTotalBytesRead * 100) / braveTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {braveProgress}% ({braveTotalBytesRead / 1024} KB de {braveTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nBrave was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nBrave was downloaded succesfully!");
+                Process braveInstallerProcess = Process.Start(new ProcessStartInfo(braveSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (braveInstallerProcess != null && !braveInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "2")
-        {
-            string url = "https://download.mozilla.org/?product=firefox-latest&os=win64";
-            string saveLocation = "C:\\m4Installers\\FirefoxSetup.exe";
-            Console.WriteLine("Downloading Firefox...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    braveInstallerProcess.WaitForExit();
+
+                    if (braveInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "2":
+                string firefoxUrl = "https://download.mozilla.org/?product=firefox-latest&os=win64";
+                string firefoxSaveLocation = "C:\\m4Installers\\FirefoxSetup.exe";
+                Console.WriteLine("Downloading Firefox...");
+                using (HttpClient firefoxClient = new HttpClient())
+                {
+                    using (HttpResponseMessage firefoxResponse = firefoxClient.GetAsync(firefoxUrl).Result)
+                    {
+                        using (HttpContent firefoxContent = firefoxResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream firefoxStream = firefoxContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream firefoxFileStream = new FileStream(firefoxSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] firefoxBuffer = new byte[1024];
+                                    int firefoxBytesRead;
+                                    long firefoxTotalBytesRead = 0;
+                                    long firefoxTotalBytes = firefoxResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((firefoxBytesRead = firefoxStream.Read(firefoxBuffer, 0, firefoxBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        firefoxFileStream.Write(firefoxBuffer, 0, firefoxBytesRead);
+                                        firefoxTotalBytesRead += firefoxBytesRead;
+
+                                        if (firefoxTotalBytes > 0)
+                                        {
+                                            int firefoxProgress = (int)((firefoxTotalBytesRead * 100) / firefoxTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {firefoxProgress}% ({firefoxTotalBytesRead / 1024} KB de {firefoxTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nFirefox was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nFirefox was downloaded succesfully!");
+                Process firefoxInstallerProcess = Process.Start(new ProcessStartInfo(firefoxSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (firefoxInstallerProcess != null && !firefoxInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "3")
-        {
-            string url = "https://downloads.vivaldi.com/stable/Vivaldi.6.8.3381.46.x64.exe";
-            string saveLocation = "C:\\m4Installers\\VivaldiSetup.exe";
-            Console.WriteLine("Downloading Vivaldi...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    firefoxInstallerProcess.WaitForExit();
+
+                    if (firefoxInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "3":
+                string vivaldiUrl = "https://downloads.vivaldi.com/stable/Vivaldi.6.8.3381.46.x64.exe";
+                string vivaldiSaveLocation = "C:\\m4Installers\\VivaldiSetup.exe";
+                Console.WriteLine("Downloading Vivaldi...");
+                using (HttpClient vivaldiClient = new HttpClient())
+                {
+                    using (HttpResponseMessage vivaldiResponse = vivaldiClient.GetAsync(vivaldiUrl).Result)
+                    {
+                        using (HttpContent vivaldiContent = vivaldiResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream vivaldiStream = vivaldiContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream vivaldiFileStream = new FileStream(vivaldiSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] vivaldiBuffer = new byte[1024];
+                                    int vivaldiBytesRead;
+                                    long vivaldiTotalBytesRead = 0;
+                                    long vivaldiTotalBytes = vivaldiResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((vivaldiBytesRead = vivaldiStream.Read(vivaldiBuffer, 0, vivaldiBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        vivaldiFileStream.Write(vivaldiBuffer, 0, vivaldiBytesRead);
+                                        vivaldiTotalBytesRead += vivaldiBytesRead;
+
+                                        if (vivaldiTotalBytes > 0)
+                                        {
+                                            int vivaldiProgress = (int)((vivaldiTotalBytesRead * 100) / vivaldiTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {vivaldiProgress}% ({vivaldiTotalBytesRead / 1024} KB de {vivaldiTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nVivaldi was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nVivaldi was downloaded succesfully!");
+                Process vivaldiInstallerProcess = Process.Start(new ProcessStartInfo(vivaldiSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (vivaldiInstallerProcess != null && !vivaldiInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "4")
-        {
-            string url =
-                "https://download3.operacdn.com/pub/opera_gx/100.0.4815.44/win/Opera_GX_100.0.4815.44_Setup_x64.exe";
-            string saveLocation = "C:\\m4Installers\\OperaGXSetup.exe";
-            Console.WriteLine("Downloading OperaGX...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    vivaldiInstallerProcess.WaitForExit();
+
+                    if (vivaldiInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "4":
+                string operaGXUrl =
+                    "https://download3.operacdn.com/pub/opera_gx/100.0.4815.44/win/Opera_GX_100.0.4815.44_Setup_x64.exe";
+                string operaGXSaveLocation = "C:\\m4Installers\\OperaGXSetup.exe";
+                Console.WriteLine("Downloading OperaGX...");
+                using (HttpClient operaGXClient = new HttpClient())
+                {
+                    using (HttpResponseMessage operaGXResponse = operaGXClient.GetAsync(operaGXUrl).Result)
+                    {
+                        using (HttpContent operaGXContent = operaGXResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream operaGXStream = operaGXContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream operaGXFileStream = new FileStream(operaGXSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] operaGXBuffer = new byte[1024];
+                                    int operaGXBytesRead;
+                                    long operaGXTotalBytesRead = 0;
+                                    long operaGXTotalBytes = operaGXResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((operaGXBytesRead = operaGXStream.Read(operaGXBuffer, 0, operaGXBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        operaGXFileStream.Write(operaGXBuffer, 0, operaGXBytesRead);
+                                        operaGXTotalBytesRead += operaGXBytesRead;
+
+                                        if (operaGXTotalBytes > 0)
+                                        {
+                                            int operaGXProgress = (int)((operaGXTotalBytesRead * 100) / operaGXTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {operaGXProgress}% ({operaGXTotalBytesRead / 1024} KB de {operaGXTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nOperaGX was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nOperaGX was downloaded succesfully!");
+                Process operaGXInstallerProcess = Process.Start(new ProcessStartInfo(operaGXSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (operaGXInstallerProcess != null && !operaGXInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    operaGXInstallerProcess.WaitForExit();
+
+                    if (operaGXInstallerProcess.ExitCode == 0)
+                    {
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
                 }
-            }
-        }
-        else if (option == "5")
-        {
-            Installers.ReturnToMainMenu();
-        }
-        else
-        {
-            Console.WriteLine("Invalid option. Try it again.");
-            Thread.Sleep(2500); // Add a delay of 2.5 seconds
-            Console.Clear();
-            ShowMenu();
+                break;
+
+            case "5":
+                Installers.ReturnToMainMenu();
+                break;
+
+            default:
+                Console.WriteLine("Invalid option. Try it again.");
+                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Console.Clear();
+                ShowMenu();
+                break;
         }
     }
 }

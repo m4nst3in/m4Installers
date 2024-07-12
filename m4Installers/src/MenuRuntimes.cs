@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net.Http;
+﻿using System.Diagnostics;
 
 class MenuRuntimes
 {
@@ -18,242 +15,264 @@ class MenuRuntimes
 
         string option = Console.ReadLine();
 
-        if (option == "1")
+        switch (option)
         {
-            string url =
-                "https://media.computerbase.de/s/GMGpZJyVj9vYs5IosY2y_w/1720764360/download/758/aio-runtimes_v2.5.0.exe";
-            string saveLocation = "C:\\m4Installers\\AIOSetup.exe";
-            Console.WriteLine("Downloading AllinOne Runtimes...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
+            case "1":
+                string allinoneurl =
+                    "https://media.computerbase.de/s/GMGpZJyVj9vYs5IosY2y_w/1720764360/download/758/aio-runtimes_v2.5.0.exe";
+                string allinoneSaveLocation = "C:\\m4Installers\\AIOSetup.exe";
+                Console.WriteLine("Downloading AllinOne Runtimes...");
+                using (HttpClient client = new HttpClient())
                 {
-                    using (HttpContent content = response.Content)
+                    using (HttpResponseMessage response = client.GetAsync(allinoneurl).Result)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        using (HttpContent content = response.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream stream = content.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream fileStream = new FileStream(allinoneSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] buffer = new byte[1024];
+                                    int bytesRead;
+                                    long totalBytesRead = 0;
+                                    long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        fileStream.Write(buffer, 0, bytesRead);
+                                        totalBytesRead += bytesRead;
+
+                                        if (totalBytes > 0)
+                                        {
+                                            int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nAllinOne Runtimes was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nAllinOne Runtimes was downloaded succesfully!");
+                Process allinoneInstallerProcess = Process.Start(new ProcessStartInfo(allinoneSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (allinoneInstallerProcess != null && !allinoneInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "2")
-        {
-            string url = "https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net481-offline-installer";
-            string saveLocation = "C:\\m4Installers\\Net481Setup.exe";
-            Console.WriteLine("Downloading .NET Framework...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    allinoneInstallerProcess.WaitForExit();
+
+                    if (allinoneInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "2":
+                string dotneturl = "https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net481-offline-installer";
+                string dotnetSaveLocation = "C:\\m4Installers\\Net481Setup.exe";
+                Console.WriteLine("Downloading .NET Framework...");
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage response = client.GetAsync(dotneturl).Result)
+                    {
+                        using (HttpContent content = response.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream stream = content.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream fileStream = new FileStream(dotnetSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] buffer = new byte[1024];
+                                    int bytesRead;
+                                    long totalBytesRead = 0;
+                                    long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        fileStream.Write(buffer, 0, bytesRead);
+                                        totalBytesRead += bytesRead;
+
+                                        if (totalBytes > 0)
+                                        {
+                                            int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\n.NET Framework was downloaded successfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\n.NET Framework was downloaded successfully!");
+                Process dotnetInstallerProcess = Process.Start(new ProcessStartInfo(dotnetSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (dotnetInstallerProcess != null && !dotnetInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "3")
-        {
-            string url = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
-            string saveLocation = "C:\\m4Installers\\VcRedistSetup.exe";
-            Console.WriteLine("Downloading Visual C++ Redist...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    dotnetInstallerProcess.WaitForExit();
+
+                    if (dotnetInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "3":
+                string vcurl = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
+                string vcSaveLocation = "C:\\m4Installers\\VcRedistSetup.exe";
+                Console.WriteLine("Downloading Visual C++ Redist...");
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage response = client.GetAsync(vcurl).Result)
+                    {
+                        using (HttpContent content = response.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream stream = content.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream fileStream = new FileStream(vcSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] buffer = new byte[1024];
+                                    int bytesRead;
+                                    long totalBytesRead = 0;
+                                    long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        fileStream.Write(buffer, 0, bytesRead);
+                                        totalBytesRead += bytesRead;
+
+                                        if (totalBytes > 0)
+                                        {
+                                            int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nVisual C++ was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nVisual C++ was downloaded succesfully!");
+                Process vcInstallerProcess = Process.Start(new ProcessStartInfo(vcSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (vcInstallerProcess != null && !vcInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "4")
-        {
-            string url =
-                "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe";
-            string saveLocation = "C:\\m4Installers\\DXWebSetup.exe";
-            Console.WriteLine("Downloading DirectX...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    vcInstallerProcess.WaitForExit();
+
+                    if (vcInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "4":
+                string dxurl =
+                    "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe";
+                string dxSaveLocation = "C:\\m4Installers\\DXWebSetup.exe";
+                Console.WriteLine("Downloading DirectX...");
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage response = client.GetAsync(dxurl).Result)
+                    {
+                        using (HttpContent content = response.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream stream = content.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream fileStream = new FileStream(dxSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] buffer = new byte[1024];
+                                    int bytesRead;
+                                    long totalBytesRead = 0;
+                                    long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        fileStream.Write(buffer, 0, bytesRead);
+                                        totalBytesRead += bytesRead;
+
+                                        if (totalBytes > 0)
+                                        {
+                                            int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nDirectX was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nDirectX was downloaded succesfully!");
+                Process dxInstallerProcess = Process.Start(new ProcessStartInfo(dxSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (dxInstallerProcess != null && !dxInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    dxInstallerProcess.WaitForExit();
+
+                    if (dxInstallerProcess.ExitCode == 0)
+                    {
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
                 }
-            }
-        }
-        else if (option == "5")
-        {
-            Installers.ReturnToMainMenu();
-        }
-        else
-        {
-            Console.WriteLine("Invalid option. Try it again.");
-            Thread.Sleep(2500); // Add a delay of 2.5 seconds
-            Console.Clear();
-            ShowMenu();
+                break;
+
+            case "5":
+                Installers.ReturnToMainMenu();
+                break;
+
+            default:
+                Console.WriteLine("Invalid option. Try it again.");
+                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Console.Clear();
+                ShowMenu();
+                break;
         }
     }
 }

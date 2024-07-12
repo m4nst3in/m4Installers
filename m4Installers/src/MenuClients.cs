@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net.Http;
+﻿using System.Diagnostics;
 
 class MenuClients
 {
@@ -18,242 +15,262 @@ class MenuClients
 
         string option = Console.ReadLine();
 
-        if (option == "1")
+        switch (option)
         {
-            string url =
-                "https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe";
-            string saveLocation = "C:\\m4Installers\\SteamSetup.exe";
-            Console.WriteLine("Downloading Steam...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
+            case "1":
+                string steamUrl = "https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe";
+                string steamSaveLocation = "C:\\m4Installers\\SteamSetup.exe";
+                Console.WriteLine("Downloading Steam...");
+                using (HttpClient steamClient = new HttpClient())
                 {
-                    using (HttpContent content = response.Content)
+                    using (HttpResponseMessage steamResponse = steamClient.GetAsync(steamUrl).Result)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        using (HttpContent steamContent = steamResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream steamStream = steamContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream steamFileStream = new FileStream(steamSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] steamBuffer = new byte[1024];
+                                    int steamBytesRead;
+                                    long steamTotalBytesRead = 0;
+                                    long steamTotalBytes = steamResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((steamBytesRead = steamStream.Read(steamBuffer, 0, steamBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        steamFileStream.Write(steamBuffer, 0, steamBytesRead);
+                                        steamTotalBytesRead += steamBytesRead;
+
+                                        if (steamTotalBytes > 0)
+                                        {
+                                            int steamProgress = (int)((steamTotalBytesRead * 100) / steamTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {steamProgress}% ({steamTotalBytesRead / 1024} KB de {steamTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nSteam was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nSteam was downloaded succesfully!");
+                Process steamInstallerProcess = Process.Start(new ProcessStartInfo(steamSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (steamInstallerProcess != null && !steamInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "2")
-        {
-            string url = "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi";
-            string saveLocation = "C:\\m4Installers\\EGSSetup.exe";
-            Console.WriteLine("Downloading Epic Games Launcher...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    steamInstallerProcess.WaitForExit();
+
+                    if (steamInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "2":
+                string epicUrl = "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi";
+                string epicSaveLocation = "C:\\m4Installers\\EGSSetup.msi";
+                Console.WriteLine("Downloading Epic Games Launcher...");
+                using (HttpClient epicClient = new HttpClient())
+                {
+                    using (HttpResponseMessage epicResponse = epicClient.GetAsync(epicUrl).Result)
+                    {
+                        using (HttpContent epicContent = epicResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream epicStream = epicContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream epicFileStream = new FileStream(epicSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] epicBuffer = new byte[1024];
+                                    int epicBytesRead;
+                                    long epicTotalBytesRead = 0;
+                                    long epicTotalBytes = epicResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((epicBytesRead = epicStream.Read(epicBuffer, 0, epicBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        epicFileStream.Write(epicBuffer, 0, epicBytesRead);
+                                        epicTotalBytesRead += epicBytesRead;
+
+                                        if (epicTotalBytes > 0)
+                                        {
+                                            int epicProgress = (int)((epicTotalBytesRead * 100) / epicTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {epicProgress}% ({epicTotalBytesRead / 1024} KB de {epicTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nEpic Games Launcher was downloaded successfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nEpic Games Launcher was downloaded successfully!");
+                Process epicInstallerProcess = Process.Start(new ProcessStartInfo(epicSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (epicInstallerProcess != null && !epicInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "3")
-        {
-            string url = "https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe";
-            string saveLocation = "C:\\m4Installers\\OriginSetup.exe";
-            Console.WriteLine("Downloading EA App...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    epicInstallerProcess.WaitForExit();
+
+                    if (epicInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "3":
+                string originUrl = "https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe";
+                string originSaveLocation = "C:\\m4Installers\\OriginSetup.exe";
+                Console.WriteLine("Downloading EA App...");
+                using (HttpClient originClient = new HttpClient())
+                {
+                    using (HttpResponseMessage originResponse = originClient.GetAsync(originUrl).Result)
+                    {
+                        using (HttpContent originContent = originResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream originStream = originContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream originFileStream = new FileStream(originSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] originBuffer = new byte[1024];
+                                    int originBytesRead;
+                                    long originTotalBytesRead = 0;
+                                    long originTotalBytes = originResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((originBytesRead = originStream.Read(originBuffer, 0, originBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        originFileStream.Write(originBuffer, 0, originBytesRead);
+                                        originTotalBytesRead += originBytesRead;
+
+                                        if (originTotalBytes > 0)
+                                        {
+                                            int originProgress = (int)((originTotalBytesRead * 100) / originTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {originProgress}% ({originTotalBytesRead / 1024} KB de {originTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nOrigin was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nOrigin was downloaded succesfully!");
+                Process originInstallerProcess = Process.Start(new ProcessStartInfo(originSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (originInstallerProcess != null && !originInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "4")
-        {
-            string url =
-                "https://cdn.gog.com/open/galaxy/client/2.0.74.352/setup_galaxy_2.0.74.352.exe";
-            string saveLocation = "C:\\m4Installers\\GOGSetup.exe";
-            Console.WriteLine("Downloading GOG Galaxy...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    originInstallerProcess.WaitForExit();
+
+                    if (originInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "4":
+                string gogUrl = "https://cdn.gog.com/open/galaxy/client/2.0.74.352/setup_galaxy_2.0.74.352.exe";
+                string gogSaveLocation = "C:\\m4Installers\\GOGSetup.exe";
+                Console.WriteLine("Downloading GOG Galaxy...");
+                using (HttpClient gogClient = new HttpClient())
+                {
+                    using (HttpResponseMessage gogResponse = gogClient.GetAsync(gogUrl).Result)
+                    {
+                        using (HttpContent gogContent = gogResponse.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream gogStream = gogContent.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream gogFileStream = new FileStream(gogSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] gogBuffer = new byte[1024];
+                                    int gogBytesRead;
+                                    long gogTotalBytesRead = 0;
+                                    long gogTotalBytes = gogResponse.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((gogBytesRead = gogStream.Read(gogBuffer, 0, gogBuffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        gogFileStream.Write(gogBuffer, 0, gogBytesRead);
+                                        gogTotalBytesRead += gogBytesRead;
+
+                                        if (gogTotalBytes > 0)
+                                        {
+                                            int gogProgress = (int)((gogTotalBytesRead * 100) / gogTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {gogProgress}% ({gogTotalBytesRead / 1024} KB de {gogTotalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nGOG Galaxy was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nGOG Galaxy was downloaded succesfully!");
+                Process gogInstallerProcess = Process.Start(new ProcessStartInfo(gogSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (gogInstallerProcess != null && !gogInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    gogInstallerProcess.WaitForExit();
+
+                    if (gogInstallerProcess.ExitCode == 0)
+                    {
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
                 }
-            }
-        }
-        else if (option == "5")
-        {
-            Installers.ReturnToMainMenu();
-        }
-        else
-        {
-            Console.WriteLine("Invalid option. Try it again.");
-            Thread.Sleep(3000); // Add a delay of 2 seconds
-            Console.Clear();
-            ShowMenu();
+                break;
+
+            case "5":
+                Installers.ReturnToMainMenu();
+                break;
+
+            default:
+                Console.WriteLine("Invalid option. Try it again.");
+                System.Threading.Thread.Sleep(3000); // Add a delay of 2 seconds
+                Console.Clear();
+                ShowMenu();
+                break;
         }
     }
 }

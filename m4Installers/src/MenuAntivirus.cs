@@ -15,242 +15,263 @@ class MenuAntivirus
 
         string option = Console.ReadLine();
 
-        if (option == "1")
+        switch (option)
         {
-            string url =
-                "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN/installertype_FULL/build_RELEASE/";
-            string saveLocation = "C:\\m4Installers\\AvastSetup.exe";
-            Console.WriteLine("Downloading Avast...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
+            case "1":
+                string avastUrl = "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN/installertype_FULL/build_RELEASE/";
+                string avastSaveLocation = "C:\\m4Installers\\AvastSetup.exe";
+                Console.WriteLine("Downloading Avast...");
+                using (HttpClient client = new HttpClient())
                 {
-                    using (HttpContent content = response.Content)
+                    using (HttpResponseMessage response = client.GetAsync(avastUrl).Result)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        using (HttpContent content = response.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream stream = content.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream fileStream = new FileStream(avastSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] buffer = new byte[1024];
+                                    int bytesRead;
+                                    long totalBytesRead = 0;
+                                    long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        fileStream.Write(buffer, 0, bytesRead);
+                                        totalBytesRead += bytesRead;
+
+                                        if (totalBytes > 0)
+                                        {
+                                            int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nAvast was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nAvast was downloaded succesfully!");
+                Process avastInstallerProcess = Process.Start(new ProcessStartInfo(avastSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (avastInstallerProcess != null && !avastInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "2")
-        {
-            string url = "https://pdc4.trt.pdc.kaspersky.com/DownloadManagers/cb/cbf6b1d8-4ae7-4b33-927f-fdd727060f03/startup.exe";
-            string saveLocation = "C:\\m4Installers\\KasperskySetup.exe";
-            Console.WriteLine("Downloading Kaspersky...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    avastInstallerProcess.WaitForExit();
+
+                    if (avastInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "2":
+                string kasperskyUrl = "https://www.dropbox.com/scl/fi/mz69m452jlwbsjxedub7h/KasperskySetup.exe?rlkey=rw3nbq698ua3s9is53mt9zs1m&st=lvho0p8p&dl=1";
+                string kasperskySaveLocation = "C:\\m4Installers\\KasperskySetup.exe";
+                Console.WriteLine("Downloading Kaspersky...");
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage response = client.GetAsync(kasperskyUrl).Result)
+                    {
+                        using (HttpContent content = response.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream stream = content.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream fileStream = new FileStream(kasperskySaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] buffer = new byte[1024];
+                                    int bytesRead;
+                                    long totalBytesRead = 0;
+                                    long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        fileStream.Write(buffer, 0, bytesRead);
+                                        totalBytesRead += bytesRead;
+
+                                        if (totalBytes > 0)
+                                        {
+                                            int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nKaspersky was downloaded successfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nKaspersky was downloaded successfully!");
+                Process kasperskyInstallerProcess = Process.Start(new ProcessStartInfo(kasperskySaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (kasperskyInstallerProcess != null && !kasperskyInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "3")
-        {
-            string url = "https://www.malwarebytes.com/api/downloads/mb-windows?filename=MBSetup.exe&t=1720763650278";
-            string saveLocation = "C:\\m4Installers\\Malwarebytesetup.exe";
-            Console.WriteLine("Downloading Malwarebytes...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    kasperskyInstallerProcess.WaitForExit();
+
+                    if (kasperskyInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+
+                break;
+
+            case "3":
+                string malwarebytesUrl = "https://www.malwarebytes.com/api/downloads/mb-windows?filename=MBSetup.exe&t=1720763650278";
+                string malwarebytesSaveLocation = "C:\\m4Installers\\Malwarebytesetup.exe";
+                Console.WriteLine("Downloading Malwarebytes...");
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage response = client.GetAsync(malwarebytesUrl).Result)
+                    {
+                        using (HttpContent content = response.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream stream = content.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream fileStream = new FileStream(malwarebytesSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] buffer = new byte[1024];
+                                    int bytesRead;
+                                    long totalBytesRead = 0;
+                                    long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        fileStream.Write(buffer, 0, bytesRead);
+                                        totalBytesRead += bytesRead;
+
+                                        if (totalBytes > 0)
+                                        {
+                                            int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nMalwarebytes was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nMalwarebytes was downloaded succesfully!");
+                Process malwarebytesInstallerProcess = Process.Start(new ProcessStartInfo(malwarebytesSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (malwarebytesInstallerProcess != null && !malwarebytesInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                }
-            }
-        }
-        else if (option == "4")
-        {
-            string url =
-                "https://download.bitdefender.com/windows/installer/pt-br/bitdefender_avfree.exe";
-            string saveLocation = "C:\\m4Installers\\BitdefenderSetup.exe";
-            Console.WriteLine("Downloading Bitdefender...");
-            using (HttpClient client = new HttpClient())
-            {
-                using (HttpResponseMessage response = client.GetAsync(url).Result)
-                {
-                    using (HttpContent content = response.Content)
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    malwarebytesInstallerProcess.WaitForExit();
+
+                    if (malwarebytesInstallerProcess.ExitCode == 0)
                     {
-                        using (Stream stream = content.ReadAsStreamAsync().Result)
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+                break;
+
+            case "4":
+                string bitdefenderUrl = "https://download.bitdefender.com/windows/installer/pt-br/bitdefender_avfree.exe";
+                string bitdefenderSaveLocation = "C:\\m4Installers\\BitdefenderSetup.exe";
+                Console.WriteLine("Downloading Bitdefender...");
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage response = client.GetAsync(bitdefenderUrl).Result)
+                    {
+                        using (HttpContent content = response.Content)
                         {
-                            using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create,
-                                       FileAccess.Write, FileShare.None))
+                            using (Stream stream = content.ReadAsStreamAsync().Result)
                             {
-                                byte[] buffer = new byte[1024];
-                                int bytesRead;
-                                long totalBytesRead = 0;
-                                long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                                while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
+                                using (FileStream fileStream = new FileStream(bitdefenderSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
                                 {
-                                    fileStream.Write(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
+                                    byte[] buffer = new byte[1024];
+                                    int bytesRead;
+                                    long totalBytesRead = 0;
+                                    long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-                                    if (totalBytes > 0)
+                                    while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
-                                        int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                        Console.Write(
-                                            $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        fileStream.Write(buffer, 0, bytesRead);
+                                        totalBytesRead += bytesRead;
+
+                                        if (totalBytes > 0)
+                                        {
+                                            int progress = (int)((totalBytesRead * 100) / totalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            Console.WriteLine("\nBitdefender was downloaded succesfully!");
-            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nBitdefender was downloaded succesfully!");
+                Process bitdefenderInstallerProcess = Process.Start(new ProcessStartInfo(bitdefenderSaveLocation) { UseShellExecute = true });
 
-            if (installerProcess != null && !installerProcess.HasExited)
-            {
-                Console.WriteLine("Installing...");
-
-                // Wait until installation process has finished
-                installerProcess.WaitForExit();
-
-                if (installerProcess.ExitCode == 0)
+                if (bitdefenderInstallerProcess != null && !bitdefenderInstallerProcess.HasExited)
                 {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    bitdefenderInstallerProcess.WaitForExit();
+
+                    if (bitdefenderInstallerProcess.ExitCode == 0)
+                    {
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
                 }
-            }
-        }
-        else if (option == "5")
-        {
-            Installers.ReturnToMainMenu();
-        }
-        else
-        {
-            Console.WriteLine("Invalid option. Try it again.");
-            Thread.Sleep(2500); // Add a delay of 2.5 seconds
-            Console.Clear();
-            ShowMenu();
+                break;
+
+            case "5":
+                Installers.ReturnToMainMenu();
+                break;
+
+            default:
+                Console.WriteLine("Invalid option. Try it again.");
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Console.Clear();
+                ShowMenu();
+                break;
         }
     }
 }
