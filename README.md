@@ -50,10 +50,18 @@ Launch the application and follow the on-screen instructions to select and insta
 - **Web Browsers**: Brave, Firefox, Vivaldi, Opera, OperaGX, Google Chrome, Microsoft Edge, Thorium, Librewolf.
 - **Tools**: WinRAR, 7zip, AIDA64, CPU-Z.
 - **Game Clients**: Steam, Epic Games Launcher, EA App (Origin), GOG Galaxy.
-- **Runtimes**: All-in-one Runtimes, .NET Framework 4.8.1, Visual C++ Redistributable, DirectX.
+- **Runtimes**: All-in-one Runtimes, .NET Framework 4.*.*, Visual C++ Redistributable, DirectX.
 - **Text Editors/IDEs**: Sublime Text, Notepad++, Visual Studio Code, JetBrains Toolbox.
 - **Antivirus**: Avast, Kaspersky, MalwareBytes, Bitdefender.
-- **Extra**: Discord, Telegram, GitHub Desktop, Paint.NET.
+- **Utilities**: CCleaner, PuTTY, Filezilla, Recuva.
+- **Games**: SKLauncher, Prisma Launcher, Heroic Games Launcher, Playnite.
+- **Messaging**: Discord, Telegram, TeamSpeak, Skype.
+- **Media**: Spotify, Deezer, VLC Media Player, Kodi.
+- **Documents**: OpenOffice, LibreOffice, WPS OFfice, Obsidian.
+- **Torrent Clients**: uTorrent, BitTorrent, QBitTorrent, Transmission.
+- **File Storage**: DropBox, MEGA Sync, SugarSync, Google Drive, OneDrive.
+- **Recorders/Live Software**: OBS Studio, Streamlabs, Fraps, Bandicam.
+- **Photo/Video Editors**: GIMP, Paint.NET, OpenShot, Krita.
 ## FAQ
 - **Where the downloaded files are stored?** - It downloads the setup files directly to the C:/m4Installers folder.
 - **Do you plan adding more programs to m4Installers?** - Yes, i do. Even new categories!
