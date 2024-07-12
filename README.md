@@ -47,7 +47,7 @@ Launch the application and follow the on-screen instructions to select and insta
 
 ### Actual Supported Programs
 
-- **Web Browsers**: Brave, Firefox, Vivaldi, OperaGX.
+- **Web Browsers**: Brave, Firefox, Vivaldi, Opera, OperaGX, Google Chrome, Microsoft Edge, Thorium, Librewolf.
 - **Tools**: WinRAR, 7zip, AIDA64, CPU-Z.
 - **Game Clients**: Steam, Epic Games Launcher, EA App (Origin), GOG Galaxy.
 - **Runtimes**: All-in-one Runtimes, .NET Framework 4.8.1, Visual C++ Redistributable, DirectX.

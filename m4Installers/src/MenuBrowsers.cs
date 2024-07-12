@@ -11,8 +11,13 @@ class MenuBrowsers
         Console.WriteLine("[1] - Brave");
         Console.WriteLine("[2] - Firefox");
         Console.WriteLine("[3] - Vivaldi");
-        Console.WriteLine("[4] - Opera GX");
-        Console.WriteLine("[5] - Return to Main Menu");
+        Console.WriteLine("[4] - Opera");
+        Console.WriteLine("[5] - Opera GX");
+        Console.WriteLine("[6] - Google Chrome");
+        Console.WriteLine("[7] - Microsoft Edge");
+        Console.WriteLine("[8] - Thorium");
+        Console.WriteLine("[9] - Librewolf");
+        Console.WriteLine("[10] - Return to Main Menu");
 
         string option = Console.ReadLine();
 
@@ -214,8 +219,74 @@ class MenuBrowsers
                 // Delete the setup file
                 File.Delete(vivaldiSaveLocation);
                 break;
-
             case "4":
+                Console.Clear();
+                string operaUrl =
+                    "https://net.geo.opera.com/opera/stable/windows?utm_tryagain=yes&utm_source=google&utm_medium=ose&utm_campaign=(none)&http_referrer=https%3A%2F%2Fwww.google.com%2F&utm_site=opera_com&&utm_lastpage=opera.com/download";
+                string operaSaveLocation = "C:\\m4Installers\\OperaSetup.exe";
+                Console.WriteLine("Downloading Opera...");
+                using (HttpClient operaClient = new HttpClient())
+                {
+                    using (HttpResponseMessage operaResponse = operaClient.GetAsync(operaUrl).Result)
+                    {
+                        using (HttpContent operaContent = operaResponse.Content)
+                        {
+                            using (Stream operaStream = operaContent.ReadAsStreamAsync().Result)
+                            {
+                                using (FileStream operaFileStream = new FileStream(operaSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
+                                {
+                                    byte[] operaBuffer = new byte[1024];
+                                    int operaBytesRead;
+                                    long operaTotalBytesRead = 0;
+                                    long operaTotalBytes = operaResponse.Content.Headers.ContentLength ?? -1;
+
+                                    while ((operaBytesRead = operaStream.Read(operaBuffer, 0, operaBuffer.Length)) > 0)
+                                    {
+                                        operaFileStream.Write(operaBuffer, 0, operaBytesRead);
+                                        operaTotalBytesRead += operaBytesRead;
+
+                                        if (operaTotalBytes > 0)
+                                        {
+                                            int operaProgress = (int)((operaTotalBytesRead * 100) / operaTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {operaProgress}% ({operaTotalBytesRead / 1024} KB de {operaTotalBytes / 1024} KB)");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Console.WriteLine("\nOpera was downloaded succesfully!");
+                Process operaInstallerProcess = Process.Start(new ProcessStartInfo(operaSaveLocation) { UseShellExecute = true });
+
+                if (operaInstallerProcess != null && !operaInstallerProcess.HasExited)
+                {
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    operaInstallerProcess.WaitForExit();
+
+                    if (operaInstallerProcess.ExitCode == 0)
+                    {
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                        File.Delete(operaSaveLocation);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+
+                // Delete the setup file
+                File.Delete(operaSaveLocation);
+                break;
+
+            case "5":
                 Console.Clear();
                 string operaGXUrl =
                     "https://download3.operacdn.com/pub/opera_gx/100.0.4815.44/win/Opera_GX_100.0.4815.44_Setup_x64.exe";
@@ -281,8 +352,272 @@ class MenuBrowsers
                 // Delete the setup file
                 File.Delete(operaGXSaveLocation);
                 break;
+            case "6":
+                Console.Clear();
+                string chromeUrl =
+                    "https://www.dropbox.com/scl/fi/ec46c0o79webh2f3a7i81/ChromeSetup.exe?rlkey=jpj57k653hlqf8zghot6oyej4&st=tuomgeh9&dl=1";
+                string chromeSaveLocation = "C:\\m4Installers\\ChromeSetup.exe";
+                Console.WriteLine("Downloading Google Chrome...");
+                using (HttpClient chromeClient = new HttpClient())
+                {
+                    using (HttpResponseMessage chromeResponse = chromeClient.GetAsync(chromeUrl).Result)
+                    {
+                        using (HttpContent chromeContent = chromeResponse.Content)
+                        {
+                            using (Stream chromeStream = chromeContent.ReadAsStreamAsync().Result)
+                            {
+                                using (FileStream chromeFileStream = new FileStream(chromeSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
+                                {
+                                    byte[] chromeBuffer = new byte[1024];
+                                    int chromeBytesRead;
+                                    long chromeTotalBytesRead = 0;
+                                    long chromeTotalBytes = chromeResponse.Content.Headers.ContentLength ?? -1;
 
-            case "5":
+                                    while ((chromeBytesRead = chromeStream.Read(chromeBuffer, 0, chromeBuffer.Length)) > 0)
+                                    {
+                                        chromeFileStream.Write(chromeBuffer, 0, chromeBytesRead);
+                                        chromeTotalBytesRead += chromeBytesRead;
+
+                                        if (chromeTotalBytes > 0)
+                                        {
+                                            int chromeProgress = (int)((chromeTotalBytesRead * 100) / chromeTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {chromeProgress}% ({chromeTotalBytesRead / 1024} KB de {chromeTotalBytes / 1024} KB)");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Console.WriteLine("\nGoogle Chrome was downloaded succesfully!");
+                Process chromeInstallerProcess = Process.Start(new ProcessStartInfo(chromeSaveLocation) { UseShellExecute = true });
+
+                if (chromeInstallerProcess != null && !chromeInstallerProcess.HasExited)
+                {
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    chromeInstallerProcess.WaitForExit();
+
+                    if (chromeInstallerProcess.ExitCode == 0)
+                    {
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                        File.Delete(chromeSaveLocation);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+
+                // Delete the setup file
+                File.Delete(chromeSaveLocation);
+                break;
+            case "7":
+                Console.Clear();
+                string edgeUrl =
+                    "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?platform=Default&source=EdgeStablePage&Channel=Stable&language=en";
+                string edgeSaveLocation = "C:\\m4Installers\\EdgeSetup.exe";
+                Console.WriteLine("Downloading Microsoft Edge...");
+                using (HttpClient edgeClient = new HttpClient())
+                {
+                    using (HttpResponseMessage edgeResponse = edgeClient.GetAsync(edgeUrl).Result)
+                    {
+                        using (HttpContent edgeContent = edgeResponse.Content)
+                        {
+                            using (Stream edgeStream = edgeContent.ReadAsStreamAsync().Result)
+                            {
+                                using (FileStream edgeFileStream = new FileStream(edgeSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
+                                {
+                                    byte[] edgeBuffer = new byte[1024];
+                                    int edgeBytesRead;
+                                    long edgeTotalBytesRead = 0;
+                                    long edgeTotalBytes = edgeResponse.Content.Headers.ContentLength ?? -1;
+
+                                    while ((edgeBytesRead = edgeStream.Read(edgeBuffer, 0, edgeBuffer.Length)) > 0)
+                                    {
+                                        edgeFileStream.Write(edgeBuffer, 0, edgeBytesRead);
+                                        edgeTotalBytesRead += edgeBytesRead;
+
+                                        if (edgeTotalBytes > 0)
+                                        {
+                                            int edgeProgress = (int)((edgeTotalBytesRead * 100) / edgeTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {edgeProgress}% ({edgeTotalBytesRead / 1024} KB de {edgeTotalBytes / 1024} KB)");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Console.WriteLine("\nMicrosoft Edge was downloaded succesfully!");
+                Process edgeInstallerProcess = Process.Start(new ProcessStartInfo(edgeSaveLocation) { UseShellExecute = true });
+
+                if (edgeInstallerProcess != null && !edgeInstallerProcess.HasExited)
+                {
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    edgeInstallerProcess.WaitForExit();
+
+                    if (edgeInstallerProcess.ExitCode == 0)
+                    {
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                        File.Delete(edgeSaveLocation);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+
+                // Delete the setup file
+                File.Delete(edgeSaveLocation);
+                break;
+            case "8":
+                Console.Clear();
+                string thoriumUrl =
+                    "https://github.com/Alex313031/Thorium-Win/releases/download/M124.0.6367.218/thorium_AVX_mini_installer.exe";
+                string thoriumSaveLocation = "C:\\m4Installers\\ThoriumSetup.exe";
+                Console.WriteLine("Downloading Thorium...");
+                using (HttpClient thoriumClient = new HttpClient())
+                {
+                    using (HttpResponseMessage thoriumResponse = thoriumClient.GetAsync(thoriumUrl).Result)
+                    {
+                        using (HttpContent thoriumContent = thoriumResponse.Content)
+                        {
+                            using (Stream thoriumStream = thoriumContent.ReadAsStreamAsync().Result)
+                            {
+                                using (FileStream thoriumFileStream = new FileStream(thoriumSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
+                                {
+                                    byte[] thoriumBuffer = new byte[1024];
+                                    int thoriumBytesRead;
+                                    long thoriumTotalBytesRead = 0;
+                                    long thoriumTotalBytes = thoriumResponse.Content.Headers.ContentLength ?? -1;
+
+                                    while ((thoriumBytesRead = thoriumStream.Read(thoriumBuffer, 0, thoriumBuffer.Length)) > 0)
+                                    {
+                                        thoriumFileStream.Write(thoriumBuffer, 0, thoriumBytesRead);
+                                        thoriumTotalBytesRead += thoriumBytesRead;
+
+                                        if (thoriumTotalBytes > 0)
+                                        {
+                                            int thoriumProgress = (int)((thoriumTotalBytesRead * 100) / thoriumTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {thoriumProgress}% ({thoriumTotalBytesRead / 1024} KB de {thoriumTotalBytes / 1024} KB)");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Console.WriteLine("\nThorium was downloaded succesfully!");
+                Process thoriumInstallerProcess = Process.Start(new ProcessStartInfo(thoriumSaveLocation) { UseShellExecute = true });
+
+                if (thoriumInstallerProcess != null && !thoriumInstallerProcess.HasExited)
+                {
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    thoriumInstallerProcess.WaitForExit();
+
+                    if (thoriumInstallerProcess.ExitCode == 0)
+                    {
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                        File.Delete(thoriumSaveLocation);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+
+                // Delete the setup file
+                File.Delete(thoriumSaveLocation);
+                break;
+            case "9":
+                Console.Clear();
+                string librewolfUrl =
+                    "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/127.0.2-2/librewolf-127.0.2-2-windows-x86_64-setup.exe";
+                string librewolfSaveLocation = "C:\\m4Installers\\LibrewolfSetup.exe";
+                Console.WriteLine("Downloading Librewolf...");
+                using (HttpClient librewolfClient = new HttpClient())
+                {
+                    using (HttpResponseMessage librewolfResponse = librewolfClient.GetAsync(librewolfUrl).Result)
+                    {
+                        using (HttpContent librewolfContent = librewolfResponse.Content)
+                        {
+                            using (Stream librewolfStream = librewolfContent.ReadAsStreamAsync().Result)
+                            {
+                                using (FileStream librewolfFileStream = new FileStream(librewolfSaveLocation, FileMode.Create,
+                                           FileAccess.Write, FileShare.None))
+                                {
+                                    byte[] librewolfBuffer = new byte[1024];
+                                    int librewolfBytesRead;
+                                    long librewolfTotalBytesRead = 0;
+                                    long librewolfTotalBytes = librewolfResponse.Content.Headers.ContentLength ?? -1;
+
+                                    while ((librewolfBytesRead = librewolfStream.Read(librewolfBuffer, 0, librewolfBuffer.Length)) > 0)
+                                    {
+                                        librewolfFileStream.Write(librewolfBuffer, 0, librewolfBytesRead);
+                                        librewolfTotalBytesRead += librewolfBytesRead;
+
+                                        if (librewolfTotalBytes > 0)
+                                        {
+                                            int librewolfProgress = (int)((librewolfTotalBytesRead * 100) / librewolfTotalBytes);
+                                            Console.Write(
+                                                $"\rDownloading... {librewolfProgress}% ({librewolfTotalBytesRead / 1024} KB de {librewolfTotalBytes / 1024} KB)");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Console.WriteLine("\nLibrewolf was downloaded succesfully!");
+                Process librewolfInstallerProcess = Process.Start(new ProcessStartInfo(librewolfSaveLocation) { UseShellExecute = true });
+
+                if (librewolfInstallerProcess != null && !librewolfInstallerProcess.HasExited)
+                {
+                    Console.WriteLine("Installing...");
+
+                    // Wait until installation process has finished
+                    librewolfInstallerProcess.WaitForExit();
+
+                    if (librewolfInstallerProcess.ExitCode == 0)
+                    {
+                        Console.WriteLine("Installation was concluded with success!");
+                        Console.Clear();
+                        File.Delete(librewolfSaveLocation);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Installation has failed!");
+                        Console.Clear();
+                    }
+                }
+
+                // Delete the setup file
+                File.Delete(librewolfSaveLocation);
+                break;
+
+            case "10":
                 Installers.ReturnToMainMenu();
                 break;
 
