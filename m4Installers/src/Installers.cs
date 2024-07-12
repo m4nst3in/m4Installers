@@ -70,7 +70,7 @@
                     break;
                 case "7":
                     ClearConsole();
-                    MenuExtra.ShowMenu();
+                    MenuUtilities.ShowMenu();
                     break;
                 case "8":
                     ClearConsole();
@@ -79,6 +79,10 @@
                 case "9":
                     ClearConsole();
                     MenuMessaging.ShowMenu();
+                    break;
+                case "10":
+                    ClearConsole();
+                    MenuMedia.ShowMenu();
                     break;
                 case "16":
                     exit = true;
