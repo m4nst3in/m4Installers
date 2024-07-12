@@ -6,13 +6,11 @@ class MenuDocuments
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Document Apps \n");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
-        Console.WriteLine("[1] - Microsoft Word ");
-        Console.WriteLine("[2] - Google Docs ");
-        Console.WriteLine("[3] - Adobe Acrobat Reader ");
-        Console.WriteLine("[4] - LibreOffice Writer ");
-        Console.WriteLine("[5] - WPS Office "); 
-        Console.WriteLine("[6] - Obsidian ");
-        Console.WriteLine("[6] - Return to Main Menu ");
+        Console.WriteLine("[1] - OpenOffice ");
+        Console.WriteLine("[2] - LibreOffice Writer ");
+        Console.WriteLine("[3] - WPS Office ");
+        Console.WriteLine("[4] - Obsidian ");
+        Console.WriteLine("[5] - Return to Main Menu ");
 
         string option = Console.ReadLine();
 
@@ -20,40 +18,38 @@ class MenuDocuments
         {
             case "1":
                 Console.Clear();
-                string wordUrl =
-                    "https://go.microsoft.com/fwlink/?linkid=525133";
-                string wordSaveLocation = "C:\\m4Installers\\WordSetup.exe";
-                Console.WriteLine("Downloading Microsoft Word...");
+                string openOfficeUrl = "https://sourceforge.net/projects/openofficeorg.mirror/files/4.1.15/binaries/pt-BR/Apache_OpenOffice_4.1.15_Win_x86_install_pt-BR.exe/download";
+                string openOfficeSaveLocation = "C:\\m4Installers\\OpenOfficeSetup.exe";
+                Console.WriteLine("Downloading OpenOffice...");
 
-                // Download Word installer
-                using (HttpClient wordClient = new HttpClient())
+                // Download OpenOffice installer
+                using (HttpClient openOfficeClient = new HttpClient())
                 {
-                    using (HttpResponseMessage wordResponse = wordClient.GetAsync(wordUrl).Result)
+                    using (HttpResponseMessage openOfficeResponse = openOfficeClient.GetAsync(openOfficeUrl).Result)
                     {
-                        using (HttpContent wordContent = wordResponse.Content)
-                            
+                        using (HttpContent openOfficeContent = openOfficeResponse.Content)
                         {
-                            using (Stream wordStream = wordContent.ReadAsStreamAsync().Result)
+                            using (Stream openOfficeStream = openOfficeContent.ReadAsStreamAsync().Result)
                             {
-                                using (FileStream wordFileStream = new FileStream(wordSaveLocation, FileMode.Create,
+                                using (FileStream openOfficeFileStream = new FileStream(openOfficeSaveLocation, FileMode.Create,
                                            FileAccess.Write, FileShare.None))
                                 {
-                                    byte[] wordBuffer = new byte[1024];
-                                    int wordBytesRead;
-                                    long wordTotalBytesRead = 0;
-                                    long wordTotalBytes = wordResponse.Content.Headers.ContentLength ?? -1;
+                                    byte[] openOfficeBuffer = new byte[1024];
+                                    int openOfficeBytesRead;
+                                    long openOfficeTotalBytesRead = 0;
+                                    long openOfficeTotalBytes = openOfficeResponse.Content.Headers.ContentLength ?? -1;
 
-                                    // Read and write Word installer file
-                                    while ((wordBytesRead = wordStream.Read(wordBuffer, 0, wordBuffer.Length)) > 0)
+                                    // Read and write OpenOffice installer file
+                                    while ((openOfficeBytesRead = openOfficeStream.Read(openOfficeBuffer, 0, openOfficeBuffer.Length)) > 0)
                                     {
-                                        wordFileStream.Write(wordBuffer, 0, wordBytesRead);
-                                        wordTotalBytesRead += wordBytesRead;
+                                        openOfficeFileStream.Write(openOfficeBuffer, 0, openOfficeBytesRead);
+                                        openOfficeTotalBytesRead += openOfficeBytesRead;
 
-                                        if (wordTotalBytes > 0)
+                                        if (openOfficeTotalBytes > 0)
                                         {
-                                            int wordProgress = (int)((wordTotalBytesRead * 100) / wordTotalBytes);
+                                            int openOfficeProgress = (int)((openOfficeTotalBytesRead * 100) / openOfficeTotalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {wordProgress}% ({wordTotalBytesRead / 1024} KB of {wordTotalBytes / 1024} KB)");
+                                                $"\rDownloading... {openOfficeProgress}% ({openOfficeTotalBytesRead / 1024} KB of {openOfficeTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -62,167 +58,33 @@ class MenuDocuments
                     }
                 }
 
-                Console.WriteLine("\nMicrosoft Word was downloaded successfully!");
-                Process wordInstallerProcess = Process.Start(new ProcessStartInfo(wordSaveLocation) { UseShellExecute = true });
+                Console.WriteLine("\nOpenOffice was downloaded successfully!");
+                Process openOfficeInstallerProcess = Process.Start(new ProcessStartInfo(openOfficeSaveLocation) { UseShellExecute = true });
 
-                if (wordInstallerProcess != null && !wordInstallerProcess.HasExited)
+                if (openOfficeInstallerProcess != null && !openOfficeInstallerProcess.HasExited)
                 {
                     Console.WriteLine("Installing...");
 
                     // Wait until installation process has finished
-                    wordInstallerProcess.WaitForExit();
+                    openOfficeInstallerProcess.WaitForExit();
 
-                    if (wordInstallerProcess.ExitCode == 0)
+                    if (openOfficeInstallerProcess.ExitCode == 0)
                     {
                         Console.WriteLine("Installation was concluded with success!");
                         Console.Clear();
-                        File.Delete(wordSaveLocation); // Delete the setup file
+                        File.Delete(openOfficeSaveLocation); // Delete the setup file
                     }
                     else
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
-                        File.Delete(wordSaveLocation); // Delete the setup file
+                        File.Delete(openOfficeSaveLocation); // Delete the setup file
+
                     }
                 }
                 break;
 
             case "2":
-                Console.Clear();
-                string googleDocsUrl = "https://www.google.com/docs/about/download/";
-                string googleDocsSaveLocation = "C:\\m4Installers\\GoogleDocsSetup.exe";
-                Console.WriteLine("Downloading Google Docs...");
-
-                // Download Google Docs installer
-                using (HttpClient googleDocsClient = new HttpClient())
-                {
-                    using (HttpResponseMessage googleDocsResponse = googleDocsClient.GetAsync(googleDocsUrl).Result)
-                    {
-                        using (HttpContent googleDocsContent = googleDocsResponse.Content)
-                        {
-                            using (Stream googleDocsStream = googleDocsContent.ReadAsStreamAsync().Result)
-                            {
-                                using (FileStream googleDocsFileStream = new FileStream(googleDocsSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
-                                {
-                                    byte[] googleDocsBuffer = new byte[1024];
-                                    int googleDocsBytesRead;
-                                    long googleDocsTotalBytesRead = 0;
-                                    long googleDocsTotalBytes = googleDocsResponse.Content.Headers.ContentLength ?? -1;
-
-                                    // Read and write Google Docs installer file
-                                    while ((googleDocsBytesRead = googleDocsStream.Read(googleDocsBuffer, 0, googleDocsBuffer.Length)) > 0)
-                                    {
-                                        googleDocsFileStream.Write(googleDocsBuffer, 0, googleDocsBytesRead);
-                                        googleDocsTotalBytesRead += googleDocsBytesRead;
-
-                                        if (googleDocsTotalBytes > 0)
-                                        {
-                                            int googleDocsProgress = (int)((googleDocsTotalBytesRead * 100) / googleDocsTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {googleDocsProgress}% ({googleDocsTotalBytesRead / 1024} KB of {googleDocsTotalBytes / 1024} KB)");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                Console.WriteLine("\nGoogle Docs was downloaded successfully!");
-                Process googleDocsInstallerProcess = Process.Start(new ProcessStartInfo(googleDocsSaveLocation) { UseShellExecute = true });
-
-                if (googleDocsInstallerProcess != null && !googleDocsInstallerProcess.HasExited)
-                {
-                    Console.WriteLine("Installing...");
-
-                    // Wait until installation process has finished
-                    googleDocsInstallerProcess.WaitForExit();
-
-                    if (googleDocsInstallerProcess.ExitCode == 0)
-                    {
-                        Console.WriteLine("Installation was concluded with success!");
-                        Console.Clear();
-                        File.Delete(googleDocsSaveLocation); // Delete the setup file
-                    }
-                    else
-                    {
-                        Console.WriteLine("Installation has failed!");
-                        Console.Clear();
-                        File.Delete(googleDocsSaveLocation); // Delete the setup file
-                    }
-                }
-                break;
-
-            case "3":
-                Console.Clear();
-                string acrobatUrl = "https://get.adobe.com/reader/";
-                string acrobatSaveLocation = "C:\\m4Installers\\AcrobatReaderSetup.exe";
-                Console.WriteLine("Downloading Adobe Acrobat Reader...");
-
-                // Download Adobe Acrobat Reader installer
-                using (HttpClient acrobatClient = new HttpClient())
-                {
-                    using (HttpResponseMessage acrobatResponse = acrobatClient.GetAsync(acrobatUrl).Result)
-                    {
-                        using (HttpContent acrobatContent = acrobatResponse.Content)
-                        {
-                            using (Stream acrobatStream = acrobatContent.ReadAsStreamAsync().Result)
-                            {
-                                using (FileStream acrobatFileStream = new FileStream(acrobatSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
-                                {
-                                    byte[] acrobatBuffer = new byte[1024];
-                                    int acrobatBytesRead;
-                                    long acrobatTotalBytesRead = 0;
-                                    long acrobatTotalBytes = acrobatResponse.Content.Headers.ContentLength ?? -1;
-
-                                    // Read and write Adobe Acrobat Reader installer file
-                                    while ((acrobatBytesRead = acrobatStream.Read(acrobatBuffer, 0, acrobatBuffer.Length)) > 0)
-                                    {
-                                        acrobatFileStream.Write(acrobatBuffer, 0, acrobatBytesRead);
-                                        acrobatTotalBytesRead += acrobatBytesRead;
-
-                                        if (acrobatTotalBytes > 0)
-                                        {
-                                            int acrobatProgress = (int)((acrobatTotalBytesRead * 100) / acrobatTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {acrobatProgress}% ({acrobatTotalBytesRead / 1024} KB of {acrobatTotalBytes / 1024} KB)");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                Console.WriteLine("\nAdobe Acrobat Reader was downloaded successfully!");
-                Process acrobatInstallerProcess = Process.Start(new ProcessStartInfo(acrobatSaveLocation) { UseShellExecute = true });
-
-                if (acrobatInstallerProcess != null && !acrobatInstallerProcess.HasExited)
-                {
-                    Console.WriteLine("Installing...");
-
-                    // Wait until installation process has finished
-                    acrobatInstallerProcess.WaitForExit();
-
-                    if (acrobatInstallerProcess.ExitCode == 0)
-                    {
-                        Console.WriteLine("Installation was concluded with success!");
-                        Console.Clear();
-                        File.Delete(acrobatSaveLocation); // Delete the setup file
-                    }
-                    else
-                    {
-                        Console.WriteLine("Installation has failed!");
-                        Console.Clear();
-                        File.Delete(acrobatSaveLocation); // Delete the setup file
-
-                    }
-                }
-                break;
-
-            case "4":
                 Console.Clear();
                 string libreOfficeUrl = "https://www.libreoffice.org/download/download/";
                 string libreOfficeSaveLocation = "C:\\m4Installers\\LibreOfficeSetup.exe";
@@ -289,7 +151,7 @@ class MenuDocuments
                     }
                 }
                 break;
-            case "5":
+            case "3":
                 Console.Clear();
                 string wpsOfficeUrl = "https://www.wps.com/office-free";
                 string wpsOfficeSaveLocation = "C:\\m4Installers\\WPSOfficeSetup.exe";
@@ -355,7 +217,7 @@ class MenuDocuments
                     }
                 }
                 break;
-            case "6":
+            case "4":
                 Console.Clear();
                 string obsidianUrl = "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.5/Obsidian-1.6.5.exe";
                 string obsidianSaveLocation = "C:\\m4Installers\\ObsidianSetup.exe";
@@ -422,7 +284,7 @@ class MenuDocuments
                 }
                 break;
 
-            case "7":
+            case "5":
                 Installers.ReturnToMainMenu();
                 break;
 

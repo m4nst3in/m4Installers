@@ -84,6 +84,14 @@
                     ClearConsole();
                     MenuMedia.ShowMenu();
                     break;
+                case "11":
+                    ClearConsole();
+                    MenuDocuments.ShowMenu();
+                    break;
+                case "12":
+                    ClearConsole();
+                    MenuTorrents.ShowMenu();
+                    break;
                 case "16":
                     exit = true;
                     Environment.Exit(0);
