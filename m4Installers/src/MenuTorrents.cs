@@ -18,7 +18,7 @@ class MenuTorrents
             case "1":
                 Console.Clear();
                 string utorrentUrl = "https://download-hr.utorrent.com/track/beta/endpoint/utorrent/os/windows";
-                string utorrentSaveLocation = "C:\\m4Installers\\uTorrentSetup.exe";
+                string utorrentSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "UTorrentSetup.exe");
                 Console.WriteLine("Downloading uTorrent...");
 
                 // Download uTorrent installer
@@ -85,7 +85,7 @@ class MenuTorrents
             case "2":
                 Console.Clear();
                 string bittorrentUrl = "https://download-new.utorrent.com/endpoint/bittorrent/os/windows/track/stable/";
-                string bittorrentSaveLocation = "C:\\m4Installers\\BitTorrentSetup.exe";
+                string bittorrentSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "BittorrentSetup.exe"); ;
                 Console.WriteLine("Downloading BitTorrent...");
 
                 // Download BitTorrent installer
@@ -152,7 +152,7 @@ class MenuTorrents
             case "3":
                 Console.Clear();
                 string qbittorrentUrl = "https://www.dropbox.com/scl/fi/bbthely0e6m64nmmav0yj/qbittorrent_4.6.5_x64_setup.exe?rlkey=qg8wt0lll4l0ppda094todubk&st=7ee8soaw&dl=01";
-                string qbittorrentSaveLocation = "C:\\m4Installers\\qBittorrentSetup.exe";
+                string qbittorrentSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "QBittorrentSetup.exe"); ;
                 Console.WriteLine("Downloading qBittorrent...");
 
                 // Download qBittorrent installer
@@ -219,7 +219,7 @@ class MenuTorrents
             case "4":
                 Console.Clear();
                 string transmissionUrl = "https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6-x64.msi";
-                string transmissionSaveLocation = "C:\\m4Installers\\TransmissionSetup.msi";
+                string transmissionSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "TransmissionSetup.msi"); ;
                 Console.WriteLine("Downloading Transmission...");
 
                 // Download Transmission installer

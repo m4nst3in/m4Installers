@@ -20,7 +20,7 @@ class MenuAntivirus
             case "1":
                 Console.Clear();
                 string avastUrl = "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN/installertype_FULL/build_RELEASE/";
-                string avastSaveLocation = "C:\\m4Installers\\AvastSetup.exe";
+                string avastSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "AvastSetup.exe");
                 Console.WriteLine("Downloading Avast...");
 
                 // Download Avast installer
@@ -87,7 +87,7 @@ class MenuAntivirus
             case "2":
                 Console.Clear();
                 string kasperskyUrl = "https://www.dropbox.com/scl/fi/mz69m452jlwbsjxedub7h/KasperskySetup.exe?rlkey=rw3nbq698ua3s9is53mt9zs1m&st=lvho0p8p&dl=1";
-                string kasperskySaveLocation = "C:\\m4Installers\\KasperskySetup.exe";
+                string kasperskySaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "KasperskySetup.exe");
                 Console.WriteLine("Downloading Kaspersky...");
 
                 // Download Kaspersky installer
@@ -155,7 +155,7 @@ class MenuAntivirus
             case "3":
                 Console.Clear();
                 string malwarebytesUrl = "https://www.malwarebytes.com/api/downloads/mb-windows?filename=MBSetup.exe&t=1720763650278";
-                string malwarebytesSaveLocation = "C:\\m4Installers\\Malwarebytesetup.exe";
+                string malwarebytesSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "Malwarebytesetup.exe");
                 Console.WriteLine("Downloading Malwarebytes...");
 
                 // Download Malwarebytes installer
@@ -222,7 +222,7 @@ class MenuAntivirus
             case "4":
                 Console.Clear();
                 string bitdefenderUrl = "https://download.bitdefender.com/windows/installer/pt-br/bitdefender_avfree.exe";
-                string bitdefenderSaveLocation = "C:\\m4Installers\\BitdefenderSetup.exe";
+                string bitdefenderSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "BitdefenderSetup.exe");
                 Console.WriteLine("Downloading Bitdefender...");
 
                 // Download Bitdefender installer

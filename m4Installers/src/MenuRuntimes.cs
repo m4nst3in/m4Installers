@@ -21,7 +21,7 @@ class MenuRuntimes
                 Console.Clear();
                 string allinoneurl =
                     "https://media.computerbase.de/s/GMGpZJyVj9vYs5IosY2y_w/1720764360/download/758/aio-runtimes_v2.5.0.exe";
-                string allinoneSaveLocation = "C:\\m4Installers\\AIOSetup.exe";
+                string allinoneSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "AIOSetup.exe"); ;
                 Console.WriteLine("Downloading AllinOne Runtimes...");
 
                 // Download AllinOne Runtimes
@@ -94,7 +94,7 @@ class MenuRuntimes
 
                 string dotnetVersionOption = Console.ReadLine();
                 string dotneturl = "";
-                string dotnetSaveLocation = "C:\\m4Installers\\NetSetup.exe";
+                string dotnetSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "DotNetSetup.exe");
 
                 switch (dotnetVersionOption)
                 {
@@ -210,7 +210,7 @@ class MenuRuntimes
                         return;
                 }
 
-                string vcSaveLocation = "C:\\m4Installers\\VcRedistSetup.exe";
+                string vcSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "VCRSetup.exe"); ;
                 Console.WriteLine("Downloading Visual C++ Redistributable...");
 
                 // Download Visual C++ Redistributable
@@ -277,7 +277,7 @@ class MenuRuntimes
                 Console.Clear();
                 string dxurl =
                     "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe";
-                string dxSaveLocation = "C:\\m4Installers\\DXWebSetup.exe";
+                string dxSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "DXWebSetup.exe"); ;
                 Console.WriteLine("Downloading DirectX...");
 
                 // Download DirectX

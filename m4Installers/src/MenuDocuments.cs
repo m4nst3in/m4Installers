@@ -19,7 +19,7 @@ class MenuDocuments
             case "1":
                 Console.Clear();
                 string openOfficeUrl = "https://sourceforge.net/projects/openofficeorg.mirror/files/4.1.15/binaries/pt-BR/Apache_OpenOffice_4.1.15_Win_x86_install_pt-BR.exe/download";
-                string openOfficeSaveLocation = "C:\\m4Installers\\OpenOfficeSetup.exe";
+                string openOfficeSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "OpenOfficeSetup.exe");
                 Console.WriteLine("Downloading OpenOffice...");
 
                 // Download OpenOffice installer
@@ -87,7 +87,7 @@ class MenuDocuments
             case "2":
                 Console.Clear();
                 string libreOfficeUrl = "https://www.libreoffice.org/download/download/";
-                string libreOfficeSaveLocation = "C:\\m4Installers\\LibreOfficeSetup.exe";
+                string libreOfficeSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "LibreOfficeSetup.exe");
                 Console.WriteLine("Downloading LibreOffice Writer...");
 
                 // Download LibreOffice Writer installer
@@ -154,7 +154,7 @@ class MenuDocuments
             case "3":
                 Console.Clear();
                 string wpsOfficeUrl = "https://www.wps.com/office-free";
-                string wpsOfficeSaveLocation = "C:\\m4Installers\\WPSOfficeSetup.exe";
+                string wpsOfficeSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "WPSOfficeSetup.exe");
                 Console.WriteLine("Downloading WPS Office...");
 
                 // Download WPS Office installer
@@ -220,7 +220,7 @@ class MenuDocuments
             case "4":
                 Console.Clear();
                 string obsidianUrl = "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.5/Obsidian-1.6.5.exe";
-                string obsidianSaveLocation = "C:\\m4Installers\\ObsidianSetup.exe";
+                string obsidianSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "ObsidianSetup.exe");
                 Console.WriteLine("Downloading Obsidian (Vault)...");
 
                 // Download Obsidian installer

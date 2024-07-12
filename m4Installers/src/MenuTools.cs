@@ -21,7 +21,7 @@ class MenuTools
             case "1":
                 Console.Clear();
                 string winrarUrl = "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-701.exe";
-                string winrarSaveLocation = "C:\\m4Installers\\WinRARSetup.exe";
+                string winrarSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "WinRARSetup.exe");
                 Console.WriteLine("Downloading WinRAR...");
 
                 // Download WinRAR installer
@@ -89,7 +89,7 @@ class MenuTools
             case "2":
                 Console.Clear();
                 string sevenZipUrl = "https://www.7-zip.org/a/7z2407-x64.exe";
-                string sevenZipSaveLocation = "C:\\m4Installers\\7zipSetup.exe";
+                string sevenZipSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "7zipSetup.exe");
                 Console.WriteLine("Downloading 7zip...");
 
                 // Download 7zip installer
@@ -157,7 +157,7 @@ class MenuTools
             case "3":
                 Console.Clear();
                 string aida64Url = "https://download2.aida64.com/aida64extreme730.exe";
-                string aida64SaveLocation = "C:\\m4Installers\\AIDA64Setup.exe";
+                string aida64SaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "AIDA64Setup.exe");
                 Console.WriteLine("Downloading AIDA64...");
 
                 // Download AIDA64 installer
@@ -225,7 +225,7 @@ class MenuTools
             case "4":
                 Console.Clear();
                 string cpuZUrl = "https://download.cpuid.com/cpu-z/cpu-z_1.79-en.exe";
-                string cpuZSaveLocation = "C:\\m4Installers\\CPUZSetup.exe";
+                string cpuZSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "CPUZSetup.exe");
                 Console.WriteLine("Downloading CPU-Z...");
 
                 // Download CPU-Z installer

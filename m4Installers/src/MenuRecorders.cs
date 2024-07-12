@@ -18,7 +18,7 @@ class MenuRecorders
             case "1":
                 Console.Clear();
                 string obsUrl = "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-30.1.2-Full-Installer-x64.exe";
-                string obsSaveLocation = "C:\\m4Installers\\OBSStudioSetup.exe";
+                string obsSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "OBSStudioSetup.exe");
                 Console.WriteLine("Downloading OBS Studio...");
 
                 // Download OBS Studio installer
@@ -85,7 +85,7 @@ class MenuRecorders
             case "2":
                 Console.Clear();
                 string streamlabsUrl = "https://slobs-cdn.streamlabs.com/Streamlabs+Desktop+Setup+1.16.7.exe";
-                string streamlabsSaveLocation = "C:\\m4Installers\\StreamlabsSetup.exe";
+                string streamlabsSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "StreamlabsSetup.exe");
                 Console.WriteLine("Downloading Streamlabs...");
 
                 // Download Streamlabs installer
@@ -152,7 +152,7 @@ class MenuRecorders
             case "3":
                 Console.Clear();
                 string frapsUrl = "https://beepa.com/free/setup.exe";
-                string frapsSaveLocation = "C:\\m4Installers\\FrapsSetup.exe";
+                string frapsSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "FrapsSetup.exe");
                 Console.WriteLine("Downloading Fraps...");
 
                 // Download Fraps installer
@@ -219,7 +219,7 @@ class MenuRecorders
             case "4":
                 Console.Clear();
                 string bandicamUrl = "https://dl.bandicam.com/bdcamsetup.exe";
-                string bandicamSaveLocation = "C:\\m4Installers\\BandicamSetup.exe";
+                string bandicamSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "BandicamSetup.exe");
                 Console.WriteLine("Downloading Bandicam...");
 
                 // Download Bandicam installer

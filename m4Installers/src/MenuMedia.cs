@@ -22,7 +22,7 @@ class MenuMedia
                 Console.Clear();
                 string spotifyUrl =
                     "https://download.scdn.co/SpotifySetup.exe";
-                string spotifySaveLocation = "C:\\m4Installers\\SpotifySetup.exe";
+                string spotifySaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "SpotifySetup.exe");
                 Console.WriteLine("Downloading Spotify...");
 
                 // Download spotify installer
@@ -89,7 +89,7 @@ class MenuMedia
             case "2":
                 Console.Clear();
                 string deezerUrl = "https://www.deezer.com/desktop/download?platform=win32&architecture=x86";
-                string deezerSaveLocation = "C:\\m4Installers\\deezerSetup.exe";
+                string deezerSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "deezerSetup.exe");
                 Console.WriteLine("Downloading Deezer...");
 
                 // Download deezer installer
@@ -156,7 +156,7 @@ class MenuMedia
             case "3":
                 Console.Clear();
                 string vlcUrl = "https://get.videolan.org/vlc/3.0.21/win32/vlc-3.0.21-win32.exe";
-                string vlcSaveLocation = "C:\\m4Installers\\vlcSetup.exe";
+                string vlcSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "vlcSetup.exe");
                 Console.WriteLine("Downloading VLC Media Player...");
 
                 // Download vlc installer
@@ -224,7 +224,7 @@ class MenuMedia
             case "4":
                 Console.Clear();
                 string kodiUrl = "https://mirrors.kodi.tv/releases/windows/win64/kodi-21.0-Omega-x64.exe?https=1";
-                string kodiSaveLocation = "C:\\m4Installers\\kodiSetup.exe";
+                string kodiSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "kodiSetup.exe");
                 Console.WriteLine("Downloading Kodi...");
 
                 // Download kodi installer

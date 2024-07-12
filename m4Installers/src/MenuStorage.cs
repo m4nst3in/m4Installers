@@ -19,7 +19,7 @@ class MenuStorage
             case "1":
                 Console.Clear();
                 string dropboxUrl = "https://www.dropbox.com/download?plat=win&type=full";
-                string dropboxSaveLocation = "C:\\m4Installers\\DropboxSetup.exe";
+                string dropboxSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "DropboxSetup.exe");
                 Console.WriteLine("Downloading Dropbox...");
 
                 // Download Dropbox installer
@@ -86,7 +86,7 @@ class MenuStorage
             case "2":
                 Console.Clear();
                 string megaUrl = "https://mega.nz/MEGAsyncSetup.exe";
-                string megaSaveLocation = "C:\\m4Installers\\MEGASyncSetup.exe";
+                string megaSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "MEGASyncSetup.exe");
                 Console.WriteLine("Downloading MEGA...");
 
                 // Download MEGA installer
@@ -153,7 +153,7 @@ class MenuStorage
             case "3":
                 Console.Clear();
                 string sugarsyncUrl = "https://sugarsync.com/downloads/p/SugarSyncSetup.exe";
-                string sugarsyncSaveLocation = "C:\\m4Installers\\SugarSyncSetup.exe";
+                string sugarsyncSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "SugarSyncSetup.exe");
                 Console.WriteLine("Downloading SugarSync...");
 
                 // Download SugarSync installer
@@ -220,7 +220,7 @@ class MenuStorage
             case "4":
                 Console.Clear();
                 string googleDriveUrl = "https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe";
-                string googleDriveSaveLocation = "C:\\m4Installers\\GoogleDriveSetup.exe";
+                string googleDriveSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "GoogleDriveSetup.exe");
                 Console.WriteLine("Downloading Google Drive...");
 
                 // Download Google Drive installer
@@ -283,10 +283,11 @@ class MenuStorage
                     }
                 }
                 break;
+
             case "5":
                 Console.Clear();
                 string oneDriveUrl = "https://oneclient.sfx.ms/Win/Installers/24.126.0623.0001/amd64/OneDriveSetup.exe";
-                string oneDriveSaveLocation = "C:\\m4Installers\\OneDriveSetup.exe";
+                string oneDriveSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "OneDriveSetup.exe");
                 Console.WriteLine("Downloading OneDrive...");
 
                 // Download OneDrive installer
@@ -348,17 +349,6 @@ class MenuStorage
                         File.Delete(oneDriveSaveLocation); // Delete the setup file
                     }
                 }
-                break;
-
-            case "6":
-                Installers.ReturnToMainMenu();
-                break;
-
-            default:
-                Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
-                Console.Clear();
-                ShowMenu();
                 break;
         }
     }

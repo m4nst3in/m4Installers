@@ -22,7 +22,7 @@ class MenuMessaging
                 Console.Clear();
                 string discordUrl =
                     "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x64";
-                string discordSaveLocation = "C:\\m4Installers\\DiscordSetup.exe";
+                string discordSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "DiscordSetup.exe");
                 Console.WriteLine("Downloading Discord...");
 
                 // Download Discord installer
@@ -89,7 +89,7 @@ class MenuMessaging
             case "2":
                 Console.Clear();
                 string telegramUrl = "https://telegram.org/dl/desktop/win64";
-                string telegramSaveLocation = "C:\\m4Installers\\TelegramSetup.exe";
+                string telegramSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "TelegramSetup.exe");
                 Console.WriteLine("Downloading Telegram...");
 
                 // Download Telegram installer
@@ -156,7 +156,7 @@ class MenuMessaging
             case "3":
                 Console.Clear();
                 string teamspeakUrl = "https://files.teamspeak-services.com/pre_releases/client/5.0.0-beta77/teamspeak-client.msi";
-                string teamspeakSaveLocation = "C:\\m4Installers\\TeamSpeakSetup.msi";
+                string teamspeakSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "TeamSpeakSetup.msi");
                 Console.WriteLine("Downloading Teamspeak...");
 
                 // Download teamspeak installer
@@ -224,7 +224,7 @@ class MenuMessaging
             case "4":
                 Console.Clear();
                 string skypeUrl = "https://download.skype.com/s4l/download/win/Skype-8.123.0.203.exe";
-                string skypeSaveLocation = "C:\\m4Installers\\SkypeSetup.exe";
+                string skypeSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "SkypeSetup.exe");
                 Console.WriteLine("Downloading skype...");
 
                 // Download skype installer

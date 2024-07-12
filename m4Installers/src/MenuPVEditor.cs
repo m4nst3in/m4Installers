@@ -18,7 +18,7 @@ class MenuPVEditor
             case "1":
                 Console.Clear();
                 string gimpUrl = "https://download.gimp.org/gimp/v2.10/windows/gimp-2.10.38-setup.exe";
-                string gimpSaveLocation = "C:\\m4Installers\\GIMPSetup.exe";
+                string gimpSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "GIMPSetup.exe");
                 Console.WriteLine("Downloading GIMP...");
 
                 // Download GIMP installer
@@ -85,7 +85,7 @@ class MenuPVEditor
             case "2":
                 Console.Clear();
                 string paintDotNetUrl = "https://github.com/paintdotnet/release/releases/download/v5.0.13/paint.net.5.0.13.install.anycpu.web.zip";
-                string paintDotNetSaveLocation = "C:\\m4Installers\\PaintDotNetSetup.zip";
+                string paintDotNetSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "PaintDotNetSetup.zip");
                 Console.WriteLine("Downloading Paint.NET...");
 
                 // Download Paint.NET installer
@@ -152,7 +152,7 @@ class MenuPVEditor
             case "3":
                 Console.Clear();
                 string openshotUrl = "https://github.com/OpenShot/openshot-qt/releases/download/v3.2.1/OpenShot-v3.2.1-x86_64.exe";
-                string openshotSaveLocation = "C:\\m4Installers\\OpenShotSetup.exe";
+                string openshotSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "OpenShotSetup.exe");
                 Console.WriteLine("Downloading OpenShot...");
 
                 // Download OpenShot installer
@@ -220,7 +220,7 @@ class MenuPVEditor
             case "4":
                 Console.Clear();
                 string kritaUrl = "https://download.kde.org/stable/krita/4.4.5/krita-x64-4.4.5-setup.exe";
-                string kritaSaveLocation = "C:\\m4Installers\\KritaSetup.exe";
+                string kritaSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "KritaSetup.exe");
                 Console.WriteLine("Downloading Krita...");
 
                 // Download Krita installer

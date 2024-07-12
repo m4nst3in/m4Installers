@@ -25,12 +25,9 @@ class MenuBrowsers
         {
             case "1":
                 Console.Clear();
-                string braveUrl =
-                    "https://github.com/brave/brave-browser/releases/download/v1.67.123/BraveBrowserStandaloneSetup.exe";
-                string braveSaveLocation = "C:\\m4Installers\\BraveSetup.exe";
+                string braveUrl = "https://github.com/brave/brave-browser/releases/download/v1.67.123/BraveBrowserStandaloneSetup.exe";
+                string braveSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "BraveSetup.exe");
                 Console.WriteLine("Downloading Brave...");
-
-                // Download Brave
                 using (HttpClient braveClient = new HttpClient())
                 {
                     using (HttpResponseMessage braveResponse = braveClient.GetAsync(braveUrl).Result)
@@ -39,8 +36,7 @@ class MenuBrowsers
                         {
                             using (Stream braveStream = braveContent.ReadAsStreamAsync().Result)
                             {
-                                using (FileStream braveFileStream = new FileStream(braveSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
+                                using (FileStream braveFileStream = new FileStream(braveSaveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
                                 {
                                     byte[] braveBuffer = new byte[1024];
                                     int braveBytesRead;
@@ -55,8 +51,7 @@ class MenuBrowsers
                                         if (braveTotalBytes > 0)
                                         {
                                             int braveProgress = (int)((braveTotalBytesRead * 100) / braveTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {braveProgress}% ({braveTotalBytesRead / 1024} KB of {braveTotalBytes / 1024} KB)");
+                                            Console.Write($"\rDownloading... {braveProgress}% ({braveTotalBytesRead / 1024} KB of {braveTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -72,7 +67,7 @@ class MenuBrowsers
                 {
                     Console.WriteLine("Installing...");
 
-                    // Wait until installation process has finished
+                    // Wait until the installation process has finished
                     braveInstallerProcess.WaitForExit();
 
                     if (braveInstallerProcess.ExitCode == 0)
@@ -85,7 +80,6 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
-                        File.Delete(braveSaveLocation);
                     }
                 }
 
@@ -94,10 +88,8 @@ class MenuBrowsers
             case "2":
                 Console.Clear();
                 string firefoxUrl = "https://download.mozilla.org/?product=firefox-latest&os=win64";
-                string firefoxSaveLocation = "C:\\m4Installers\\FirefoxSetup.exe";
+                string firefoxSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "FirefoxSetup.exe");
                 Console.WriteLine("Downloading Firefox...");
-
-                // Download Firefox
                 using (HttpClient firefoxClient = new HttpClient())
                 {
                     using (HttpResponseMessage firefoxResponse = firefoxClient.GetAsync(firefoxUrl).Result)
@@ -106,8 +98,7 @@ class MenuBrowsers
                         {
                             using (Stream firefoxStream = firefoxContent.ReadAsStreamAsync().Result)
                             {
-                                using (FileStream firefoxFileStream = new FileStream(firefoxSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
+                                using (FileStream firefoxFileStream = new FileStream(firefoxSaveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
                                 {
                                     byte[] firefoxBuffer = new byte[1024];
                                     int firefoxBytesRead;
@@ -122,8 +113,7 @@ class MenuBrowsers
                                         if (firefoxTotalBytes > 0)
                                         {
                                             int firefoxProgress = (int)((firefoxTotalBytesRead * 100) / firefoxTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {firefoxProgress}% ({firefoxTotalBytesRead / 1024} KB of {firefoxTotalBytes / 1024} KB)");
+                                            Console.Write($"\rDownloading... {firefoxProgress}% ({firefoxTotalBytesRead / 1024} KB of {firefoxTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -139,7 +129,7 @@ class MenuBrowsers
                 {
                     Console.WriteLine("Installing...");
 
-                    // Wait until installation process has finished
+                    // Wait until the installation process has finished
                     firefoxInstallerProcess.WaitForExit();
 
                     if (firefoxInstallerProcess.ExitCode == 0)
@@ -152,7 +142,6 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
-                        File.Delete(firefoxSaveLocation);
                     }
                 }
 
@@ -161,10 +150,8 @@ class MenuBrowsers
             case "3":
                 Console.Clear();
                 string vivaldiUrl = "https://downloads.vivaldi.com/stable/Vivaldi.6.8.3381.46.x64.exe";
-                string vivaldiSaveLocation = "C:\\m4Installers\\VivaldiSetup.exe";
+                string vivaldiSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "VivaldiSetup.exe");
                 Console.WriteLine("Downloading Vivaldi...");
-
-                // Download Vivaldi
                 using (HttpClient vivaldiClient = new HttpClient())
                 {
                     using (HttpResponseMessage vivaldiResponse = vivaldiClient.GetAsync(vivaldiUrl).Result)
@@ -173,8 +160,7 @@ class MenuBrowsers
                         {
                             using (Stream vivaldiStream = vivaldiContent.ReadAsStreamAsync().Result)
                             {
-                                using (FileStream vivaldiFileStream = new FileStream(vivaldiSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
+                                using (FileStream vivaldiFileStream = new FileStream(vivaldiSaveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
                                 {
                                     byte[] vivaldiBuffer = new byte[1024];
                                     int vivaldiBytesRead;
@@ -189,8 +175,7 @@ class MenuBrowsers
                                         if (vivaldiTotalBytes > 0)
                                         {
                                             int vivaldiProgress = (int)((vivaldiTotalBytesRead * 100) / vivaldiTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {vivaldiProgress}% ({vivaldiTotalBytesRead / 1024} KB of {vivaldiTotalBytes / 1024} KB)");
+                                            Console.Write($"\rDownloading... {vivaldiProgress}% ({vivaldiTotalBytesRead / 1024} KB of {vivaldiTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -206,7 +191,7 @@ class MenuBrowsers
                 {
                     Console.WriteLine("Installing...");
 
-                    // Wait until installation process has finished
+                    // Wait until the installation process has finished
                     vivaldiInstallerProcess.WaitForExit();
 
                     if (vivaldiInstallerProcess.ExitCode == 0)
@@ -219,7 +204,6 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
-                        File.Delete(vivaldiSaveLocation);
                     }
                 }
 
@@ -227,12 +211,9 @@ class MenuBrowsers
 
             case "4":
                 Console.Clear();
-                string operaUrl =
-                    "https://net.geo.opera.com/opera/stable/windows?utm_tryagain=yes&utm_source=google&utm_medium=ose&utm_campaign=(none)&http_referrer=https%3A%2F%2Fwww.google.com%2F&utm_site=opera_com&&utm_lastpage=opera.com/download";
-                string operaSaveLocation = "C:\\m4Installers\\OperaSetup.exe";
+                string operaUrl = "https://net.geo.opera.com/opera/stable/windows?utm_tryagain=yes&utm_source=google&utm_medium=ose&utm_campaign=(none)&http_referrer=https%3A%2F%2Fwww.google.com%2F&utm_site=opera_com&&utm_lastpage=opera.com/download";
+                string operaSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "OperaSetup.exe");
                 Console.WriteLine("Downloading Opera...");
-
-                // Download Opera
                 using (HttpClient operaClient = new HttpClient())
                 {
                     using (HttpResponseMessage operaResponse = operaClient.GetAsync(operaUrl).Result)
@@ -241,8 +222,7 @@ class MenuBrowsers
                         {
                             using (Stream operaStream = operaContent.ReadAsStreamAsync().Result)
                             {
-                                using (FileStream operaFileStream = new FileStream(operaSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
+                                using (FileStream operaFileStream = new FileStream(operaSaveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
                                 {
                                     byte[] operaBuffer = new byte[1024];
                                     int operaBytesRead;
@@ -257,8 +237,7 @@ class MenuBrowsers
                                         if (operaTotalBytes > 0)
                                         {
                                             int operaProgress = (int)((operaTotalBytesRead * 100) / operaTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {operaProgress}% ({operaTotalBytesRead / 1024} KB of {operaTotalBytes / 1024} KB)");
+                                            Console.Write($"\rDownloading... {operaProgress}% ({operaTotalBytesRead / 1024} KB of {operaTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -274,7 +253,7 @@ class MenuBrowsers
                 {
                     Console.WriteLine("Installing...");
 
-                    // Wait until installation process has finished
+                    // Wait until the installation process has finished
                     operaInstallerProcess.WaitForExit();
 
                     if (operaInstallerProcess.ExitCode == 0)
@@ -287,7 +266,6 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
-                        File.Delete(operaSaveLocation);
                     }
                 }
 
@@ -295,12 +273,9 @@ class MenuBrowsers
 
             case "5":
                 Console.Clear();
-                string operaGXUrl =
-                    "https://download3.operacdn.com/pub/opera_gx/100.0.4815.44/win/Opera_GX_100.0.4815.44_Setup_x64.exe";
-                string operaGXSaveLocation = "C:\\m4Installers\\OperaGXSetup.exe";
+                string operaGXUrl = "https://download3.operacdn.com/pub/opera_gx/100.0.4815.44/win/Opera_GX_100.0.4815.44_Setup_x64.exe";
+                string operaGXSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "OperaGXSetup.exe");
                 Console.WriteLine("Downloading OperaGX...");
-
-                // Download OperaGX
                 using (HttpClient operaGXClient = new HttpClient())
                 {
                     using (HttpResponseMessage operaGXResponse = operaGXClient.GetAsync(operaGXUrl).Result)
@@ -309,8 +284,7 @@ class MenuBrowsers
                         {
                             using (Stream operaGXStream = operaGXContent.ReadAsStreamAsync().Result)
                             {
-                                using (FileStream operaGXFileStream = new FileStream(operaGXSaveLocation, FileMode.Create,
-                                           FileAccess.Write, FileShare.None))
+                                using (FileStream operaGXFileStream = new FileStream(operaGXSaveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
                                 {
                                     byte[] operaGXBuffer = new byte[1024];
                                     int operaGXBytesRead;
@@ -325,8 +299,7 @@ class MenuBrowsers
                                         if (operaGXTotalBytes > 0)
                                         {
                                             int operaGXProgress = (int)((operaGXTotalBytesRead * 100) / operaGXTotalBytes);
-                                            Console.Write(
-                                                $"\rDownloading... {operaGXProgress}% ({operaGXTotalBytesRead / 1024} KB of {operaGXTotalBytes / 1024} KB)");
+                                            Console.Write($"\rDownloading... {operaGXProgress}% ({operaGXTotalBytesRead / 1024} KB of {operaGXTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -342,7 +315,7 @@ class MenuBrowsers
                 {
                     Console.WriteLine("Installing...");
 
-                    // Wait until installation process has finished
+                    // Wait until the installation process has finished
                     operaGXInstallerProcess.WaitForExit();
 
                     if (operaGXInstallerProcess.ExitCode == 0)
@@ -355,7 +328,6 @@ class MenuBrowsers
                     {
                         Console.WriteLine("Installation has failed!");
                         Console.Clear();
-                        File.Delete(operaGXSaveLocation);
                     }
                 }
 

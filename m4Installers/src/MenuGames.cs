@@ -21,7 +21,7 @@ class MenuGames
             case "1":
                 Console.Clear();
                 string sklauncherUrl = "https://skmedix.pl/binaries/skl/3.2.8/x64/SKlauncher-3.2.exe";
-                string sklauncherSaveLocation = "C:\\m4Installers\\SKLauncherSetup.exe";
+                string sklauncherSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "SKLauncherSetup.exe");
                 Console.WriteLine("Downloading SKLauncher...");
 
                 // Download sklauncher installer
@@ -89,10 +89,10 @@ class MenuGames
             case "2":
                 Console.Clear();
                 string prismaUrl = "https://github.com/PrismLauncher/PrismLauncher/releases/download/8.4/PrismLauncher-Windows-MSVC-Setup-8.4.exe";
-                string prismaSaveLocation = "C:\\m4Installers\\PrismaSetup.exe";
+                string prismaSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "PrismaSetup.exe");
                 Console.WriteLine("Downloading Prisma Launcher...");
 
-                // Download 7zip installer
+                // Download prisma installer
                 using (HttpClient prismaClient = new HttpClient())
                 {
                     using (HttpResponseMessage prismaResponse = prismaClient.GetAsync(prismaUrl).Result)
@@ -157,7 +157,7 @@ class MenuGames
             case "3":
                 Console.Clear();
                 string heroicUrl = "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.14.1/Heroic-2.14.1-Setup-x64.exe";
-                string heroicSaveLocation = "C:\\m4Installers\\HeroicSetup.exe";
+                string heroicSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "HeroicSetup.exe");
                 Console.WriteLine("Downloading Heroic Games Launcher...");
 
                 // Download Heroic installer
@@ -225,7 +225,7 @@ class MenuGames
             case "4":
                 Console.Clear();
                 string playniteUrl = "https://github.com/JosefNemec/Playnite/releases/download/10.33/Playnite1033.exe";
-                string playniteSaveLocation = "C:\\m4Installers\\PlayniteSetup.exe";
+                string playniteSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "PlayniteSetup.exe");
                 Console.WriteLine("Downloading Playnite...");
 
                 // Download Playnite installer

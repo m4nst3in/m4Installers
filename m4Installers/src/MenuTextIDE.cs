@@ -22,7 +22,7 @@ class MenuTextIDE
                 Console.Clear();
                 string sublimeUrl =
                     "https://download.sublimetext.com/sublime_text_build_4169_x64_setup.exe";
-                string sublimeSaveLocation = "C:\\m4Installers\\SublimeTextSetup.exe";
+                string sublimeSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "SublimeTextSetup.exe");
                 Console.WriteLine("Downloading Sublime Text...");
 
                 // Download Sublime Text installer
@@ -89,7 +89,7 @@ class MenuTextIDE
             case "2":
                 Console.Clear();
                 string notepadUrl = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.7/npp.8.6.7.Installer.x64.exe";
-                string notepadSaveLocation = "C:\\m4Installers\\NotepadSetup.exe";
+                string notepadSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "NotepadSetup.exe");
                 Console.WriteLine("Downloading Notepad++...");
 
                 // Download Notepad++ installer
@@ -157,7 +157,7 @@ class MenuTextIDE
             case "3":
                 Console.Clear();
                 string vscodeUrl = "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user";
-                string vscodeSaveLocation = "C:\\m4Installers\\VSCodeSetup.exe";
+                string vscodeSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "VSCodeSetup.exe");
                 Console.WriteLine("Downloading Visual Studio Code...");
 
                 // Download Visual Studio Code installer
@@ -226,7 +226,7 @@ class MenuTextIDE
                 Console.Clear();
                 string jetbrainsUrl =
                     "https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.4.0.32175.exe";
-                string jetbrainsSaveLocation = "C:\\m4Installers\\JetBrainsIDESetup.exe";
+                string jetbrainsSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "JetBrainsIDESetup.exe");
                 Console.WriteLine("Downloading JetBrains Toolbox...");
 
                 // Download JetBrains Toolbox installer

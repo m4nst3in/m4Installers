@@ -13,7 +13,8 @@
         }
 
         // Create a directory if it doesn't exist
-        Directory.CreateDirectory("C:\\m4Installers");
+        string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers");
+        Directory.CreateDirectory(appDataPath);
 
         while (!exit)
         {
@@ -110,7 +111,7 @@
                     break;
                 default:
                     Console.WriteLine("Invalid option. Try it again.");
-                    Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                    System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
                     Console.Clear();
                     break;
             }

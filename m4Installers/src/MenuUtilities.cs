@@ -21,7 +21,7 @@ class MenuUtilities
                 Console.Clear();
                 string ccleanerUrl =
                     "https://www.dropbox.com/scl/fi/5ytqjerss5wpmi2mz48vf/ccsetup625.exe?rlkey=rnr3b0r4pvwpoxbchlitw267s&st=ks9kk1lv&dl=1";
-                string ccleanerSaveLocation = "C:\\m4Installers\\ccleanerSetup.exe";
+                string ccleanerSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "CCleanerSetup.exe"); ;
                 Console.WriteLine("Downloading CCleaner...");
 
                 // Download ccleaner installer
@@ -88,7 +88,7 @@ class MenuUtilities
             case "2":
                 Console.Clear();
                 string puttyUrl = "https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.81-installer.msi";
-                string puttySaveLocation = "C:\\m4Installers\\puttySetup.exe";
+                string puttySaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "PuttySetup.exe"); ;
                 Console.WriteLine("Downloading PuTTY...");
 
                 // Download putty installer
@@ -155,7 +155,7 @@ class MenuUtilities
             case "3":
                 Console.Clear();
                 string filezillaUrl = "https://download.filezilla-project.org/client/FileZilla_3.67.1_win64_sponsored2-setup.exe";
-                string filezillaSaveLocation = "C:\\m4Installers\\FilezillaSetup.exe";
+                string filezillaSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "FilezillaSetup.exe"); ;
                 Console.WriteLine("Downloading Filezilla Desktop...");
 
                 // Download filezilla installer
@@ -223,7 +223,7 @@ class MenuUtilities
                 Console.Clear();
                 string recuvaUrl =
                     "https://github.com/paintdotnet/release/releases/download/v5.0.13/paint.net.5.0.13.install.anycpu.web.zip";
-                string recuvaSaveLocation = "C:\\m4Installers\\RecuvaSetup.exe";
+                string recuvaSaveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", "RecuvaSetup.exe"); ;
                 Console.WriteLine("Downloading Recuva...");
 
                 // Download Recuva installer
