@@ -16,14 +16,14 @@ class Installers
         while (!exit)
         {
             Console.WriteLine("Select an option:");
-            Console.WriteLine("1 - Browsers");
-            Console.WriteLine("2 - Tools");
-            Console.WriteLine("3 - Game Clients");
-            Console.WriteLine("4 - Runtimes");
-            Console.WriteLine("5 - Text Editors/IDE");
-            Console.WriteLine("6 - Anti-Virus");
-            Console.WriteLine("7 - Extra");
-            Console.WriteLine("8 - Exit");
+            Console.WriteLine("[1] - Browsers");
+            Console.WriteLine("[2] - Tools");
+            Console.WriteLine("[3] - Game Clients");
+            Console.WriteLine("[4] - Runtimes");
+            Console.WriteLine("[5] - Text Editors/IDE");
+            Console.WriteLine("[6] - Anti-Virus");
+            Console.WriteLine("[7] - Extra");
+            Console.WriteLine("[8] - Exit");
 
             string option = Console.ReadLine();
 

@@ -8,11 +8,11 @@ class MenuRuntimes
     public static void ShowMenu()
     {
         Console.WriteLine("Runtimes");
-        Console.WriteLine("1 - AllinOne Runtimes");
-        Console.WriteLine("2 - .NET Framework");
-        Console.WriteLine("3 - Visual C++");
-        Console.WriteLine("4 - DirectX");
-        Console.WriteLine("5 - Return to Main Menu");
+        Console.WriteLine("[1] - AllinOne Runtimes");
+        Console.WriteLine("[2] - .NET Framework");
+        Console.WriteLine("[3] - Visual C++");
+        Console.WriteLine("[4] - DirectX");
+        Console.WriteLine("[5] - Return to Main Menu");
 
         string option = Console.ReadLine();
 
@@ -57,7 +57,21 @@ class MenuRuntimes
             }
 
             Console.WriteLine("\nAllinOne Runtimes was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "2")
         {
@@ -99,7 +113,21 @@ class MenuRuntimes
             }
 
             Console.WriteLine("\n.NET Framework was downloaded successfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "3")
         {
@@ -141,7 +169,21 @@ class MenuRuntimes
             }
 
             Console.WriteLine("\nVisual C++ was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "4")
         {
@@ -184,7 +226,21 @@ class MenuRuntimes
             }
 
             Console.WriteLine("\nDirectX was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "5")
         {

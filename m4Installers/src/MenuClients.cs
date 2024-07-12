@@ -8,11 +8,11 @@ class MenuClients
     public static void ShowMenu()
     {
         Console.WriteLine("Game Clients");
-        Console.WriteLine("1 - Steam");
-        Console.WriteLine("2 - Epic Games Launcher");
-        Console.WriteLine("3 - EA App (Origin)");
-        Console.WriteLine("4 - GOG");
-        Console.WriteLine("5 - Return to Main Menu");
+        Console.WriteLine("[1] - Steam");
+        Console.WriteLine("[2] - Epic Games Launcher");
+        Console.WriteLine("[3] - EA App (Origin)");
+        Console.WriteLine("[4] - GOG");
+        Console.WriteLine("[5] - Return to Main Menu");
 
         string option = Console.ReadLine();
 
@@ -57,7 +57,21 @@ class MenuClients
             }
 
             Console.WriteLine("\nSteam was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "2")
         {
@@ -99,7 +113,21 @@ class MenuClients
             }
 
             Console.WriteLine("\nEpic Games Launcher was downloaded successfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "3")
         {
@@ -141,7 +169,21 @@ class MenuClients
             }
 
             Console.WriteLine("\nOrigin was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "4")
         {
@@ -184,7 +226,21 @@ class MenuClients
             }
 
             Console.WriteLine("\nGOG Galaxy was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "5")
         {

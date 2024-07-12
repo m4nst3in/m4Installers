@@ -8,11 +8,11 @@ class MenuTools
     public static void ShowMenu()
     {
         Console.WriteLine("Tools");
-        Console.WriteLine("1 - WinRAR");
-        Console.WriteLine("2 - 7zip");
-        Console.WriteLine("3 - AIDA64");
-        Console.WriteLine("4 - CPU-Z");
-        Console.WriteLine("5 - Return to Main Menu");
+        Console.WriteLine("[1] - WinRAR");
+        Console.WriteLine("[2] - 7zip");
+        Console.WriteLine("[3] - AIDA64");
+        Console.WriteLine("[4] - CPU-Z");
+        Console.WriteLine("[5] - Return to Main Menu");
 
         string option = Console.ReadLine();
 
@@ -57,7 +57,21 @@ class MenuTools
             }
 
             Console.WriteLine("\nWinRAR was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "2")
         {
@@ -99,7 +113,21 @@ class MenuTools
             }
 
             Console.WriteLine("\n7zip was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "3")
         {
@@ -141,7 +169,21 @@ class MenuTools
             }
 
             Console.WriteLine("\nAIDA64 was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "4")
         {
@@ -184,7 +226,21 @@ class MenuTools
             }
 
             Console.WriteLine("\nCPU-Z was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "5")
         {

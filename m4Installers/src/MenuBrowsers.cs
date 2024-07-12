@@ -8,11 +8,11 @@ class MenuBrowsers
     public static void ShowMenu()
     {
         Console.WriteLine("Browsers");
-        Console.WriteLine("1 - Brave");
-        Console.WriteLine("2 - Firefox");
-        Console.WriteLine("3 - Vivaldi");
-        Console.WriteLine("4 - Opera GX");
-        Console.WriteLine("5 - Return to Main Menu");
+        Console.WriteLine("[1] - Brave");
+        Console.WriteLine("[2] - Firefox");
+        Console.WriteLine("[3] - Vivaldi");
+        Console.WriteLine("[4] - Opera GX");
+        Console.WriteLine("[5] - Return to Main Menu");
 
         string option = Console.ReadLine();
 
@@ -57,7 +57,21 @@ class MenuBrowsers
             }
 
             Console.WriteLine("\nBrave was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "2")
         {
@@ -99,7 +113,21 @@ class MenuBrowsers
             }
 
             Console.WriteLine("\nFirefox was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "3")
         {
@@ -141,7 +169,21 @@ class MenuBrowsers
             }
 
             Console.WriteLine("\nVivaldi was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "4")
         {
@@ -184,7 +226,21 @@ class MenuBrowsers
             }
 
             Console.WriteLine("\nOperaGX was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "5")
         {

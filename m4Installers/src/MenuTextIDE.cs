@@ -57,7 +57,21 @@ class MenuTextIDE
             }
 
             Console.WriteLine("\nSublime Text was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "2")
         {
@@ -99,7 +113,21 @@ class MenuTextIDE
             }
 
             Console.WriteLine("\nNotepad++ was downloaded successfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "3")
         {
@@ -141,7 +169,21 @@ class MenuTextIDE
             }
 
             Console.WriteLine("\nVisual Studio Code was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "4")
         {
@@ -184,7 +226,21 @@ class MenuTextIDE
             }
 
             Console.WriteLine("\nJetBrains Toolbox was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "5")
         {

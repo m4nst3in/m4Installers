@@ -5,11 +5,11 @@ class MenuAntivirus
     public static void ShowMenu()
     {
         Console.WriteLine("Antivirus");
-        Console.WriteLine("1 - Avast");
-        Console.WriteLine("2 - Kaspersky");
-        Console.WriteLine("3 - MalwareBytes");
-        Console.WriteLine("4 - Bitdefender");
-        Console.WriteLine("5 - Return to Main Menu");
+        Console.WriteLine("[1] - Avast");
+        Console.WriteLine("[2] - Kaspersky");
+        Console.WriteLine("[3] - MalwareBytes");
+        Console.WriteLine("[4] - Bitdefender");
+        Console.WriteLine("[5] - Return to Main Menu");
 
         string option = Console.ReadLine();
 
@@ -54,7 +54,21 @@ class MenuAntivirus
             }
 
             Console.WriteLine("\nAvast was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "2")
         {
@@ -96,7 +110,21 @@ class MenuAntivirus
             }
 
             Console.WriteLine("\nKaspersky was downloaded successfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "3")
         {
@@ -138,7 +166,21 @@ class MenuAntivirus
             }
 
             Console.WriteLine("\nMalwarebytes was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "4")
         {
@@ -181,7 +223,21 @@ class MenuAntivirus
             }
 
             Console.WriteLine("\nBitdefender was downloaded succesfully!");
-            Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+            if (installerProcess != null && !installerProcess.HasExited)
+            {
+                Console.WriteLine("Installing...");
+
+                // Wait until installation process has finished
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                }
+            }
         }
         else if (option == "5")
         {
