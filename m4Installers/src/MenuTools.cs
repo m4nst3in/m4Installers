@@ -6,7 +6,15 @@ class MenuTools
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Tools \n");
+        Console.WriteLine(@"
+ _____           _     
+|_   _|__   ___ | |___ 
+  | |/ _ \ / _ \| / __|
+  | | (_) | (_) | \__ \
+  |_|\___/ \___/|_|___/
+
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - WinRAR");
         Console.WriteLine("[2] - 7zip");

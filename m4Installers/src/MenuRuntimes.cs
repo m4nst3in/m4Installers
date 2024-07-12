@@ -5,7 +5,15 @@ class MenuRuntimes
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Runtimes \n");
+        Console.WriteLine(@"
+ ____              _   _                     
+|  _ \ _   _ _ __ | |_(_)_ __ ___   ___  ___ 
+| |_) | | | | '_ \| __| | '_ ` _ \ / _ \/ __|
+|  _ <| |_| | | | | |_| | | | | | |  __/\__ \
+|_| \_\\__,_|_| |_|\__|_|_| |_| |_|\___||___/
+
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - AllinOne Runtimes");
         Console.WriteLine("[2] - .NET Framework");

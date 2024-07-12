@@ -4,7 +4,16 @@ class MenuStorage
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Storage Apps \n");
+        Console.WriteLine(@"
+ ____  _                             
+/ ___|| |_ ___  _ __ __ _  __ _  ___ 
+\___ \| __/ _ \| '__/ _` |/ _` |/ _ \
+ ___) | || (_) | | | (_| | (_| |  __/
+|____/ \__\___/|_|  \__,_|\__, |\___|
+                          |___/      
+
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Dropbox ");
         Console.WriteLine("[2] - MEGA ");
@@ -349,6 +358,17 @@ class MenuStorage
                         File.Delete(oneDriveSaveLocation); // Delete the setup file
                     }
                 }
+                break;
+
+            case "6":
+                Installers.ReturnToMainMenu();
+                break;
+
+            default:
+                Console.WriteLine("Invalid option. Try again.");
+                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Console.Clear();
+                ShowMenu();
                 break;
         }
     }

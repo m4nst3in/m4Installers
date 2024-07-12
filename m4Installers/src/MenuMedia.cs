@@ -6,7 +6,15 @@ class MenuMedia
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Media Apps \n");
+        Console.WriteLine(@"
+ __  __          _ _       
+|  \/  | ___  __| (_) __ _ 
+| |\/| |/ _ \/ _` | |/ _` |
+| |  | |  __/ (_| | | (_| |
+|_|  |_|\___|\__,_|_|\__,_|
+
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Spotify ");
         Console.WriteLine("[2] - Deezer ");

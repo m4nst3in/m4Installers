@@ -5,7 +5,14 @@ class MenuAntivirus
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Antivirus \n");
+        Console.WriteLine(@"
+    _          _   _       _                
+   / \   _ __ | |_(_)_   _(_)_ __ _   _ ___ 
+  / _ \ | '_ \| __| \ \ / / | '__| | | / __|
+ / ___ \| | | | |_| |\ V /| | |  | |_| \__ \
+/_/   \_\_| |_|\__|_| \_/ |_|_|   \__,_|___/
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Avast");
         Console.WriteLine("[2] - Kaspersky");

@@ -5,7 +5,15 @@ class MenuUtilities
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Utilities \n");
+        Console.WriteLine(@"
+ _   _ _   _ _ _ _   _           
+| | | | |_(_) (_) |_(_) ___  ___ 
+| | | | __| | | | __| |/ _ \/ __|
+| |_| | |_| | | | |_| |  __/\__ \
+ \___/ \__|_|_|_|\__|_|\___||___/
+
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - CCleaner");
         Console.WriteLine("[2] - PuTTY");

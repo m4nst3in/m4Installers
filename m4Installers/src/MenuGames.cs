@@ -6,7 +6,15 @@ class MenuGames
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Games \n");
+        Console.WriteLine(@"
+  ____                           
+ / ___| __ _ _ __ ___   ___  ___ 
+| |  _ / _` | '_ ` _ \ / _ \/ __|
+| |_| | (_| | | | | | |  __/\__ \
+ \____|\__,_|_| |_| |_|\___||___/
+
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - SKLauncher (MC) ");
         Console.WriteLine("[2] - Prisma Launcher (MC) ");

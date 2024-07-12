@@ -4,7 +4,15 @@ class MenuPVEditor
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Photo/Video Editors \n");
+        Console.WriteLine(@"
+ ____  _           _           __     ___     _              _____    _ _ _   
+|  _ \| |__   ___ | |_ ___     \ \   / (_) __| | ___  ___   | ____|__| (_) |_ ___  _ __ ___  
+| |_) | '_ \ / _ \| __/ _ \ ____\ \ / /| |/ _` |/ _ \/ _ \  |  _| / _` | | __/ _ \| '__/ __|
+|  __/| | | | (_) | || (_) |_____\ V / | | (_| |  __/ (_) | | |__| (_| | | || (_) | |  \__ \
+|_|   |_| |_|\___/ \__\___/       \_/  |_|\__,_|\___|\___/  |_____\__,_|_|\__\___/|_|  |___/
+
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - GIMP");
         Console.WriteLine("[2] - Paint.NET");

@@ -6,7 +6,16 @@ class MenuMessaging
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Messaging Apps \n");
+        Console.WriteLine(@"
+ __  __                           _             
+|  \/  | ___  ___ ___  __ _  __ _(_)_ __   __ _ 
+| |\/| |/ _ \/ __/ __|/ _` |/ _` | | '_ \ / _` |
+| |  | |  __/\__ \__ \ (_| | (_| | | | | | (_| |
+|_|  |_|\___||___/___/\__,_|\__, |_|_| |_|\__, |
+                            |___/         |___/ 
+
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Discord ");
         Console.WriteLine("[2] - Telegram ");

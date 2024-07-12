@@ -5,7 +5,16 @@ class MenuClients
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Game Clients \n");
+        Console.WriteLine(@"
+  ____                         ____ _ _            _       
+ / ___| __ _ _ __ ___   ___   / ___| (_) ___ _ __ | |_ ___ 
+| |  _ / _` | '_ ` _ \ / _ \ | |   | | |/ _ \ '_ \| __/ __|
+| |_| | (_| | | | | | |  __/ | |___| | |  __/ | | | |_\__ \
+ \____|\__,_|_| |_| |_|\___|  \____|_|_|\___|_| |_|\__|___/
+
+
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Steam");
         Console.WriteLine("[2] - Epic Games Launcher");

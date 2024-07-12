@@ -4,7 +4,19 @@ class MenuDocuments
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Document Apps \n");
+        Console.WriteLine(@"
+
+
+ ____                                        _       
+|  _ \  ___   ___ _   _ _ __ ___   ___ _ __ | |_ ___ 
+| | | |/ _ \ / __| | | | '_ ` _ \ / _ \ '_ \| __/ __|
+| |_| | (_) | (__| |_| | | | | | |  __/ | | | |_\__ \
+|____/ \___/ \___|\__,_|_| |_| |_|\___|_| |_|\__|___/
+
+
+
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - OpenOffice ");
         Console.WriteLine("[2] - LibreOffice Writer ");

@@ -4,7 +4,15 @@ class MenuTorrents
     public static void ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Torrent Clients \n");
+        Console.WriteLine(@"
+ _____                         _       
+|_   _|__  _ __ _ __ ___ _ __ | |_ ___ 
+  | |/ _ \| '__| '__/ _ \ '_ \| __/ __|
+  | | (_) | |  | | |  __/ | | | |_\__ \
+  |_|\___/|_|  |_|  \___|_| |_|\__|___/
+
+
+");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - uTorrent ");
         Console.WriteLine("[2] - BitTorrent ");
