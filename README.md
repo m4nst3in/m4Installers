@@ -8,6 +8,7 @@ This C# simple console application is designed to simplify the process of instal
 
 - **Program Selection**: Choose from a list of programs to install.
 - **Automated Downloading**: Streamlines the download process with minimal user interaction.
+- **Large Program List**: It contains a large count of essential programs for you to install.
 
 ## Installation
 
