@@ -53,7 +53,8 @@ Launch the application and follow the on-screen instructions to select and insta
 - **Extra**: Discord, Telegram, GitHub Desktop, Paint.NET. 
 
 ## Example
-![image](https://github.com/user-attachments/assets/41c43c25-3051-49f8-8577-d4147261823a)
+![image](https://github.com/user-attachments/assets/a40135e8-2f7b-443c-a8f0-5800a4e70711)
+
 
 ## FAQ
 - **Where the downloaded files are stored?** - It downloads the setup files directly to the C:/m4Installers folder.
