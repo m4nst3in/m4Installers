@@ -1,6 +1,6 @@
 
 
-![image](https://github.com/user-attachments/assets/25be5013-bcf3-465e-993f-7e73c1aa8af9)                                                                            
+![image](https://github.com/user-attachments/assets/5832cb1b-f6d2-4dd6-bbf4-5fad6e4f36c0)                                                                         
                                                                              
 This C# simple console application is designed to simplify the process of installing essential programs on a Windows system. It provides a straightforward interface for selecting and installing programs such as browsers, tools, game clients and other essential software.
 
