@@ -22,6 +22,8 @@ class MenuAntivirus
                 string avastUrl = "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN/installertype_FULL/build_RELEASE/";
                 string avastSaveLocation = "C:\\m4Installers\\AvastSetup.exe";
                 Console.WriteLine("Downloading Avast...");
+
+                // Download Avast installer
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(avastUrl).Result)
@@ -38,6 +40,7 @@ class MenuAntivirus
                                     long totalBytesRead = 0;
                                     long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
+                                    // Write downloaded data to file
                                     while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
                                         fileStream.Write(buffer, 0, bytesRead);
@@ -47,7 +50,7 @@ class MenuAntivirus
                                         {
                                             int progress = (int)((totalBytesRead * 100) / totalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -56,7 +59,7 @@ class MenuAntivirus
                     }
                 }
 
-                Console.WriteLine("\nAvast was downloaded succesfully!");
+                Console.WriteLine("\nAvast was downloaded successfully!");
                 Process avastInstallerProcess = Process.Start(new ProcessStartInfo(avastSaveLocation) { UseShellExecute = true });
 
                 if (avastInstallerProcess != null && !avastInstallerProcess.HasExited)
@@ -85,6 +88,8 @@ class MenuAntivirus
                 string kasperskyUrl = "https://www.dropbox.com/scl/fi/mz69m452jlwbsjxedub7h/KasperskySetup.exe?rlkey=rw3nbq698ua3s9is53mt9zs1m&st=lvho0p8p&dl=1";
                 string kasperskySaveLocation = "C:\\m4Installers\\KasperskySetup.exe";
                 Console.WriteLine("Downloading Kaspersky...");
+
+                // Download Kaspersky installer
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(kasperskyUrl).Result)
@@ -101,6 +106,7 @@ class MenuAntivirus
                                     long totalBytesRead = 0;
                                     long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
+                                    // Write downloaded data to file
                                     while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
                                         fileStream.Write(buffer, 0, bytesRead);
@@ -110,7 +116,7 @@ class MenuAntivirus
                                         {
                                             int progress = (int)((totalBytesRead * 100) / totalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -149,6 +155,8 @@ class MenuAntivirus
                 string malwarebytesUrl = "https://www.malwarebytes.com/api/downloads/mb-windows?filename=MBSetup.exe&t=1720763650278";
                 string malwarebytesSaveLocation = "C:\\m4Installers\\Malwarebytesetup.exe";
                 Console.WriteLine("Downloading Malwarebytes...");
+
+                // Download Malwarebytes installer
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(malwarebytesUrl).Result)
@@ -165,6 +173,7 @@ class MenuAntivirus
                                     long totalBytesRead = 0;
                                     long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
+                                    // Write downloaded data to file
                                     while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
                                         fileStream.Write(buffer, 0, bytesRead);
@@ -174,7 +183,7 @@ class MenuAntivirus
                                         {
                                             int progress = (int)((totalBytesRead * 100) / totalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -183,7 +192,7 @@ class MenuAntivirus
                     }
                 }
 
-                Console.WriteLine("\nMalwarebytes was downloaded succesfully!");
+                Console.WriteLine("\nMalwarebytes was downloaded successfully!");
                 Process malwarebytesInstallerProcess = Process.Start(new ProcessStartInfo(malwarebytesSaveLocation) { UseShellExecute = true });
 
                 if (malwarebytesInstallerProcess != null && !malwarebytesInstallerProcess.HasExited)
@@ -212,6 +221,8 @@ class MenuAntivirus
                 string bitdefenderUrl = "https://download.bitdefender.com/windows/installer/pt-br/bitdefender_avfree.exe";
                 string bitdefenderSaveLocation = "C:\\m4Installers\\BitdefenderSetup.exe";
                 Console.WriteLine("Downloading Bitdefender...");
+
+                // Download Bitdefender installer
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(bitdefenderUrl).Result)
@@ -228,6 +239,7 @@ class MenuAntivirus
                                     long totalBytesRead = 0;
                                     long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
+                                    // Write downloaded data to file
                                     while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
                                         fileStream.Write(buffer, 0, bytesRead);
@@ -237,7 +249,7 @@ class MenuAntivirus
                                         {
                                             int progress = (int)((totalBytesRead * 100) / totalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -246,7 +258,7 @@ class MenuAntivirus
                     }
                 }
 
-                Console.WriteLine("\nBitdefender was downloaded succesfully!");
+                Console.WriteLine("\nBitdefender was downloaded successfully!");
                 Process bitdefenderInstallerProcess = Process.Start(new ProcessStartInfo(bitdefenderSaveLocation) { UseShellExecute = true });
 
                 if (bitdefenderInstallerProcess != null && !bitdefenderInstallerProcess.HasExited)
@@ -275,7 +287,7 @@ class MenuAntivirus
                 break;
 
             default:
-                Console.WriteLine("Invalid option. Try it again.");
+                Console.WriteLine("Invalid option. Try again.");
                 Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
                 ShowMenu();

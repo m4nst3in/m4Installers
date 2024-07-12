@@ -22,6 +22,8 @@ class MenuClients
                 string steamUrl = "https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe";
                 string steamSaveLocation = "C:\\m4Installers\\SteamSetup.exe";
                 Console.WriteLine("Downloading Steam...");
+
+                // Download Steam installer
                 using (HttpClient steamClient = new HttpClient())
                 {
                     using (HttpResponseMessage steamResponse = steamClient.GetAsync(steamUrl).Result)
@@ -47,7 +49,7 @@ class MenuClients
                                         {
                                             int steamProgress = (int)((steamTotalBytesRead * 100) / steamTotalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {steamProgress}% ({steamTotalBytesRead / 1024} KB de {steamTotalBytes / 1024} KB)");
+                                                $"\rDownloading... {steamProgress}% ({steamTotalBytesRead / 1024} KB of {steamTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -56,7 +58,7 @@ class MenuClients
                     }
                 }
 
-                Console.WriteLine("\nSteam was downloaded succesfully!");
+                Console.WriteLine("\nSteam was downloaded successfully!");
                 Process steamInstallerProcess = Process.Start(new ProcessStartInfo(steamSaveLocation) { UseShellExecute = true });
 
                 if (steamInstallerProcess != null && !steamInstallerProcess.HasExited)
@@ -85,6 +87,8 @@ class MenuClients
                 string epicUrl = "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi";
                 string epicSaveLocation = "C:\\m4Installers\\EGSSetup.msi";
                 Console.WriteLine("Downloading Epic Games Launcher...");
+
+                // Download Epic Games Launcher installer
                 using (HttpClient epicClient = new HttpClient())
                 {
                     using (HttpResponseMessage epicResponse = epicClient.GetAsync(epicUrl).Result)
@@ -110,7 +114,7 @@ class MenuClients
                                         {
                                             int epicProgress = (int)((epicTotalBytesRead * 100) / epicTotalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {epicProgress}% ({epicTotalBytesRead / 1024} KB de {epicTotalBytes / 1024} KB)");
+                                                $"\rDownloading... {epicProgress}% ({epicTotalBytesRead / 1024} KB of {epicTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -148,6 +152,8 @@ class MenuClients
                 string originUrl = "https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe";
                 string originSaveLocation = "C:\\m4Installers\\OriginSetup.exe";
                 Console.WriteLine("Downloading EA App...");
+
+                // Download EA App installer
                 using (HttpClient originClient = new HttpClient())
                 {
                     using (HttpResponseMessage originResponse = originClient.GetAsync(originUrl).Result)
@@ -173,7 +179,7 @@ class MenuClients
                                         {
                                             int originProgress = (int)((originTotalBytesRead * 100) / originTotalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {originProgress}% ({originTotalBytesRead / 1024} KB de {originTotalBytes / 1024} KB)");
+                                                $"\rDownloading... {originProgress}% ({originTotalBytesRead / 1024} KB of {originTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -182,7 +188,7 @@ class MenuClients
                     }
                 }
 
-                Console.WriteLine("\nOrigin was downloaded succesfully!");
+                Console.WriteLine("\nOrigin was downloaded successfully!");
                 Process originInstallerProcess = Process.Start(new ProcessStartInfo(originSaveLocation) { UseShellExecute = true });
 
                 if (originInstallerProcess != null && !originInstallerProcess.HasExited)
@@ -211,6 +217,8 @@ class MenuClients
                 string gogUrl = "https://cdn.gog.com/open/galaxy/client/2.0.74.352/setup_galaxy_2.0.74.352.exe";
                 string gogSaveLocation = "C:\\m4Installers\\GOGSetup.exe";
                 Console.WriteLine("Downloading GOG Galaxy...");
+
+                // Download GOG Galaxy installer
                 using (HttpClient gogClient = new HttpClient())
                 {
                     using (HttpResponseMessage gogResponse = gogClient.GetAsync(gogUrl).Result)
@@ -236,7 +244,7 @@ class MenuClients
                                         {
                                             int gogProgress = (int)((gogTotalBytesRead * 100) / gogTotalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {gogProgress}% ({gogTotalBytesRead / 1024} KB de {gogTotalBytes / 1024} KB)");
+                                                $"\rDownloading... {gogProgress}% ({gogTotalBytesRead / 1024} KB of {gogTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -245,7 +253,7 @@ class MenuClients
                     }
                 }
 
-                Console.WriteLine("\nGOG Galaxy was downloaded succesfully!");
+                Console.WriteLine("\nGOG Galaxy was downloaded successfully!");
                 Process gogInstallerProcess = Process.Start(new ProcessStartInfo(gogSaveLocation) { UseShellExecute = true });
 
                 if (gogInstallerProcess != null && !gogInstallerProcess.HasExited)
@@ -274,8 +282,8 @@ class MenuClients
                 break;
 
             default:
-                Console.WriteLine("Invalid option. Try it again.");
-                System.Threading.Thread.Sleep(3000); // Add a delay of 2 seconds
+                Console.WriteLine("Invalid option. Try again.");
+                System.Threading.Thread.Sleep(3000); // Add a delay of 3 seconds
                 Console.Clear();
                 ShowMenu();
                 break;

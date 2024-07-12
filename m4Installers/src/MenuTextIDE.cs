@@ -13,6 +13,7 @@ class MenuTextIDE
         Console.WriteLine("[4] - JetBrains IDEs");
         Console.WriteLine("[5] - Return to Main Menu");
 
+        // Read user input
         string option = Console.ReadLine();
 
         switch (option)
@@ -23,6 +24,8 @@ class MenuTextIDE
                     "https://download.sublimetext.com/sublime_text_build_4169_x64_setup.exe";
                 string sublimeSaveLocation = "C:\\m4Installers\\SublimeTextSetup.exe";
                 Console.WriteLine("Downloading Sublime Text...");
+
+                // Download Sublime Text installer
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(sublimeUrl).Result)
@@ -39,6 +42,7 @@ class MenuTextIDE
                                     long totalBytesRead = 0;
                                     long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
+                                    // Read the response stream and write to file
                                     while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
                                         fileStream.Write(buffer, 0, bytesRead);
@@ -48,7 +52,7 @@ class MenuTextIDE
                                         {
                                             int progress = (int)((totalBytesRead * 100) / totalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -57,7 +61,7 @@ class MenuTextIDE
                     }
                 }
 
-                Console.WriteLine("\nSublime Text was downloaded succesfully!");
+                Console.WriteLine("\nSublime Text was downloaded successfully!");
                 Process sublimeInstallerProcess = Process.Start(new ProcessStartInfo(sublimeSaveLocation) { UseShellExecute = true });
 
                 if (sublimeInstallerProcess != null && !sublimeInstallerProcess.HasExited)
@@ -86,6 +90,8 @@ class MenuTextIDE
                 string notepadUrl = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.7/npp.8.6.7.Installer.x64.exe";
                 string notepadSaveLocation = "C:\\m4Installers\\NotepadSetup.exe";
                 Console.WriteLine("Downloading Notepad++...");
+
+                // Download Notepad++ installer
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(notepadUrl).Result)
@@ -102,6 +108,7 @@ class MenuTextIDE
                                     long totalBytesRead = 0;
                                     long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
+                                    // Read the response stream and write to file
                                     while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
                                         fileStream.Write(buffer, 0, bytesRead);
@@ -111,7 +118,7 @@ class MenuTextIDE
                                         {
                                             int progress = (int)((totalBytesRead * 100) / totalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -149,6 +156,8 @@ class MenuTextIDE
                 string vscodeUrl = "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user";
                 string vscodeSaveLocation = "C:\\m4Installers\\VSCodeSetup.exe";
                 Console.WriteLine("Downloading Visual Studio Code...");
+
+                // Download Visual Studio Code installer
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(vscodeUrl).Result)
@@ -165,6 +174,7 @@ class MenuTextIDE
                                     long totalBytesRead = 0;
                                     long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
+                                    // Read the response stream and write to file
                                     while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
                                         fileStream.Write(buffer, 0, bytesRead);
@@ -174,7 +184,7 @@ class MenuTextIDE
                                         {
                                             int progress = (int)((totalBytesRead * 100) / totalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -183,7 +193,7 @@ class MenuTextIDE
                     }
                 }
 
-                Console.WriteLine("\nVisual Studio Code was downloaded succesfully!");
+                Console.WriteLine("\nVisual Studio Code was downloaded successfully!");
                 Process vscodeInstallerProcess = Process.Start(new ProcessStartInfo(vscodeSaveLocation) { UseShellExecute = true });
 
                 if (vscodeInstallerProcess != null && !vscodeInstallerProcess.HasExited)
@@ -213,6 +223,8 @@ class MenuTextIDE
                     "https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.4.0.32175.exe";
                 string jetbrainsSaveLocation = "C:\\m4Installers\\JetBrainsIDESetup.exe";
                 Console.WriteLine("Downloading JetBrains Toolbox...");
+
+                // Download JetBrains Toolbox installer
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(jetbrainsUrl).Result)
@@ -229,6 +241,7 @@ class MenuTextIDE
                                     long totalBytesRead = 0;
                                     long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
+                                    // Read the response stream and write to file
                                     while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                                     {
                                         fileStream.Write(buffer, 0, bytesRead);
@@ -238,7 +251,7 @@ class MenuTextIDE
                                         {
                                             int progress = (int)((totalBytesRead * 100) / totalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB de {totalBytes / 1024} KB)");
+                                                $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -247,7 +260,7 @@ class MenuTextIDE
                     }
                 }
 
-                Console.WriteLine("\nJetBrains Toolbox was downloaded succesfully!");
+                Console.WriteLine("\nJetBrains Toolbox was downloaded successfully!");
                 Process jetbrainsInstallerProcess = Process.Start(new ProcessStartInfo(jetbrainsSaveLocation) { UseShellExecute = true });
 
                 if (jetbrainsInstallerProcess != null && !jetbrainsInstallerProcess.HasExited)
@@ -276,7 +289,7 @@ class MenuTextIDE
                 break;
 
             default:
-                Console.WriteLine("Invalid option. Try it again.");
+                Console.WriteLine("Invalid option. Try again.");
                 System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
                 ShowMenu();

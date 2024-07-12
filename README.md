@@ -54,7 +54,6 @@ Launch the application and follow the on-screen instructions to select and insta
 - **Text Editors/IDEs**: Sublime Text, Notepad++, Visual Studio Code, JetBrains Toolbox.
 - **Antivirus**: Avast, Kaspersky, MalwareBytes, Bitdefender.
 - **Extra**: Discord, Telegram, GitHub Desktop, Paint.NET.
-- 
 ## FAQ
 - **Where the downloaded files are stored?** - It downloads the setup files directly to the C:/m4Installers folder.
 - **Do you plan adding more programs to m4Installers?** - Yes, i do. Even new categories!

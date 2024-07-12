@@ -23,6 +23,8 @@ class MenuTools
                 string winrarUrl = "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-701.exe";
                 string winrarSaveLocation = "C:\\m4Installers\\WinRARSetup.exe";
                 Console.WriteLine("Downloading WinRAR...");
+
+                // Download WinRAR installer
                 using (HttpClient winrarClient = new HttpClient())
                 {
                     using (HttpResponseMessage winrarResponse = winrarClient.GetAsync(winrarUrl).Result)
@@ -39,6 +41,7 @@ class MenuTools
                                     long winrarTotalBytesRead = 0;
                                     long winrarTotalBytes = winrarResponse.Content.Headers.ContentLength ?? -1;
 
+                                    // Write downloaded data to file
                                     while ((winrarBytesRead = winrarStream.Read(winrarBuffer, 0, winrarBuffer.Length)) > 0)
                                     {
                                         winrarFileStream.Write(winrarBuffer, 0, winrarBytesRead);
@@ -48,7 +51,7 @@ class MenuTools
                                         {
                                             int winrarProgress = (int)((winrarTotalBytesRead * 100) / winrarTotalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {winrarProgress}% ({winrarTotalBytesRead / 1024} KB de {winrarTotalBytes / 1024} KB)");
+                                                $"\rDownloading... {winrarProgress}% ({winrarTotalBytesRead / 1024} KB of {winrarTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -57,7 +60,7 @@ class MenuTools
                     }
                 }
 
-                Console.WriteLine("\nWinRAR was downloaded succesfully!");
+                Console.WriteLine("\nWinRAR was downloaded successfully!");
                 Process winrarInstallerProcess = Process.Start(new ProcessStartInfo(winrarSaveLocation) { UseShellExecute = true });
 
                 if (winrarInstallerProcess != null && !winrarInstallerProcess.HasExited)
@@ -86,6 +89,8 @@ class MenuTools
                 string sevenZipUrl = "https://www.7-zip.org/a/7z2407-x64.exe";
                 string sevenZipSaveLocation = "C:\\m4Installers\\7zipSetup.exe";
                 Console.WriteLine("Downloading 7zip...");
+
+                // Download 7zip installer
                 using (HttpClient sevenZipClient = new HttpClient())
                 {
                     using (HttpResponseMessage sevenZipResponse = sevenZipClient.GetAsync(sevenZipUrl).Result)
@@ -102,6 +107,7 @@ class MenuTools
                                     long sevenZipTotalBytesRead = 0;
                                     long sevenZipTotalBytes = sevenZipResponse.Content.Headers.ContentLength ?? -1;
 
+                                    // Write downloaded data to file
                                     while ((sevenZipBytesRead = sevenZipStream.Read(sevenZipBuffer, 0, sevenZipBuffer.Length)) > 0)
                                     {
                                         sevenZipFileStream.Write(sevenZipBuffer, 0, sevenZipBytesRead);
@@ -111,7 +117,7 @@ class MenuTools
                                         {
                                             int sevenZipProgress = (int)((sevenZipTotalBytesRead * 100) / sevenZipTotalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {sevenZipProgress}% ({sevenZipTotalBytesRead / 1024} KB de {sevenZipTotalBytes / 1024} KB)");
+                                                $"\rDownloading... {sevenZipProgress}% ({sevenZipTotalBytesRead / 1024} KB of {sevenZipTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -120,7 +126,7 @@ class MenuTools
                     }
                 }
 
-                Console.WriteLine("\n7zip was downloaded succesfully!");
+                Console.WriteLine("\n7zip was downloaded successfully!");
                 Process sevenZipInstallerProcess = Process.Start(new ProcessStartInfo(sevenZipSaveLocation) { UseShellExecute = true });
 
                 if (sevenZipInstallerProcess != null && !sevenZipInstallerProcess.HasExited)
@@ -149,6 +155,8 @@ class MenuTools
                 string aida64Url = "https://download2.aida64.com/aida64extreme730.exe";
                 string aida64SaveLocation = "C:\\m4Installers\\AIDA64Setup.exe";
                 Console.WriteLine("Downloading AIDA64...");
+
+                // Download AIDA64 installer
                 using (HttpClient aida64Client = new HttpClient())
                 {
                     using (HttpResponseMessage aida64Response = aida64Client.GetAsync(aida64Url).Result)
@@ -165,6 +173,7 @@ class MenuTools
                                     long aida64TotalBytesRead = 0;
                                     long aida64TotalBytes = aida64Response.Content.Headers.ContentLength ?? -1;
 
+                                    // Write downloaded data to file
                                     while ((aida64BytesRead = aida64Stream.Read(aida64Buffer, 0, aida64Buffer.Length)) > 0)
                                     {
                                         aida64FileStream.Write(aida64Buffer, 0, aida64BytesRead);
@@ -174,7 +183,7 @@ class MenuTools
                                         {
                                             int aida64Progress = (int)((aida64TotalBytesRead * 100) / aida64TotalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {aida64Progress}% ({aida64TotalBytesRead / 1024} KB de {aida64TotalBytes / 1024} KB)");
+                                                $"\rDownloading... {aida64Progress}% ({aida64TotalBytesRead / 1024} KB of {aida64TotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -183,7 +192,7 @@ class MenuTools
                     }
                 }
 
-                Console.WriteLine("\nAIDA64 was downloaded succesfully!");
+                Console.WriteLine("\nAIDA64 was downloaded successfully!");
                 Process aida64InstallerProcess = Process.Start(new ProcessStartInfo(aida64SaveLocation) { UseShellExecute = true });
 
                 if (aida64InstallerProcess != null && !aida64InstallerProcess.HasExited)
@@ -212,6 +221,8 @@ class MenuTools
                 string cpuZUrl = "https://download.cpuid.com/cpu-z/cpu-z_1.79-en.exe";
                 string cpuZSaveLocation = "C:\\m4Installers\\CPUZSetup.exe";
                 Console.WriteLine("Downloading CPU-Z...");
+
+                // Download CPU-Z installer
                 using (HttpClient cpuZClient = new HttpClient())
                 {
                     using (HttpResponseMessage cpuZResponse = cpuZClient.GetAsync(cpuZUrl).Result)
@@ -228,6 +239,7 @@ class MenuTools
                                     long cpuZTotalBytesRead = 0;
                                     long cpuZTotalBytes = cpuZResponse.Content.Headers.ContentLength ?? -1;
 
+                                    // Write downloaded data to file
                                     while ((cpuZBytesRead = cpuZStream.Read(cpuZBuffer, 0, cpuZBuffer.Length)) > 0)
                                     {
                                         cpuZFileStream.Write(cpuZBuffer, 0, cpuZBytesRead);
@@ -237,7 +249,7 @@ class MenuTools
                                         {
                                             int cpuZProgress = (int)((cpuZTotalBytesRead * 100) / cpuZTotalBytes);
                                             Console.Write(
-                                                $"\rDownloading... {cpuZProgress}% ({cpuZTotalBytesRead / 1024} KB de {cpuZTotalBytes / 1024} KB)");
+                                                $"\rDownloading... {cpuZProgress}% ({cpuZTotalBytesRead / 1024} KB of {cpuZTotalBytes / 1024} KB)");
                                         }
                                     }
                                 }
@@ -246,7 +258,7 @@ class MenuTools
                     }
                 }
 
-                Console.WriteLine("\nCPU-Z was downloaded succesfully!");
+                Console.WriteLine("\nCPU-Z was downloaded successfully!");
                 Process cpuZInstallerProcess = Process.Start(new ProcessStartInfo(cpuZSaveLocation) { UseShellExecute = true });
 
                 if (cpuZInstallerProcess != null && !cpuZInstallerProcess.HasExited)
@@ -275,7 +287,7 @@ class MenuTools
                 break;
 
             default:
-                Console.WriteLine("Invalid option. Try it again.");
+                Console.WriteLine("Invalid option. Try again.");
                 System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
                 ShowMenu();

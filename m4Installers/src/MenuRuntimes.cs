@@ -23,6 +23,8 @@ class MenuRuntimes
                     "https://media.computerbase.de/s/GMGpZJyVj9vYs5IosY2y_w/1720764360/download/758/aio-runtimes_v2.5.0.exe";
                 string allinoneSaveLocation = "C:\\m4Installers\\AIOSetup.exe";
                 Console.WriteLine("Downloading AllinOne Runtimes...");
+
+                // Download AllinOne Runtimes
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(allinoneurl).Result)
@@ -86,6 +88,8 @@ class MenuRuntimes
                 string dotneturl = "https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net481-offline-installer";
                 string dotnetSaveLocation = "C:\\m4Installers\\Net481Setup.exe";
                 Console.WriteLine("Downloading .NET Framework...");
+
+                // Download .NET Framework
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(dotneturl).Result)
@@ -149,6 +153,8 @@ class MenuRuntimes
                 string vcurl = "https://aka.ms/vs/17/release/vc_redist.x64.exe";
                 string vcSaveLocation = "C:\\m4Installers\\VcRedistSetup.exe";
                 Console.WriteLine("Downloading Visual C++ Redist...");
+
+                // Download Visual C++ Redist
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(vcurl).Result)
@@ -213,6 +219,8 @@ class MenuRuntimes
                     "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe";
                 string dxSaveLocation = "C:\\m4Installers\\DXWebSetup.exe";
                 Console.WriteLine("Downloading DirectX...");
+
+                // Download DirectX
                 using (HttpClient client = new HttpClient())
                 {
                     using (HttpResponseMessage response = client.GetAsync(dxurl).Result)
@@ -277,7 +285,9 @@ class MenuRuntimes
 
             default:
                 Console.WriteLine("Invalid option. Try it again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+
+                // Add a delay of 2.5 seconds
+                System.Threading.Thread.Sleep(2500);
                 Console.Clear();
                 ShowMenu();
                 break;
