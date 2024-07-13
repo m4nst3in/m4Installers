@@ -49,7 +49,7 @@ class MenuIDEs
         switch (option)
         {
             case "1":
-                await MenuTextIDE.DownloadAndInstall("Eclipse", "EclipseSetup.exe", "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2024-06/R/eclipse-java-2024-06-R-win32-x86_64.zip");
+                await MenuTextIDE.DownloadAndInstall("Eclipse", "EclipseSetup.exe", "https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2024-06/R/eclipse-inst-jre-win64.exe");
                 break;
             case "2":
                 await MenuTextIDE.DownloadAndInstall("IntelliJ IDEA Community Edition", "IntelliJCSetup.exe", "https://download.jetbrains.com/idea/ideaIC-2024.1.4.exe");
