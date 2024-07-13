@@ -1,6 +1,6 @@
 ﻿class Installers
 {
-    static async Task Main(string[] args)
+    static async Task Main(string[]? args)
     {
         Console.Title = "m4Installers - Install your essential programs with ease!"; // Set the console title to "m4Installers"
 
