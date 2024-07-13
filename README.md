@@ -59,7 +59,7 @@ Launch the application and follow the on-screen instructions to select and insta
 - **Messaging**: Discord, Telegram, TeamSpeak, Skype.
 - **Media**: Spotify, Deezer, VLC Media Player, Kodi.
 - **Documents**: OpenOffice, LibreOffice, WPS OFfice, Obsidian.
-- **Torrent Clients**: uTorrent, BitTorrent, QBitTorrent, Transmission.
+- **Downloader Clients**: uTorrent, BitTorrent, QBitTorrent, Transmission, Vuze, Deluge, Internet Download Manager, Free Download Manager, JDownloader.
 - **File Storage**: DropBox, MEGA Sync, SugarSync, Google Drive, OneDrive.
 - **Recorders/Live Software**: OBS Studio, Streamlabs, Fraps, Bandicam.
 - **Photo/Video Editors**: GIMP, Paint.NET, OpenShot, Krita.

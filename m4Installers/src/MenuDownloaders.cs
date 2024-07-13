@@ -1,15 +1,16 @@
-﻿using System.Diagnostics;
-class MenuTorrents
+using System.Diagnostics;
+
+class MenuDownloaders
 {
     public static async Task ShowMenu()
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
- _____                         _       
-|_   _|__  _ __ _ __ ___ _ __ | |_ ___ 
-  | |/ _ \| '__| '__/ _ \ '_ \| __/ __|
-  | | (_) | |  | | |  __/ | | | |_\__ \
-  |_|\___/|_|  |_|  \___|_| |_|\__|___/
+ ____                      _                 _               
+|  _ \  _____      ___ __ | | ___   __ _  __| | ___ _ __ ___ 
+| | | |/ _ \ \ /\ / / '_ \| |/ _ \ / _` |/ _` |/ _ \ '__/ __|
+| |_| | (_) \ V  V /| | | | | (_) | (_| | (_| |  __/ |  \__ \
+|____/ \___/ \_/\_/ |_| |_|_|\___/ \__,_|\__,_|\___|_|  |___/
 
 
 ");
@@ -18,21 +19,26 @@ class MenuTorrents
         Console.WriteLine("[2] - BitTorrent ");
         Console.WriteLine("[3] - qBittorrent ");
         Console.WriteLine("[4] - Transmission ");
-        Console.WriteLine("[5] - Return to Main Menu ");
+        Console.WriteLine("[5] - Vuze ");
+        Console.WriteLine("[6] - Deluge ");
+        Console.WriteLine("[7] - Free Download Manager ");
+        Console.WriteLine("[8] - JDownloader ");
+        Console.WriteLine("[9] - Internet Download Manager ");
+        Console.WriteLine("[10] - Return to Main Menu ");
         var option = Console.ReadLine();
 
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("UTorrent", "UTorrentSetup.exe", "https://download-hr.utorrent.com/track/beta/endpoint/utorrent/os/windows");
+                await DownloadAndInstall("uTorrent", "uTorrentSetup.exe", "https://download-hr.utorrent.com/track/beta/endpoint/utorrent/os/windows");
                 break;
 
             case "2":
-                await DownloadAndInstall("BitTorrent", "BittorrentSetup.exe", "https://download-new.utorrent.com/endpoint/bittorrent/os/windows/track/stable/");
+                await DownloadAndInstall("BitTorrent", "BitTorrentSetup.exe", "https://download-new.utorrent.com/endpoint/bittorrent/os/windows/track/stable/");
                 break;
 
             case "3":
-                await DownloadAndInstall("qBitTorrent", "QBittorrentSetup.exe", "https://www.dropbox.com/scl/fi/bbthely0e6m64nmmav0yj/qbittorrent_4.6.5_x64_setup.exe?rlkey=qg8wt0lll4l0ppda094todubk&st=7ee8soaw&dl=01");
+                await DownloadAndInstall("qBittorrent", "qBittorrentSetup.exe", "https://www.dropbox.com/scl/fi/bbthely0e6m64nmmav0yj/qbittorrent_4.6.5_x64_setup.exe?rlkey=qg8wt0lll4l0ppda094todubk&st=7ee8soaw&dl=01");
                 break;
 
             case "4":
@@ -40,7 +46,27 @@ class MenuTorrents
                 break;
 
             case "5":
-                Installers.ReturnToMainMenu();
+                await DownloadAndInstall("Vuze", "VuzeSetup.exe", "https://cf1.vuze.com/installers/VuzeBittorrentClientInstaller.exe");
+                break;
+
+            case "6":
+                await DownloadAndInstall("Deluge", "DelugeSetup.exe", "https://ftp.osuosl.org/pub/deluge/windows/deluge-2.1.1-win64-setup.exe");
+                break;
+
+            case "7":
+                await DownloadAndInstall("Free Download Manager", "FDMSetup.exe", "https://files2.freedownloadmanager.org/6/latest/fdm_x64_setup.exe");
+                break;
+
+            case "8":
+                await DownloadAndInstall("JDownloader", "JDownloaderSetup.exe", "https://sdl.adaware.com/?bundleid=JD003&savename=JDownloaderSetup.exe");
+                break;
+
+            case "9":
+                await DownloadAndInstall("Internet Download Manager", "IDMSetup.exe", "https://mirror2.internetdownloadmanager.com/idman642build14.exe?v=lt&filename=idman642build14.exe");
+                break;
+
+            case "10":
+                await Installers.ReturnToMainMenu();
                 break;
 
             default:
@@ -66,8 +92,7 @@ class MenuTorrents
                 {
                     using (Stream stream = await content.ReadAsStreamAsync())
                     {
-                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write,
-                                   FileShare.None))
+                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
                         {
                             byte[] buffer = new byte[8192];
                             int bytesRead;
@@ -82,8 +107,7 @@ class MenuTorrents
                                 if (totalBytes > 0)
                                 {
                                     int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                    Console.Write(
-                                        $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                                    Console.Write($"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
                                 }
                             }
                         }
