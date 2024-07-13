@@ -53,7 +53,7 @@ class MenuClients
                 await DownloadAndInstall("Xbox App", "XboxAppSetup.exe", "https://assets.xbox.com/installer/20190628.8/anycpu/XboxInstaller.exe");
                 break;
             case "8":
-                await DownloadAndInstall("Itch.io", "ItchIOSetup.exe", "https://www.dropbox.com/scl/fi/xz9f99o403o2i00gxdci7/itch-setup.exe?rlkey=5ri0faw8hr22qoykqvvscjhsr&st=wov1z2d6&dl=0");
+                await DownloadAndInstall("Itch.io", "ItchIOSetup.exe", "https://www.dropbox.com/scl/fi/xz9f99o403o2i00gxdci7/itch-setup.exe?rlkey=5ri0faw8hr22qoykqvvscjhsr&st=wov1z2d6&dl=1");
                 break;
             case "9":
                 await DownloadAndInstall("Rockstar Launcher", "RockstarLauncherSetup.exe", "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe");
