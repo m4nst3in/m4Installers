@@ -4,6 +4,7 @@ class MenuUtilities
 {
     public static async Task ShowMenu()
     {
+
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
  _   _ _   _ _ _ _   _           

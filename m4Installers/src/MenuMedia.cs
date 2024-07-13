@@ -4,6 +4,7 @@ class MenuMedia
 {
     public static async Task ShowMenu()
     {
+
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
  __  __          _ _       
@@ -32,7 +33,7 @@ class MenuMedia
                 await DownloadAndInstall("Deezer", "deezerSetup.exe", "https://www.deezer.com/desktop/download?platform=win32&architecture=x86");
                 break;
             case "3":
-                await DownloadAndInstall("VLC Media Player", "vlcSetup.exe", "https://get.videolan.org/vlc/3.0.21/win32/vlc-3.0.21-win32.exe");
+                await DownloadAndInstall("VLC Media Player", "vlcSetup.exe", "https://mirror.turbozoneinternet.net.br/videolan/vlc/3.0.21/win32/vlc-3.0.21-win32.exe");
                 break;
             case "4":
                 await DownloadAndInstall("Kodi", "kodiSetup.exe", "https://mirrors.kodi.tv/releases/windows/win64/kodi-21.0-Omega-x64.exe?https=1");

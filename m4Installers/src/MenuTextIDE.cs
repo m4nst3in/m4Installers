@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using static MenuIDEs;
-
 class MenuTextIDE
 {
     public static async Task ShowMenu()
@@ -21,9 +20,8 @@ class MenuTextIDE
         Console.WriteLine("[3] - Return to Main Menu");
 
         // Read user input
-        string option = Console.ReadLine();
-
-        switch (option)
+        var option = Console.ReadLine();
+            switch (option)
         {
             case "1":
                 await ShowTextEditorsMenu();

@@ -4,6 +4,7 @@ class MenuDocuments
 {
     public static async Task ShowMenu()
     {
+
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
  ____                                        _       
@@ -28,10 +29,10 @@ class MenuDocuments
                 await DownloadAndInstall("OpenOffice", "OpenOfficeSetup.exe", "https://sourceforge.net/projects/openofficeorg.mirror/files/4.1.15/binaries/pt-BR/Apache_OpenOffice_4.1.15_Win_x86_install_pt-BR.exe/download");
                 break;
             case "2":
-                await DownloadAndInstall("LibreOffice Writer", "LibreOfficeSetup.exe", "https://www.libreoffice.org/download/download/");
+                await DownloadAndInstall("LibreOffice Writer", "LibreOfficeSetup.msi", "https://download.documentfoundation.org/libreoffice/stable/24.2.5/win/x86_64/LibreOffice_24.2.5_Win_x86-64.msi");
                 break;
             case "3":
-                await DownloadAndInstall("WPS Office", "WPSOfficeSetup.exe", "https://www.wps.com/office-free");
+                await DownloadAndInstall("WPS Office", "WPSOfficeSetup.exe", "https://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/onlinesetup/distsrc/200.1087/wpsinst/wps_office_inst.exe");
                 break;
             case "4":
                 await DownloadAndInstall("Obsidian (Vault)", "ObsidianSetup.exe", "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.5/Obsidian-1.6.5.exe");

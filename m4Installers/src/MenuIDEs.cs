@@ -3,6 +3,7 @@ class MenuIDEs
 {
     public static async Task ShowCSharpMenu()
     {
+
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("C# IDEs:");
@@ -49,7 +50,7 @@ class MenuIDEs
         switch (option)
         {
             case "1":
-                await MenuTextIDE.DownloadAndInstall("Eclipse", "EclipseSetup.exe", "https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2024-06/R/eclipse-inst-jre-win64.exe");
+                await MenuTextIDE.DownloadAndInstall("Eclipse", "EclipseSetup.exe", "https://eclipse.c3sl.ufpr.br/oomph/epp/2024-06/R/eclipse-inst-jre-win64.exe");
                 break;
             case "2":
                 await MenuTextIDE.DownloadAndInstall("IntelliJ IDEA Community Edition", "IntelliJCSetup.exe", "https://download.jetbrains.com/idea/ideaIC-2024.1.4.exe");

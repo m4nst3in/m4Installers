@@ -3,6 +3,7 @@ class MenuPVEditor
 {
     public static async Task ShowMenu()
     {
+
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
  ____  _           _           __     ___     _              _____    _ _ _   
@@ -29,7 +30,7 @@ class MenuPVEditor
                 break;
 
             case "2":
-                await DownloadAndInstall("Paint.NET", "PaintDotNetSetup.zip", "https://github.com/paintdotnet/release/releases/download/v5.0.13/paint.net.5.0.13.install.anycpu.web.zip");
+                await DownloadAndInstall("Paint.NET", "PaintDotNetSetup.exe", "https://www.dropbox.com/scl/fi/q490njix95u49b10f2xnp/paint.net.5.0.13.install.anycpu.web.exe?rlkey=u06viwqd1jh7mjl7rclg3z4x9&st=7upuevwe&dl=1");
                 break;
 
             case "3":

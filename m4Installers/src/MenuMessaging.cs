@@ -4,6 +4,7 @@ class MenuMessaging
 {
     public static async Task ShowMenu()
     {
+
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
          __  __                           _             
@@ -35,7 +36,7 @@ class MenuMessaging
                 await DownloadAndInstall("Teamspeak", "TeamSpeakSetup.msi", "https://files.teamspeak-services.com/pre_releases/client/5.0.0-beta77/teamspeak-client.msi");
                 break;
             case "4":
-                await DownloadAndInstall("Skype", "SkypeSetup.exe", "https://download.skype.com/s4l/download/win/Skype-8.123.0.203.exe");
+                await DownloadAndInstall("Skype", "SkypeSetup.exe", "https://www.dropbox.com/scl/fi/byuvi3phwpg5akdge54ze/Skype-8.123.0.203.exe?rlkey=gvybr84vzg85qprzwo2q28g37&st=bkk9jny8&dl=1");
                 break;
             case "5":
                 await Installers.ReturnToMainMenu();
