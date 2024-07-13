@@ -20,7 +20,7 @@ class MenuDocuments
         Console.WriteLine("[4] - Obsidian ");
         Console.WriteLine("[5] - Return to Main Menu ");
 
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {

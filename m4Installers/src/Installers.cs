@@ -41,7 +41,7 @@
             Console.WriteLine("                              [7] - Utilities                 [15] - Photo/Video Editors");
             Console.WriteLine("                              [8] - Games                     [16] - Exit");
 
-            var option = Console.ReadLine();
+            var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
             switch (option)
             {

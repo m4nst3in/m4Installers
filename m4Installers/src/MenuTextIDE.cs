@@ -18,7 +18,7 @@ class MenuTextIDE
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Text Editors");
         Console.WriteLine("[2] - IDEs");
-        Console.WriteLine("[3] - break to Main Menu");
+        Console.WriteLine("[3] - Return to Main Menu");
 
         // Read user input
         string option = Console.ReadLine();
@@ -56,10 +56,10 @@ class MenuTextIDE
         Console.WriteLine("[5] - Vim Online");
         Console.WriteLine("[6] - Emacs");
         Console.WriteLine("[7] - NeoVim");
-        Console.WriteLine("[8] - break to Main Menu");
+        Console.WriteLine("[8] - Return to Main Menu");
 
         // Read user input
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {
@@ -85,7 +85,7 @@ class MenuTextIDE
                 await DownloadAndInstall("NeoVim", "NeoVimSetup.msi", "https://github.com/neovim/neovim/releases/latest/download/nvim-win64.msi");
                 break;
             case "8":
-                await ShowMenu();
+                await ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
@@ -112,7 +112,7 @@ class MenuTextIDE
         Console.WriteLine("[8] - break to Main Menu");
 
         // Read user input
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {
@@ -138,7 +138,7 @@ class MenuTextIDE
                 await ShowGoMenu();
                 break;
             case "8":
-                await ShowMenu();
+                await ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
@@ -147,6 +147,11 @@ class MenuTextIDE
                 await ShowPLMenu();
                 break;
         }
+    }
+    public static async Task ReturnToMainMenu()
+    {
+        Console.Clear();
+        await ShowMenu();
     }
 
     public static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)

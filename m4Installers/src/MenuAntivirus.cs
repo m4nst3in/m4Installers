@@ -23,7 +23,7 @@ class MenuAntivirus
         Console.WriteLine("[7] - SUPERAntiSpyware");
         Console.WriteLine("[8] - Return to Main Menu");
 
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {

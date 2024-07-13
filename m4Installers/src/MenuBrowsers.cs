@@ -31,7 +31,7 @@ class MenuBrowsers
         Console.WriteLine("[14] - Tempest Browser");
         Console.WriteLine("[15] - Return to Main Menu");
 
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {

@@ -27,7 +27,7 @@ class MenuClients
         Console.WriteLine("[9] - Rockstar Launcher");
         Console.WriteLine("[10] - Return to Main Menu");
 
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {

@@ -11,8 +11,7 @@ class MenuIDEs
         Console.WriteLine("[2] - IntelliJ Rider");
         Console.WriteLine("[3] - Return to Main Menu");
 
-        // Read user input
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {
@@ -45,8 +44,7 @@ class MenuIDEs
         Console.WriteLine("[3] - IntelliJ IDEA Ultimate");
         Console.WriteLine("[4] - Return to Main Menu");
 
-        // Read user input
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {
@@ -82,8 +80,7 @@ class MenuIDEs
         Console.WriteLine("[3] - Spyder");
         Console.WriteLine("[4] - Return to Main Menu");
 
-        // Read user input
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {
@@ -119,8 +116,7 @@ class MenuIDEs
         Console.WriteLine("[3] - Visual Studio");
         Console.WriteLine("[4] - Return to Main Menu");
 
-        // Read user input
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {
@@ -155,8 +151,7 @@ class MenuIDEs
         Console.WriteLine("[2] - CLion");
         Console.WriteLine("[3] - Return to Main Menu");
 
-        // Read user input
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {
@@ -187,8 +182,7 @@ class MenuIDEs
         Console.WriteLine("[1] - RubyMine");
         Console.WriteLine("[2] - Return to Main Menu");
 
-        // Read user input
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {
@@ -216,8 +210,7 @@ class MenuIDEs
         Console.WriteLine("[1] - GoLand");
         Console.WriteLine("[2] - Return to Main Menu");
 
-        // Read user input
-        var option = Console.ReadLine();
+        var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {
