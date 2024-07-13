@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using static MenuIDEs;
 
 class MenuTextIDE
 {
@@ -15,11 +16,47 @@ class MenuTextIDE
 
 ");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine("[1] - Text Editors");
+        Console.WriteLine("[2] - IDEs");
+        Console.WriteLine("[3] - Return to Main Menu");
+
+        // Read user input
+        string option = Console.ReadLine();
+
+        switch (option)
+        {
+            case "1":
+                await ShowTextEditorsMenu();
+                break;
+            case "2":
+                await ShowPLMenu();
+                break;
+            case "3":
+                Installers.ReturnToMainMenu();
+                break;
+            default:
+                Console.WriteLine("Invalid option. Try again.");
+                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Console.Clear();
+                await ShowMenu();
+                break;
+        }
+    }
+
+    private static async Task ShowTextEditorsMenu()
+    {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Text Editors:");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Sublime Text");
         Console.WriteLine("[2] - Notepad++");
         Console.WriteLine("[3] - Visual Studio Code");
-        Console.WriteLine("[4] - JetBrains IDEs");
-        Console.WriteLine("[5] - Return to Main Menu");
+        Console.WriteLine("[4] - Atom Editor");
+        Console.WriteLine("[5] - Vim Online");
+        Console.WriteLine("[6] - Emacs");
+        Console.WriteLine("[7] - NeoVim");
+        Console.WriteLine("[8] - Return to Main Menu");
 
         // Read user input
         string option = Console.ReadLine();
@@ -33,24 +70,86 @@ class MenuTextIDE
                 await DownloadAndInstall("https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.7/npp.8.6.7.Installer.x64.exe", "NotepadSetup.exe", "Notepad++");
                 break;
             case "3":
-                await DownloadAndInstall("https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user", "VSCodeSetup.exe", "Visual Studio Code");
+                await DownloadAndInstall("https://code.visualstudio.com/sha/download?build=stable&os=win32-x64", "VSCodeSetup.exe", "Visual Studio Code");
                 break;
             case "4":
-                await DownloadAndInstall("https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.4.0.32175.exe", "JetBrainsIDESetup.exe", "JetBrains Toolbox");
+                await DownloadAndInstall("https://github.com/atom/atom/releases/download/v1.60.0/AtomSetup-x64.exe", "AtomSetup.exe", "Atom Editor");
                 break;
             case "5":
-                Installers.ReturnToMainMenu();
+                await DownloadAndInstall("https://github.com/vim/vim-win32-installer/releases/download/v9.1.0/gvim_9.1.0_x64_signed.exe", "VimSetup.exe", "Vim Online");
+                break;
+            case "6":
+                await DownloadAndInstall("http://mirror.fcix.net/gnu/emacs/windows/emacs-29/emacs-29.1-installer.exe", "EmacsSetup.exe", "Emacs");
+                break;
+            case "7":
+                await DownloadAndInstall("https://github.com/neovim/neovim/releases/latest/download/nvim-win64.msi", "NeoVimSetup.msi", "NeoVim");
+                break;
+            case "8":
+                await ShowMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
                 System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                await ShowMenu();
+                await ShowTextEditorsMenu();
                 break;
         }
     }
 
-    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
+    public static async Task ShowPLMenu()
+    {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("Select a programming language:");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine("[1] - C#");
+        Console.WriteLine("[2] - Java");
+        Console.WriteLine("[3] - Python");
+        Console.WriteLine("[4] - JavaScript");
+        Console.WriteLine("[5] - C++");
+        Console.WriteLine("[6] - Ruby");
+        Console.WriteLine("[7] - Go");
+        Console.WriteLine("[8] - Return to Main Menu");
+
+        // Read user input
+        string option = Console.ReadLine();
+
+        switch (option)
+        {
+            case "1":
+                await ShowCSharpIDEMenu();
+                break;
+            case "2":
+                await ShowJavaIDEMenu();
+                break;
+            case "3":
+                await ShowPythonIDEMenu();
+                break;
+            case "4":
+                await ShowJavaScriptIDEMenu();
+                break;
+            case "5":
+                await ShowCppIDEMenu();
+                break;
+            case "6":
+                await ShowRubyIDEMenu();
+                break;
+            case "7":
+                await ShowGoIDEMenu();
+                break;
+            case "8":
+                await ShowMenu();
+                break;
+            default:
+                Console.WriteLine("Invalid option. Try again.");
+                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Console.Clear();
+                await ShowPLMenu();
+                break;
+        }
+    }
+
+    public static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
@@ -60,9 +159,9 @@ class MenuTextIDE
         {
             using (HttpResponseMessage response = await client.GetAsync(downloadUrl))
             {
-                using (HttpContent content = response.Content)
+                 using (HttpContent content = response.Content)
                 {
-                    using (Stream stream = await content.ReadAsStreamAsync())
+                    await using (Stream stream = await content.ReadAsStreamAsync())
                     {
                         using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write,
                                    FileShare.None))
@@ -91,7 +190,7 @@ class MenuTextIDE
         }
 
         Console.WriteLine($"\n{appName} was downloaded successfully!");
-        Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
         if (installerProcess != null && !installerProcess.HasExited)
         {
