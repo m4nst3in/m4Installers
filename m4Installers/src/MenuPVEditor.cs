@@ -70,7 +70,7 @@ class MenuPVEditor
                         using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write,
                                    FileShare.None))
                         {
-                            byte[] buffer = new byte[1024];
+                            byte[] buffer = new byte[8192];
                             int bytesRead;
                             long totalBytesRead = 0;
                             long totalBytes = response.Content.Headers.ContentLength ?? -1;

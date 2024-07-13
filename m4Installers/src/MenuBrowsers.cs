@@ -66,7 +66,7 @@ class MenuBrowsers
             case "8":
                 await DownloadAndInstall("Thorium", "ThoriumSetup.exe", "https://github.com/Alex313031/Thorium-Win/releases/download/M124.0.6367.218/thorium_AVX_mini_installer.exe");
                 break;
-
+                
             case "9":
                 await DownloadAndInstall("Librewolf", "LibrewolfSetup.exe", "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/127.0.2-2/librewolf-127.0.2-2-windows-x86_64-setup.exe");
                 break;
@@ -121,7 +121,7 @@ class MenuBrowsers
                         using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write,
                                    FileShare.None))
                         {
-                            byte[] buffer = new byte[1024];
+                            byte[] buffer = new byte[8192];
                             int bytesRead;
                             long totalBytesRead = 0;
                             long totalBytes = response.Content.Headers.ContentLength ?? -1;
