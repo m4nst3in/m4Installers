@@ -26,23 +26,23 @@ class MenuStorage
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://www.dropbox.com/download?plat=win&type=full", "DropboxSetup.exe", "Dropbox");
+                await DownloadAndInstall("Dropbox", "DropboxSetup.exe", "https://www.dropbox.com/download?plat=win&type=full");
                 break;
 
             case "2":
-                await DownloadAndInstall("https://mega.nz/MEGAsyncSetup.exe", "MEGASyncSetup.exe", "MEGA");
+                await DownloadAndInstall("MEGA", "MEGASyncSetup.exe", "https://mega.nz/MEGAsyncSetup.exe");
                 break;
 
             case "3":
-                await DownloadAndInstall("https://sugarsync.com/downloads/p/SugarSyncSetup.exe", "SugarSyncSetup.exe", "SugarSync");
+                await DownloadAndInstall("SugarSync", "SugarSyncSetup.exe", "https://sugarsync.com/downloads/p/SugarSyncSetup.exe");
                 break;
 
             case "4":
-                await DownloadAndInstall("https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe", "GoogleDriveSetup.exe", "Google Drive");
+                await DownloadAndInstall("Google Drive", "GoogleDriveSetup.exe", "https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe");
                 break;
 
             case "5":
-                await DownloadAndInstall("https://oneclient.sfx.ms/Win/Installers/24.126.0623.0001/amd64/OneDriveSetup.exe", "OneDriveSetup.exe", "OneDrive");
+                await DownloadAndInstall("OneDrive", "OneDriveSetup.exe", "https://oneclient.sfx.ms/Win/Installers/24.126.0623.0001/amd64/OneDriveSetup.exe");
                 break;
 
             case "6":
@@ -58,7 +58,7 @@ class MenuStorage
         }
     }
 
-    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);

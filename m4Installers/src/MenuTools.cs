@@ -26,19 +26,19 @@ class MenuTools
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("WinRAR", "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-701.exe", "WinRARSetup.exe");
+                await DownloadAndInstall("WinRAR", "WinRARSetup.exe", "https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-701.exe");
                 break;
 
             case "2":
-                await DownloadAndInstall("7zip", "https://www.7-zip.org/a/7z2407-x64.exe", "7zipSetup.exe");
+                await DownloadAndInstall("7zip", "7zipSetup.exe", "https://www.7-zip.org/a/7z2407-x64.exe");
                 break;
 
             case "3":
-                await DownloadAndInstall("AIDA64", "https://download2.aida64.com/aida64extreme730.exe", "AIDA64Setup.exe");
+                await DownloadAndInstall("AIDA64", "AIDA64Setup.exe", "https://download2.aida64.com/aida64extreme730.exe");
                 break;
 
             case "4":
-                await DownloadAndInstall("CPU-Z", "https://download.cpuid.com/cpu-z/cpu-z_1.79-en.exe", "CPUZSetup.exe");
+                await DownloadAndInstall("CPU-Z", "CPUZSetup.exe", "https://download.cpuid.com/cpu-z/cpu-z_1.79-en.exe");
                 break;
 
             case "5":
@@ -54,7 +54,7 @@ class MenuTools
         }
     }
 
-    private static async Task DownloadAndInstall(string appName, string downloadUrl, string fileName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
@@ -95,29 +95,29 @@ class MenuTools
         }
 
         Console.WriteLine($"\n{appName} was downloaded successfully!");
-                Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
-                if (installerProcess != null && !installerProcess.HasExited)
-                {
-                    Console.WriteLine("Installing...");
-                    installerProcess.WaitForExit();
+        if (installerProcess != null && !installerProcess.HasExited)
+        {
+            Console.WriteLine("Installing...");
+            installerProcess.WaitForExit();
 
-                    if (installerProcess.ExitCode == 0)
-                    {
-                        Console.WriteLine("Installation was concluded with success!");
-                        Console.Clear();
-                        File.Delete(saveLocation); // Delete the setup file
+            if (installerProcess.ExitCode == 0)
+            {
+                Console.WriteLine("Installation was concluded with success!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
-                    else
-                    {
-                        Console.WriteLine("Installation has failed!");
-                        Console.Clear();
-                        File.Delete(saveLocation); // Delete the setup file
-            }
-                }
             else
             {
-                Console.WriteLine($"Failed to download {appName}. Please try again.");
+                Console.WriteLine("Installation has failed!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
         }
+        else
+        {
+            Console.WriteLine($"Failed to download {appName}. Please try again.");
+        }
     }
+}

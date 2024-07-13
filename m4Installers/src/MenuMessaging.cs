@@ -6,15 +6,14 @@ class MenuMessaging
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
- __  __                           _             
-|  \/  | ___  ___ ___  __ _  __ _(_)_ __   __ _ 
-| |\/| |/ _ \/ __/ __|/ _` |/ _` | | '_ \ / _` |
-| |  | |  __/\__ \__ \ (_| | (_| | | | | | (_| |
-|_|  |_|\___||___/___/\__,_|\__, |_|_| |_|\__, |
-                            |___/         |___/ 
+         __  __                           _             
+        |  \/  | ___  ___ ___  __ _  __ _(_)_ __   __ _ 
+        | |\/| |/ _ \/ __/ __|/ _` |/ _` | | '_ \ / _` |
+        | |  | |  __/\__ \__ \ (_| | (_| | | | | | (_| |
+        |_|  |_|\___||___/___/\__,_|\__, |_|_| |_|\__, |
+                                    |___/         |___/ 
 
-
-");
+        ");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Discord ");
         Console.WriteLine("[2] - Telegram ");
@@ -27,16 +26,16 @@ class MenuMessaging
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x64", "DiscordSetup.exe", "Discord");
+                await DownloadAndInstall("Discord", "DiscordSetup.exe", "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x64");
                 break;
             case "2":
-                await DownloadAndInstall("https://telegram.org/dl/desktop/win64", "TelegramSetup.exe", "Telegram");
+                await DownloadAndInstall("Telegram", "TelegramSetup.exe", "https://telegram.org/dl/desktop/win64");
                 break;
             case "3":
-                await DownloadAndInstall("https://files.teamspeak-services.com/pre_releases/client/5.0.0-beta77/teamspeak-client.msi", "TeamSpeakSetup.msi", "Teamspeak");
+                await DownloadAndInstall("Teamspeak", "TeamSpeakSetup.msi", "https://files.teamspeak-services.com/pre_releases/client/5.0.0-beta77/teamspeak-client.msi");
                 break;
             case "4":
-                await DownloadAndInstall("https://download.skype.com/s4l/download/win/Skype-8.123.0.203.exe", "SkypeSetup.exe", "Skype");
+                await DownloadAndInstall("Skype", "SkypeSetup.exe", "https://download.skype.com/s4l/download/win/Skype-8.123.0.203.exe");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
@@ -50,7 +49,7 @@ class MenuMessaging
         }
     }
 
-    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);

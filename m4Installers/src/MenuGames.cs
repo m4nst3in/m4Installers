@@ -26,16 +26,16 @@ class MenuGames
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://skmedix.pl/binaries/skl/3.2.8/x64/SKlauncher-3.2.exe", "SKLauncherSetup.exe", "SKLauncher");
+                await DownloadAndInstall("SKLauncher", "SKLauncherSetup.exe", "https://skmedix.pl/binaries/skl/3.2.8/x64/SKlauncher-3.2.exe");
                 break;
             case "2":
-                await DownloadAndInstall("https://github.com/PrismLauncher/PrismLauncher/releases/download/8.4/PrismLauncher-Windows-MSVC-Setup-8.4.exe", "PrismaSetup.exe", "Prisma Launcher");
+                await DownloadAndInstall("Prisma Launcher", "PrismaSetup.exe", "https://github.com/PrismLauncher/PrismLauncher/releases/download/8.4/PrismLauncher-Windows-MSVC-Setup-8.4.exe");
                 break;
             case "3":
-                await DownloadAndInstall("https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.14.1/Heroic-2.14.1-Setup-x64.exe", "HeroicSetup.exe", "Heroic Games Launcher");
+                await DownloadAndInstall("Heroic Games Launcher", "HeroicSetup.exe", "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.14.1/Heroic-2.14.1-Setup-x64.exe");
                 break;
             case "4":
-                await DownloadAndInstall("https://github.com/JosefNemec/Playnite/releases/download/10.33/Playnite1033.exe", "PlayniteSetup.exe", "Playnite");
+                await DownloadAndInstall("Playnite", "PlayniteSetup.exe", "https://github.com/JosefNemec/Playnite/releases/download/10.33/Playnite1033.exe");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
@@ -49,7 +49,7 @@ class MenuGames
         }
     }
 
-    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);

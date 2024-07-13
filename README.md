@@ -47,12 +47,13 @@ Launch the application and follow the on-screen instructions to select and insta
 
 ### Actual Supported Programs
 
-- **Web Browsers**: Brave, Firefox, Vivaldi, Opera, OperaGX, Google Chrome, Microsoft Edge, Thorium, Librewolf.
+- **Web Browsers**: Brave, Firefox, Vivaldi, Opera, OperaGX, Google Chrome, Microsoft Edge, Thorium, Librewolf, Floorp, Arc Browser, Waterfox, Tor Browser, Tempest Browser.
 - **Tools**: WinRAR, 7zip, AIDA64, CPU-Z.
-- **Game Clients**: Steam, Epic Games Launcher, EA App (Origin), GOG Galaxy.
-- **Runtimes**: All-in-one Runtimes, .NET Framework 4.x.x, Visual C++ Redistributable, DirectX.
-- **Text Editors/IDEs**: Sublime Text, Notepad++, Visual Studio Code, JetBrains Toolbox.
-- **Antivirus**: Avast, Kaspersky, MalwareBytes, Bitdefender.
+- **Game Clients**: Steam, Epic Games Launcher, EA App (Origin), GOG Galaxy, Ubisoft Connect, Battle.net, Xbox App, Itch.IO, Rockstar Launcher.
+- **Runtimes**: All-in-one Runtimes, .NET Framework 4.x.x, Visual C++ Redistributable 15/17/19/22, DirectX, Java 8/11/17/21 SDK/JRE.
+- **Text Editors**: Sublime Text, Notepad++, Visual Studio Code, Atom Editor, Vim Online, Emacs, NeoVim
+- **IDEs**: Visual Studio, IntelliJ Rider, IntelliJ IDEA C/U, PyCharm P/C, WebStorm, CLion, RubyMine, GoLand, Eclipse, Spyder.
+- **Antivirus**: Avast, Kaspersky, MalwareBytes, Bitdefender, Avira, AVG, SUPERAntiSpyware.
 - **Utilities**: CCleaner, PuTTY, Filezilla, Recuva.
 - **Games**: SKLauncher, Prisma Launcher, Heroic Games Launcher, Playnite.
 - **Messaging**: Discord, Telegram, TeamSpeak, Skype.

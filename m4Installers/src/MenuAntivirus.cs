@@ -28,31 +28,31 @@ class MenuAntivirus
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("Avast", "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN/installertype_FULL/build_RELEASE/", "AvastSetup.exe");
+                await DownloadAndInstall("Avast", "AvastSetup.exe", "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN/installertype_FULL/build_RELEASE/");
                 break;
 
             case "2":
-                await DownloadAndInstall("Kaspersky", "https://www.dropbox.com/scl/fi/mz69m452jlwbsjxedub7h/KasperskySetup.exe?rlkey=rw3nbq698ua3s9is53mt9zs1m&st=lvho0p8p&dl=1", "KasperskySetup.exe");
+                await DownloadAndInstall("Kaspersky", "KasperskySetup.exe", "https://www.dropbox.com/scl/fi/mz69m452jlwbsjxedub7h/KasperskySetup.exe?rlkey=rw3nbq698ua3s9is53mt9zs1m&st=lvho0p8p&dl=1");
                 break;
 
             case "3":
-                await DownloadAndInstall("Malwarebytes", "https://www.malwarebytes.com/api/downloads/mb-windows?filename=MBSetup.exe&t=1720763650278", "Malwarebytesetup.exe");
+                await DownloadAndInstall("Malwarebytes", "Malwarebytesetup.exe", "https://www.malwarebytes.com/api/downloads/mb-windows?filename=MBSetup.exe&t=1720763650278");
                 break;
 
             case "4":
-                await DownloadAndInstall("Bitdefender", "https://download.bitdefender.com/windows/installer/pt-br/bitdefender_avfree.exe", "BitdefenderSetup.exe");
+                await DownloadAndInstall("Bitdefender", "BitdefenderSetup.exe", "https://download.bitdefender.com/windows/installer/pt-br/bitdefender_avfree.exe");
                 break;
 
             case "5":
-                await DownloadAndInstall("AVG", "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN_AVG/installertype_ONLINE/build_RELEASE", "AVGSetup.exe");
+                await DownloadAndInstall("AVG", "AVGSetup.exe", "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN_AVG/installertype_ONLINE/build_RELEASE");
                 break;
 
             case "6":
-                await DownloadAndInstall("Avira", "https://package.avira.com/download/spotlight-windows-bootstrapper/avira_en_sptl1_316508c615bffe3f__ws-spotlight-release.exe", "AviraSetup.exe");
+                await DownloadAndInstall("Avira", "AviraSetup.exe", "https://package.avira.com/download/spotlight-windows-bootstrapper/avira_en_sptl1_316508c615bffe3f__ws-spotlight-release.exe");
                 break;
 
             case "7":
-                await DownloadAndInstall("SUPERAntiSpyware", "https://secure.superantispyware.com/SUPERAntiSpyware.exe", "SUPERAntiSpywareSetup.exe");
+                await DownloadAndInstall("SUPERAntiSpyware", "SUPERAntiSpywareSetup.exe", "https://secure.superantispyware.com/SUPERAntiSpyware.exe");
                 break;
 
             case "8":
@@ -68,11 +68,11 @@ class MenuAntivirus
         }
     }
 
-    private static async Task DownloadAndInstall(string antivirusName, string downloadUrl, string fileName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
-        Console.WriteLine($"Downloading {antivirusName}...");
+        Console.WriteLine($"Downloading {appName}...");
 
         using (HttpClient client = new HttpClient())
         {
@@ -106,7 +106,7 @@ class MenuAntivirus
             }
         }
 
-        Console.WriteLine($"\n{antivirusName} was downloaded successfully!");
+        Console.WriteLine($"\n{appName} was downloaded successfully!");
         Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
         if (installerProcess != null && !installerProcess.HasExited)

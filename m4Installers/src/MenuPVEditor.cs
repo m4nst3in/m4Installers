@@ -24,19 +24,19 @@ class MenuPVEditor
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://download.gimp.org/gimp/v2.10/windows/gimp-2.10.38-setup.exe", "GIMPSetup.exe", "GIMP");
+                await DownloadAndInstall("GIMP", "GIMPSetup.exe", "https://download.gimp.org/gimp/v2.10/windows/gimp-2.10.38-setup.exe");
                 break;
 
             case "2":
-                await DownloadAndInstall("https://github.com/paintdotnet/release/releases/download/v5.0.13/paint.net.5.0.13.install.anycpu.web.zip", "PaintDotNetSetup.zip", "Paint.NET");
+                await DownloadAndInstall("Paint.NET", "PaintDotNetSetup.zip", "https://github.com/paintdotnet/release/releases/download/v5.0.13/paint.net.5.0.13.install.anycpu.web.zip");
                 break;
 
             case "3":
-                await DownloadAndInstall("https://github.com/OpenShot/openshot-qt/releases/download/v3.2.1/OpenShot-v3.2.1-x86_64.exe", "OpenShotSetup.exe", "OpenShot");
+                await DownloadAndInstall("OpenShot", "OpenShotSetup.exe", "https://github.com/OpenShot/openshot-qt/releases/download/v3.2.1/OpenShot-v3.2.1-x86_64.exe");
                 break;
 
             case "4":
-                await DownloadAndInstall("https://download.kde.org/stable/krita/4.4.5/krita-x64-4.4.5-setup.exe", "KritaSetup.exe", "Krita");
+                await DownloadAndInstall("Krita", "KritaSetup.exe", "https://download.kde.org/stable/krita/4.4.5/krita-x64-4.4.5-setup.exe");
                 break;
 
             case "5":
@@ -52,7 +52,7 @@ class MenuPVEditor
         }
     }
 
-    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);

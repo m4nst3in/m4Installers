@@ -17,10 +17,10 @@ class MenuIDEs
         switch (option)
         {
             case "1":
-                await MenuTextIDE.DownloadAndInstall("https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022", "VisualStudioSetup.exe", "Visual Studio");
+                await MenuTextIDE.DownloadAndInstall("Visual Studio", "VisualStudioSetup.exe", "https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022");
                 break;
             case "2":
-                await MenuTextIDE.DownloadAndInstall("https://download.jetbrains.com/rider/JetBrains.Rider-2024.1.4.exe", "RiderSetup.exe", "IntelliJ Rider");
+                await MenuTextIDE.DownloadAndInstall("IntelliJ Rider", "RiderSetup.exe", "https://download.jetbrains.com/rider/JetBrains.Rider-2024.1.4.exe");
                 break;
             case "3":
                 await MenuTextIDE.ShowPLMenu();
@@ -51,13 +51,13 @@ class MenuIDEs
         switch (option)
         {
             case "1":
-                await MenuTextIDE.DownloadAndInstall("https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2024-06/R/eclipse-java-2024-06-R-win32-x86_64.zip", "EclipseSetup.exe", "Eclipse");
+                await MenuTextIDE.DownloadAndInstall("Eclipse", "EclipseSetup.exe", "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2024-06/R/eclipse-java-2024-06-R-win32-x86_64.zip");
                 break;
             case "2":
-                await MenuTextIDE.DownloadAndInstall("https://download.jetbrains.com/idea/ideaIC-2024.1.4.exe", "IntelliJCSetup.exe", "IntelliJ IDEA Community Edition");
+                await MenuTextIDE.DownloadAndInstall("IntelliJ IDEA Community Edition", "IntelliJCSetup.exe", "https://download.jetbrains.com/idea/ideaIC-2024.1.4.exe");
                 break;
             case "3":
-                await MenuTextIDE.DownloadAndInstall("https://download.jetbrains.com/idea/ideaIU-2024.1.4.exe", "IntelliJUSetup.exe", "IntelliJ IDEA Ultimate Edition");
+                await MenuTextIDE.DownloadAndInstall("IntelliJ IDEA Ultimate Edition", "IntelliJUSetup.exe", "https://download.jetbrains.com/idea/ideaIU-2024.1.4.exe");
                 break;
             case "4":
                 await MenuTextIDE.ShowPLMenu();
@@ -88,13 +88,13 @@ class MenuIDEs
         switch (option)
         {
             case "1":
-                await MenuTextIDE.DownloadAndInstall("https://download.jetbrains.com/python/pycharm-professional-2024.1.4.exe", "PyCharmPSetup.exe", "PyCharm Professional");
+                await MenuTextIDE.DownloadAndInstall("PyCharm Professional", "PyCharmPSetup.exe", "https://download.jetbrains.com/python/pycharm-professional-2024.1.4.exe");
                 break;
             case "2":
-                await MenuTextIDE.DownloadAndInstall("https://download.jetbrains.com/python/pycharm-community-2024.1.4.exe", "PyCharmCSetup.exe", "PyCharm Community Edition");
+                await MenuTextIDE.DownloadAndInstall("PyCharm Community Edition", "PyCharmCSetup.exe", "https://download.jetbrains.com/python/pycharm-community-2024.1.4.exe");
                 break;
             case "3":
-                await MenuTextIDE.DownloadAndInstall("https://github.com/spyder-ide/spyder/releases/latest/download/Spyder_64bit_full.exe", "SpyderSetup.exe", "Spyder");
+                await MenuTextIDE.DownloadAndInstall("Spyder", "SpyderSetup.exe", "https://github.com/spyder-ide/spyder/releases/latest/download/Spyder_64bit_full.exe");
                 break;
             case "4":
                 await MenuTextIDE.ShowPLMenu();
@@ -125,13 +125,13 @@ class MenuIDEs
         switch (option)
         {
             case "1":
-                await MenuTextIDE.DownloadAndInstall("https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2024-06/R/eclipse-java-2024-06-R-win32-x86_64.zip", "EclipseSetup.exe", "Eclipse");
+                await MenuTextIDE.DownloadAndInstall("Eclipse", "EclipseSetup.exe", "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2024-06/R/eclipse-java-2024-06-R-win32-x86_64.zip");
                 break;
             case "2":
-                await MenuTextIDE.DownloadAndInstall("https://download.jetbrains.com/webstorm/WebStorm-2024.1.5.exe", "WebStormSetup.exe", "WebStorm");
+                await MenuTextIDE.DownloadAndInstall("WebStorm", "WebStormSetup.exe", "https://download.jetbrains.com/webstorm/WebStorm-2024.1.5.exe");
                 break;
             case "3":
-                await MenuTextIDE.DownloadAndInstall("https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022", "VisualStudioSetup.exe", "Visual Studio");
+                await MenuTextIDE.DownloadAndInstall("Visual Studio", "VisualStudioSetup.exe", "https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022");
                 break;
             case "4":
                 await MenuTextIDE.ShowPLMenu();
@@ -161,10 +161,10 @@ class MenuIDEs
         switch (option)
         {
             case "1":
-                await MenuTextIDE.DownloadAndInstall("https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022", "VisualStudioSetup.exe", "Visual Studio");
+                await MenuTextIDE.DownloadAndInstall("Visual Studio", "VisualStudioSetup.exe", "https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022");
                 break;
             case "2":
-                await MenuTextIDE.DownloadAndInstall("https://download.jetbrains.com/cpp/CLion-2024.1.4.exe", "CLionSetup.exe", "CLion");
+                await MenuTextIDE.DownloadAndInstall("CLion", "CLionSetup.exe", "https://download.jetbrains.com/cpp/CLion-2024.1.4.exe");
                 break;
             case "3":
                 await MenuTextIDE.ShowPLMenu();
@@ -193,7 +193,7 @@ class MenuIDEs
         switch (option)
         {
             case "1":
-                await MenuTextIDE.DownloadAndInstall("https://download.jetbrains.com/ruby/RubyMine-2024.1.4.exe", "RubyMineSetup.exe", "RubyMine");
+                await MenuTextIDE.DownloadAndInstall("RubyMine", "RubyMineSetup.exe", "https://download.jetbrains.com/ruby/RubyMine-2024.1.4.exe");
                 break;
             case "2":
                 await MenuTextIDE.ShowPLMenu();
@@ -222,7 +222,7 @@ class MenuIDEs
         switch (option)
         {
             case "1":
-                await MenuTextIDE.DownloadAndInstall("https://download.jetbrains.com/go/goland-2024.1.4.exe", "GoLandSetup.exe", "GoLand");
+                await MenuTextIDE.DownloadAndInstall("GoLand", "GoLandSetup.exe", "https://download.jetbrains.com/go/goland-2024.1.4.exe");
                 break;
             case "2":
                 await MenuTextIDE.ShowPLMenu();

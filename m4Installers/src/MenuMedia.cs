@@ -26,16 +26,16 @@ class MenuMedia
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://download.scdn.co/SpotifySetup.exe", "SpotifySetup.exe", "Spotify");
+                await DownloadAndInstall("Spotify", "SpotifySetup.exe", "https://download.scdn.co/SpotifySetup.exe");
                 break;
             case "2":
-                await DownloadAndInstall("https://www.deezer.com/desktop/download?platform=win32&architecture=x86", "deezerSetup.exe", "Deezer");
+                await DownloadAndInstall("Deezer", "deezerSetup.exe", "https://www.deezer.com/desktop/download?platform=win32&architecture=x86");
                 break;
             case "3":
-                await DownloadAndInstall("https://get.videolan.org/vlc/3.0.21/win32/vlc-3.0.21-win32.exe", "vlcSetup.exe", "VLC Media Player");
+                await DownloadAndInstall("VLC Media Player", "vlcSetup.exe", "https://get.videolan.org/vlc/3.0.21/win32/vlc-3.0.21-win32.exe");
                 break;
             case "4":
-                await DownloadAndInstall("https://mirrors.kodi.tv/releases/windows/win64/kodi-21.0-Omega-x64.exe?https=1", "kodiSetup.exe", "Kodi");
+                await DownloadAndInstall("Kodi", "kodiSetup.exe", "https://mirrors.kodi.tv/releases/windows/win64/kodi-21.0-Omega-x64.exe?https=1");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
@@ -49,7 +49,7 @@ class MenuMedia
         }
     }
 
-    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);

@@ -24,19 +24,19 @@ class MenuTorrents
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://download-hr.utorrent.com/track/beta/endpoint/utorrent/os/windows", "UTorrentSetup.exe", "UTorrent");
+                await DownloadAndInstall("UTorrent", "UTorrentSetup.exe", "https://download-hr.utorrent.com/track/beta/endpoint/utorrent/os/windows");
                 break;
 
             case "2":
-                await DownloadAndInstall("https://download-new.utorrent.com/endpoint/bittorrent/os/windows/track/stable/", "BittorrentSetup.exe", "BitTorrent");
+                await DownloadAndInstall("BitTorrent", "BittorrentSetup.exe", "https://download-new.utorrent.com/endpoint/bittorrent/os/windows/track/stable/");
                 break;
 
             case "3":
-                await DownloadAndInstall("https://www.dropbox.com/scl/fi/bbthely0e6m64nmmav0yj/qbittorrent_4.6.5_x64_setup.exe?rlkey=qg8wt0lll4l0ppda094todubk&st=7ee8soaw&dl=01", "QBittorrentSetup.exe", "qBitTorrent");
+                await DownloadAndInstall("qBitTorrent", "QBittorrentSetup.exe", "https://www.dropbox.com/scl/fi/bbthely0e6m64nmmav0yj/qbittorrent_4.6.5_x64_setup.exe?rlkey=qg8wt0lll4l0ppda094todubk&st=7ee8soaw&dl=01");
                 break;
 
             case "4":
-                await DownloadAndInstall("https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6-x64.msi", "TransmissionSetup.msi", "Transmission");
+                await DownloadAndInstall("Transmission", "TransmissionSetup.msi", "https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6-x64.msi");
                 break;
 
             case "5":
@@ -52,7 +52,7 @@ class MenuTorrents
         }
     }
 
-    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);

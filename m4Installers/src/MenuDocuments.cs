@@ -25,16 +25,16 @@ class MenuDocuments
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://sourceforge.net/projects/openofficeorg.mirror/files/4.1.15/binaries/pt-BR/Apache_OpenOffice_4.1.15_Win_x86_install_pt-BR.exe/download", "OpenOfficeSetup.exe", "OpenOffice");
+                await DownloadAndInstall("OpenOffice", "OpenOfficeSetup.exe", "https://sourceforge.net/projects/openofficeorg.mirror/files/4.1.15/binaries/pt-BR/Apache_OpenOffice_4.1.15_Win_x86_install_pt-BR.exe/download");
                 break;
             case "2":
-                await DownloadAndInstall("https://www.libreoffice.org/download/download/", "LibreOfficeSetup.exe", "LibreOffice Writer");
+                await DownloadAndInstall("LibreOffice Writer", "LibreOfficeSetup.exe", "https://www.libreoffice.org/download/download/");
                 break;
             case "3":
-                await DownloadAndInstall("https://www.wps.com/office-free", "WPSOfficeSetup.exe", "WPS Office");
+                await DownloadAndInstall("WPS Office", "WPSOfficeSetup.exe", "https://www.wps.com/office-free");
                 break;
             case "4":
-                await DownloadAndInstall("https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.5/Obsidian-1.6.5.exe", "ObsidianSetup.exe", "Obsidian (Vault)");
+                await DownloadAndInstall("Obsidian (Vault)", "ObsidianSetup.exe", "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.5/Obsidian-1.6.5.exe");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
@@ -48,7 +48,7 @@ class MenuDocuments
         }
     }
 
-    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
@@ -89,29 +89,29 @@ class MenuDocuments
         }
 
         Console.WriteLine($"\n{appName} was downloaded successfully!");
-                Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+        Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
-                if (installerProcess != null && !installerProcess.HasExited)
-                {
-                    Console.WriteLine("Installing...");
-                    installerProcess.WaitForExit();
+        if (installerProcess != null && !installerProcess.HasExited)
+        {
+            Console.WriteLine("Installing...");
+            installerProcess.WaitForExit();
 
-                    if (installerProcess.ExitCode == 0)
-                    {
-                        Console.WriteLine("Installation was concluded with success!");
-                        Console.Clear();
-                        File.Delete(saveLocation); // Delete the setup file
+            if (installerProcess.ExitCode == 0)
+            {
+                Console.WriteLine("Installation was concluded with success!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
-                    else
-                    {
-                        Console.WriteLine("Installation has failed!");
-                        Console.Clear();
-                        File.Delete(saveLocation); // Delete the setup file
-            }
-                }
             else
             {
-                Console.WriteLine($"Failed to download {appName}. Please try again later.");
+                Console.WriteLine("Installation has failed!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
         }
+        else
+        {
+            Console.WriteLine($"Failed to download {appName}. Please try again later.");
+        }
     }
+}

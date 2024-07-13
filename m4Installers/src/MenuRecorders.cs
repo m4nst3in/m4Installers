@@ -24,16 +24,16 @@ class MenuRecorders
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://cdn-fastly.obsproject.com/downloads/OBS-Studio-30.1.2-Full-Installer-x64.exe", "OBSStudioSetup.exe", "OBSStudio");
+                await DownloadAndInstall("OBSStudio", "OBSStudioSetup.exe", "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-30.1.2-Full-Installer-x64.exe");
                 break;
             case "2":
-                await DownloadAndInstall("https://slobs-cdn.streamlabs.com/Streamlabs+Desktop+Setup+1.16.7.exe", "StreamlabsSetup.exe", "Streamlabs");
+                await DownloadAndInstall("Streamlabs", "StreamlabsSetup.exe", "https://slobs-cdn.streamlabs.com/Streamlabs+Desktop+Setup+1.16.7.exe");
                 break;
             case "3":
-                await DownloadAndInstall("https://beepa.com/free/setup.exe", "FrapsSetup.exe", "Fraps");
+                await DownloadAndInstall("Fraps", "FrapsSetup.exe", "https://beepa.com/free/setup.exe");
                 break;
             case "4":
-                await DownloadAndInstall("https://dl.bandicam.com/bdcamsetup.exe", "BandicamSetup.exe", "Bandicam");
+                await DownloadAndInstall("Bandicam", "BandicamSetup.exe", "https://dl.bandicam.com/bdcamsetup.exe");
                 break;
             case "5":
                 Installers.ReturnToMainMenu();
@@ -47,7 +47,7 @@ class MenuRecorders
         }
     }
 
-    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);

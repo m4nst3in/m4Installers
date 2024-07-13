@@ -134,18 +134,18 @@ class MenuRuntimes
         Console.WriteLine("[4] - Return to main menu");
 
         string dotnetVersionOption = Console.ReadLine();
-        string dotneturl = "";
+        string dotnetUrl = "";
 
         switch (dotnetVersionOption)
         {
             case "1":
-                dotneturl = "https://download.microsoft.com/download/1/6/7/167F0D79-9317-48AE-AEDB-17120579F8E2/NDP451-KB2858728-x86-x64-AllOS-ENU.exe";
+                dotnetUrl = "https://download.microsoft.com/download/1/6/7/167F0D79-9317-48AE-AEDB-17120579F8E2/NDP451-KB2858728-x86-x64-AllOS-ENU.exe";
                 break;
             case "2":
-                dotneturl = "https://download.microsoft.com/download/E/4/1/E4173890-A24A-4936-9FC9-AF930FE3FA40/NDP461-KB3102436-x86-x64-AllOS-ENU.exe";
+                dotnetUrl = "https://download.microsoft.com/download/E/4/1/E4173890-A24A-4936-9FC9-AF930FE3FA40/NDP461-KB3102436-x86-x64-AllOS-ENU.exe";
                 break;
             case "3":
-                dotneturl = "https://download.microsoft.com/download/4/b/2/cd00d4ed-ebdd-49ee-8a33-eabc3d1030e3/NDP481-x86-x64-AllOS-ENU.exe";
+                dotnetUrl = "https://download.microsoft.com/download/4/b/2/cd00d4ed-ebdd-49ee-8a33-eabc3d1030e3/NDP481-x86-x64-AllOS-ENU.exe";
                 break;
             case "4":
                 Console.Clear();
@@ -158,7 +158,7 @@ class MenuRuntimes
                 await ShowMenu();
                 return;
         }
-        await DownloadAndInstall(dotneturl, "DotNetSetup.exe", ".NET Framework");
+        await DownloadAndInstall(dotnetUrl, "DotNetSetup.exe", ".NET Framework");
     }
 
     private static async Task HandleVisualCPlusPlusInstallation()

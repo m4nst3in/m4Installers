@@ -32,31 +32,31 @@ class MenuClients
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe", "SteamSetup.exe", "Steam");
+                await DownloadAndInstall("Steam", "SteamSetup.exe", "https://cdn.akamai.steamstatic.com/client/installer/SteamSetup.exe");
                 break;
             case "2":
-                await DownloadAndInstall("https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi", "EGSSetup.msi", "Epic Games Launcher");
+                await DownloadAndInstall("Epic Games Launcher", "EGSSetup.msi", "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi");
                 break;
             case "3":
-                await DownloadAndInstall("https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe", "OriginSetup.exe", "EA App");
+                await DownloadAndInstall("EA App", "OriginSetup.exe", "https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe");
                 break;
             case "4":
-                await DownloadAndInstall("https://cdn.gog.com/open/galaxy/client/2.0.74.352/setup_galaxy_2.0.74.352.exe", "GOGSetup.exe", "GOG Galaxy");
+                await DownloadAndInstall("GOG Galaxy", "GOGSetup.exe", "https://cdn.gog.com/open/galaxy/client/2.0.74.352/setup_galaxy_2.0.74.352.exe");
                 break;
             case "5":
-                await DownloadAndInstall("https://ubi.li/4vxt9", "UbiConnectSetup.exe", "Ubisoft Connect");
+                await DownloadAndInstall("Ubisoft Connect", "UbiConnectSetup.exe", "https://ubi.li/4vxt9");
                 break;
             case "6":
-                await DownloadAndInstall("https://downloader.battle.net//download/getInstallerForGame?os=win&gameProgram=BATTLENET_APP&version=Live", "BattleNetSetup.exe", "Battle.net");
+                await DownloadAndInstall("Battle.net", "BattleNetSetup.exe", "https://downloader.battle.net//download/getInstallerForGame?os=win&gameProgram=BATTLENET_APP&version=Live");
                 break;
             case "7":
-                await DownloadAndInstall("https://assets.xbox.com/installer/20190628.8/anycpu/XboxInstaller.exe", "XboxAppSetup.exe", "Xbox App");
+                await DownloadAndInstall("Xbox App", "XboxAppSetup.exe", "https://assets.xbox.com/installer/20190628.8/anycpu/XboxInstaller.exe");
                 break;
             case "8":
-                await DownloadAndInstall("https://www.dropbox.com/scl/fi/xz9f99o403o2i00gxdci7/itch-setup.exe?rlkey=5ri0faw8hr22qoykqvvscjhsr&st=wov1z2d6&dl=0", "ItchIOSetup.exe", "Itch.io");
+                await DownloadAndInstall("Itch.io", "ItchIOSetup.exe", "https://www.dropbox.com/scl/fi/xz9f99o403o2i00gxdci7/itch-setup.exe?rlkey=5ri0faw8hr22qoykqvvscjhsr&st=wov1z2d6&dl=0");
                 break;
             case "9":
-                await DownloadAndInstall("https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe", "RockstarLauncherSetup.exe", "Rockstar Launcher");
+                await DownloadAndInstall("Rockstar Launcher", "RockstarLauncherSetup.exe", "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe");
                 break;
             case "10":
                 Installers.ReturnToMainMenu();
@@ -70,11 +70,11 @@ class MenuClients
         }
     }
 
-    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string clientName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
-        Console.WriteLine($"Downloading {clientName}...");
+        Console.WriteLine($"Downloading {appName}...");
 
         using (HttpClient client = new HttpClient())
         {
@@ -108,7 +108,7 @@ class MenuClients
             }
         }
 
-        Console.WriteLine($"\n{clientName} was downloaded successfully!");
+        Console.WriteLine($"\n{appName} was downloaded successfully!");
         Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
         if (installerProcess != null && !installerProcess.HasExited)
@@ -131,7 +131,7 @@ class MenuClients
         }
         else
         {
-            Console.WriteLine($"Failed to download {clientName}. Please try again later.");
+            Console.WriteLine($"Failed to download {appName}. Please try again later.");
         }
     }
 }

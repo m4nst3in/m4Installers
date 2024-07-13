@@ -36,59 +36,59 @@ class MenuBrowsers
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://github.com/brave/brave-browser/releases/download/v1.67.123/BraveBrowserStandaloneSetup.exe", "BraveSetup.exe", "Brave");
+                await DownloadAndInstall("Brave", "BraveSetup.exe", "https://github.com/brave/brave-browser/releases/download/v1.67.123/BraveBrowserStandaloneSetup.exe");
                 break;
 
             case "2":
-                await DownloadAndInstall("https://download.mozilla.org/?product=firefox-latest&os=win64", "FirefoxSetup.exe", "Firefox");
+                await DownloadAndInstall("Firefox", "FirefoxSetup.exe", "https://download.mozilla.org/?product=firefox-latest&os=win64");
                 break;
 
             case "3":
-                await DownloadAndInstall("https://downloads.vivaldi.com/stable/Vivaldi.6.8.3381.46.x64.exe", "VivaldiSetup.exe", "Vivaldi");
+                await DownloadAndInstall("Vivaldi", "VivaldiSetup.exe", "https://downloads.vivaldi.com/stable/Vivaldi.6.8.3381.46.x64.exe");
                 break;
 
             case "4":
-                await DownloadAndInstall("https://net.geo.opera.com/opera/stable/windows?utm_tryagain=yes&utm_source=google&utm_medium=ose&utm_campaign=(none)&http_referrer=https%3A%2F%2Fwww.google.com%2F&utm_site=opera_com&&utm_lastpage=opera.com/download", "OperaSetup.exe", "Opera");
+                await DownloadAndInstall("Opera", "OperaSetup.exe", "https://net.geo.opera.com/opera/stable/windows?utm_tryagain=yes&utm_source=google&utm_medium=ose&utm_campaign=(none)&http_referrer=https%3A%2F%2Fwww.google.com%2F&utm_site=opera_com&&utm_lastpage=opera.com/download");
                 break;
 
             case "5":
-                await DownloadAndInstall("https://download3.operacdn.com/pub/opera_gx/100.0.4815.44/win/Opera_GX_100.0.4815.44_Setup_x64.exe", "OperaGXSetup.exe", "OperaGX");
+                await DownloadAndInstall("OperaGX", "OperaGXSetup.exe", "https://download3.operacdn.com/pub/opera_gx/100.0.4815.44/win/Opera_GX_100.0.4815.44_Setup_x64.exe");
                 break;
 
             case "6":
-                await DownloadAndInstall("https://www.dropbox.com/scl/fi/ec46c0o79webh2f3a7i81/ChromeSetup.exe?rlkey=jpj57k653hlqf8zghot6oyej4&st=tuomgeh9&dl=1", "ChromeSetup.exe", "Google Chrome");
+                await DownloadAndInstall("Google Chrome", "ChromeSetup.exe", "https://www.dropbox.com/scl/fi/ec46c0o79webh2f3a7i81/ChromeSetup.exe?rlkey=jpj57k653hlqf8zghot6oyej4&st=tuomgeh9&dl=1");
                 break;
 
             case "7":
-                await DownloadAndInstall("https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?platform=Default&source=EdgeStablePage&Channel=Stable&language=en", "EdgeSetup.exe", "Edge");
+                await DownloadAndInstall("Edge", "EdgeSetup.exe", "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?platform=Default&source=EdgeStablePage&Channel=Stable&language=en");
                 break;
 
             case "8":
-                await DownloadAndInstall("https://github.com/Alex313031/Thorium-Win/releases/download/M124.0.6367.218/thorium_AVX_mini_installer.exe", "ThoriumSetup.exe", "Thorium");
+                await DownloadAndInstall("Thorium", "ThoriumSetup.exe", "https://github.com/Alex313031/Thorium-Win/releases/download/M124.0.6367.218/thorium_AVX_mini_installer.exe");
                 break;
 
             case "9":
-                await DownloadAndInstall("https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/127.0.2-2/librewolf-127.0.2-2-windows-x86_64-setup.exe", "LibrewolfSetup.exe", "Librewolf");
+                await DownloadAndInstall("Librewolf", "LibrewolfSetup.exe", "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/127.0.2-2/librewolf-127.0.2-2-windows-x86_64-setup.exe");
                 break;
 
             case "10":
-                await DownloadAndInstall("https://github.com/Floorp-Projects/Floorp/releases/download/v11.15.0/floorp-win64.installer.exe", "FloorpSetup.exe", "Floorp");
+                await DownloadAndInstall("Floorp", "FloorpSetup.exe", "https://github.com/Floorp-Projects/Floorp/releases/download/v11.15.0/floorp-win64.installer.exe");
                 break;
 
             case "11":
-                await DownloadAndInstall("https://releases.arc.net/windows/ArcInstaller.exe", "ArcBrowserSetup.exe", "Arc Browser");
+                await DownloadAndInstall("Arc Browser", "ArcBrowserSetup.exe", "https://releases.arc.net/windows/ArcInstaller.exe");
                 break;
 
             case "12":
-                await DownloadAndInstall("https://cdn1.waterfox.net/waterfox/releases/G6.0.17/WINNT_x86_64/Waterfox%20Setup%20G6.0.17.exe", "WaterfoxSetup.exe", "Waterfox");
+                await DownloadAndInstall("Waterfox", "WaterfoxSetup.exe", "https://cdn1.waterfox.net/waterfox/releases/G6.0.17/WINNT_x86_64/Waterfox%20Setup%20G6.0.17.exe");
                 break;
 
             case "13":
-                await DownloadAndInstall("https://www.torproject.org/dist/torbrowser/13.5.1/tor-browser-windows-x86_64-portable-13.5.1.exe", "TorSetup.exe", "Tor Browser");
+                await DownloadAndInstall("Tor Browser", "TorSetup.exe", "https://www.torproject.org/dist/torbrowser/13.5.1/tor-browser-windows-x86_64-portable-13.5.1.exe");
                 break;
 
             case "14":
-                await DownloadAndInstall("https://downloads.tempest.com/tempestinstaller.exe", "TempestBrowserSetup.exe", "Tempest Browser");
+                await DownloadAndInstall("Tempest Browser", "TempestBrowserSetup.exe", "https://downloads.tempest.com/tempestinstaller.exe");
                 break;
 
             case "15":
@@ -104,7 +104,7 @@ class MenuBrowsers
         }
     }
 
-    private static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
+    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);

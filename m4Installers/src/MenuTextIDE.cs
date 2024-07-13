@@ -64,25 +64,25 @@ class MenuTextIDE
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://download.sublimetext.com/sublime_text_build_4169_x64_setup.exe", "SublimeTextSetup.exe", "Sublime Text");
+                await DownloadAndInstall("Sublime Text", "SublimeTextSetup.exe", "https://download.sublimetext.com/sublime_text_build_4169_x64_setup.exe");
                 break;
             case "2":
-                await DownloadAndInstall("https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.7/npp.8.6.7.Installer.x64.exe", "NotepadSetup.exe", "Notepad++");
+                await DownloadAndInstall("Notepad++", "NotepadSetup.exe", "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.7/npp.8.6.7.Installer.x64.exe");
                 break;
             case "3":
-                await DownloadAndInstall("https://code.visualstudio.com/sha/download?build=stable&os=win32-x64", "VSCodeSetup.exe", "Visual Studio Code");
+                await DownloadAndInstall("Visual Studio Code", "VSCodeSetup.exe", "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64");
                 break;
             case "4":
-                await DownloadAndInstall("https://github.com/atom/atom/releases/download/v1.60.0/AtomSetup-x64.exe", "AtomSetup.exe", "Atom Editor");
+                await DownloadAndInstall("Atom Editor", "AtomSetup.exe", "https://github.com/atom/atom/releases/download/v1.60.0/AtomSetup-x64.exe");
                 break;
             case "5":
-                await DownloadAndInstall("https://github.com/vim/vim-win32-installer/releases/download/v9.1.0/gvim_9.1.0_x64_signed.exe", "VimSetup.exe", "Vim Online");
+                await DownloadAndInstall("Vim Online", "VimSetup.exe", "https://github.com/vim/vim-win32-installer/releases/download/v9.1.0/gvim_9.1.0_x64_signed.exe");
                 break;
             case "6":
-                await DownloadAndInstall("http://mirror.fcix.net/gnu/emacs/windows/emacs-29/emacs-29.1-installer.exe", "EmacsSetup.exe", "Emacs");
+                await DownloadAndInstall("Emacs", "EmacsSetup.exe", "http://mirror.fcix.net/gnu/emacs/windows/emacs-29/emacs-29.1-installer.exe");
                 break;
             case "7":
-                await DownloadAndInstall("https://github.com/neovim/neovim/releases/latest/download/nvim-win64.msi", "NeoVimSetup.msi", "NeoVim");
+                await DownloadAndInstall("NeoVim", "NeoVimSetup.msi", "https://github.com/neovim/neovim/releases/latest/download/nvim-win64.msi");
                 break;
             case "8":
                 await ShowMenu();
@@ -149,7 +149,7 @@ class MenuTextIDE
         }
     }
 
-    public static async Task DownloadAndInstall(string downloadUrl, string fileName, string appName)
+    public static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
