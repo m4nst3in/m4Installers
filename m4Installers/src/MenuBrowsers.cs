@@ -31,7 +31,7 @@ class MenuBrowsers
         Console.WriteLine("[14] - Tempest Browser");
         Console.WriteLine("[15] - Return to Main Menu");
 
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -92,7 +92,7 @@ class MenuBrowsers
                 break;
 
             case "15":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
 
             default:

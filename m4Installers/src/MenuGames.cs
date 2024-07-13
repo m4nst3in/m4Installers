@@ -21,7 +21,7 @@ class MenuGames
         Console.WriteLine("[4] - Playnite");
         Console.WriteLine("[5] - Return to Main Menu");
 
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -38,7 +38,7 @@ class MenuGames
                 await DownloadAndInstall("Playnite", "PlayniteSetup.exe", "https://github.com/JosefNemec/Playnite/releases/download/10.33/Playnite1033.exe");
                 break;
             case "5":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");

@@ -20,7 +20,7 @@ class MenuDocuments
         Console.WriteLine("[4] - Obsidian ");
         Console.WriteLine("[5] - Return to Main Menu ");
 
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -37,7 +37,7 @@ class MenuDocuments
                 await DownloadAndInstall("Obsidian (Vault)", "ObsidianSetup.exe", "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.5/Obsidian-1.6.5.exe");
                 break;
             case "5":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
@@ -89,7 +89,7 @@ class MenuDocuments
         }
 
         Console.WriteLine($"\n{appName} was downloaded successfully!");
-        Process installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
         if (installerProcess != null && !installerProcess.HasExited)
         {

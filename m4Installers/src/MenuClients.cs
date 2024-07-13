@@ -27,7 +27,7 @@ class MenuClients
         Console.WriteLine("[9] - Rockstar Launcher");
         Console.WriteLine("[10] - Return to Main Menu");
 
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -59,11 +59,11 @@ class MenuClients
                 await DownloadAndInstall("Rockstar Launcher", "RockstarLauncherSetup.exe", "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe");
                 break;
             case "10":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                await Task.Delay(3000); // Add a delay of 3 seconds
+                await Task.Delay(3000); // Add a delay of 3 Thread.Sleep
                 Console.Clear();
                 await ShowMenu();
                 break;

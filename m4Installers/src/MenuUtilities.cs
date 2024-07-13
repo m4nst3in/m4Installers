@@ -21,7 +21,7 @@ class MenuUtilities
         Console.WriteLine("[4] - Recuva");
         Console.WriteLine("[5] - Return to Main Menu");
 
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -38,7 +38,7 @@ class MenuUtilities
                 await DownloadAndInstall("Recuva", "RecuvaInstaller.exe", "https://download.ccleaner.com/rcsetup154.exe");
                 break;
             case "5":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try it again.");

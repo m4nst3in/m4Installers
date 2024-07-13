@@ -23,7 +23,7 @@ class MenuRuntimes
         Console.WriteLine("[5] - OpenJDK");
         Console.WriteLine("[6] - Return to Main Menu");
 
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -48,7 +48,7 @@ class MenuRuntimes
                 break;
 
             case "6":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
 
             default:
@@ -133,7 +133,7 @@ class MenuRuntimes
         Console.WriteLine("[3] - .NET Framework 4.8.1");
         Console.WriteLine("[4] - Return to main menu");
 
-        string dotnetVersionOption = Console.ReadLine();
+        var dotnetVersionOption = Console.ReadLine();
         string dotnetUrl = "";
 
         switch (dotnetVersionOption)
@@ -169,7 +169,7 @@ class MenuRuntimes
         Console.WriteLine("[2] - Visual C++ Redistributable 15-17-19-22 x86");
         Console.WriteLine("[3] - Return to main menu");
 
-        string vcVersionOption = Console.ReadLine();
+        var vcVersionOption = Console.ReadLine();
         string vcUrl = "";
 
         switch (vcVersionOption)
@@ -202,7 +202,7 @@ class MenuRuntimes
         Console.WriteLine("[2] - OpenJDK SDK");
         Console.WriteLine("[3] - Return to main menu");
 
-        string OpenJDKTypeOption = Console.ReadLine();
+        var OpenJDKTypeOption = Console.ReadLine();
         string OpenJDKUrl = "";
 
         switch (OpenJDKTypeOption)
@@ -217,7 +217,7 @@ class MenuRuntimes
                 Console.WriteLine("[5] - OpenJDK 21 JRE (x64)");
                 Console.WriteLine("[6] - Return to main menu");
 
-                string OpenJDKVersionOption = Console.ReadLine();
+                var OpenJDKVersionOption = Console.ReadLine();
 
                 switch (OpenJDKVersionOption)
                 {
@@ -260,7 +260,7 @@ class MenuRuntimes
                 Console.WriteLine("[5] - OpenJDK 21 JDK (x64)");
                 Console.WriteLine("[6] - Return to main menu");
 
-                string OpenJDKSdkVersionOption = Console.ReadLine();
+                var OpenJDKSdkVersionOption = Console.ReadLine();
 
                 switch (OpenJDKSdkVersionOption)
                 {

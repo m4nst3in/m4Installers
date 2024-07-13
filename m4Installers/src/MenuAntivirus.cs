@@ -23,7 +23,7 @@ class MenuAntivirus
         Console.WriteLine("[7] - SUPERAntiSpyware");
         Console.WriteLine("[8] - Return to Main Menu");
 
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -56,7 +56,7 @@ class MenuAntivirus
                 break;
 
             case "8":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
 
             default:

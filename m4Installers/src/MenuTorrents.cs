@@ -19,7 +19,7 @@ class MenuTorrents
         Console.WriteLine("[3] - qBittorrent ");
         Console.WriteLine("[4] - Transmission ");
         Console.WriteLine("[5] - Return to Main Menu ");
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {

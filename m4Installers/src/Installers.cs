@@ -41,7 +41,7 @@
             Console.WriteLine("                              [7] - Utilities                 [15] - Photo/Video Editors");
             Console.WriteLine("                              [8] - Games                     [16] - Exit");
 
-            string option = Console.ReadLine();
+            var option = Console.ReadLine();
 
             switch (option)
             {
@@ -118,10 +118,10 @@
         }
     }
 
-    public static void ReturnToMainMenu()
+    public static async Task ReturnToMainMenu()
     {
         Console.Clear();
-        Main(null);
+        await Main(null);
     }
 }
 

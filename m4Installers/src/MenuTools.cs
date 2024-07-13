@@ -21,7 +21,7 @@ class MenuTools
         Console.WriteLine("[4] - CPU-Z");
         Console.WriteLine("[5] - Return to Main Menu");
 
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -42,12 +42,12 @@ class MenuTools
                 break;
 
             case "5":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
 
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
                 await ShowMenu();
                 break;

@@ -21,7 +21,7 @@ class MenuMessaging
         Console.WriteLine("[4] - Skype ");
         Console.WriteLine("[5] - Return to Main Menu");
 
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -38,7 +38,7 @@ class MenuMessaging
                 await DownloadAndInstall("Skype", "SkypeSetup.exe", "https://download.skype.com/s4l/download/win/Skype-8.123.0.203.exe");
                 break;
             case "5":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");

@@ -19,7 +19,8 @@ class MenuPVEditor
         Console.WriteLine("[3] - OpenShot");
         Console.WriteLine("[4] - Krita");
         Console.WriteLine("[5] - Return to Main Menu");
-        string option = Console.ReadLine();
+
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -40,7 +41,7 @@ class MenuPVEditor
                 break;
 
             case "5":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
 
             default:

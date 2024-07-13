@@ -21,7 +21,7 @@ class MenuMedia
         Console.WriteLine("[4] - Kodi ");
         Console.WriteLine("[5] - Return to Main Menu");
 
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {

@@ -1,7 +1,7 @@
 ﻿
 class MenuIDEs
 {
-    public static async Task ShowCSharpIDEMenu()
+    public static async Task ShowCSharpMenu()
     {
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.White;
@@ -12,7 +12,7 @@ class MenuIDEs
         Console.WriteLine("[3] - Return to Main Menu");
 
         // Read user input
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -27,14 +27,14 @@ class MenuIDEs
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                await ShowCSharpIDEMenu();
+                await ShowCSharpMenu();
                 break;
         }
     }
 
-    public static async Task ShowJavaIDEMenu()
+    public static async Task ShowJavaMenu()
     {
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.White;
@@ -46,7 +46,7 @@ class MenuIDEs
         Console.WriteLine("[4] - Return to Main Menu");
 
         // Read user input
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -64,14 +64,14 @@ class MenuIDEs
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                await ShowJavaIDEMenu();
+                await ShowJavaMenu();
                 break;
         }
     }
 
-    public static async Task ShowPythonIDEMenu()
+    public static async Task ShowPythonMenu()
     {
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.White;
@@ -83,7 +83,7 @@ class MenuIDEs
         Console.WriteLine("[4] - Return to Main Menu");
 
         // Read user input
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -101,14 +101,14 @@ class MenuIDEs
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                await ShowPythonIDEMenu();
+                await ShowPythonMenu();
                 break;
         }
     }
 
-    public static async Task ShowJavaScriptIDEMenu()
+    public static async Task ShowJavaScriptMenu()
     {
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.White;
@@ -120,7 +120,7 @@ class MenuIDEs
         Console.WriteLine("[4] - Return to Main Menu");
 
         // Read user input
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -138,14 +138,14 @@ class MenuIDEs
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                await ShowJavaScriptIDEMenu();
+                await ShowJavaScriptMenu();
                 break;
         }
     }
 
-    public static async Task ShowCppIDEMenu()
+    public static async Task ShowCppMenu()
     {
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.White;
@@ -156,7 +156,7 @@ class MenuIDEs
         Console.WriteLine("[3] - Return to Main Menu");
 
         // Read user input
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -171,14 +171,14 @@ class MenuIDEs
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                await ShowCppIDEMenu();
+                await ShowCppMenu();
                 break;
         }
     }
 
-    public static async Task ShowRubyIDEMenu()
+    public static async Task ShowRubyMenu()
     {
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.White;
@@ -188,7 +188,7 @@ class MenuIDEs
         Console.WriteLine("[2] - Return to Main Menu");
 
         // Read user input
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -200,14 +200,14 @@ class MenuIDEs
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                await ShowRubyIDEMenu();
+                await ShowRubyMenu();
                 break;
         }
     }
 
-    public static async Task ShowGoIDEMenu()
+    public static async Task ShowGoMenu()
     {
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.White;
@@ -217,7 +217,7 @@ class MenuIDEs
         Console.WriteLine("[2] - Return to Main Menu");
 
         // Read user input
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -229,9 +229,9 @@ class MenuIDEs
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
-                await ShowGoIDEMenu();
+                await ShowGoMenu();
                 break;
         }
     }

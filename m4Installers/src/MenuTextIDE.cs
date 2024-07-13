@@ -18,7 +18,7 @@ class MenuTextIDE
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Text Editors");
         Console.WriteLine("[2] - IDEs");
-        Console.WriteLine("[3] - Return to Main Menu");
+        Console.WriteLine("[3] - break to Main Menu");
 
         // Read user input
         string option = Console.ReadLine();
@@ -32,11 +32,11 @@ class MenuTextIDE
                 await ShowPLMenu();
                 break;
             case "3":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
                 await ShowMenu();
                 break;
@@ -56,10 +56,10 @@ class MenuTextIDE
         Console.WriteLine("[5] - Vim Online");
         Console.WriteLine("[6] - Emacs");
         Console.WriteLine("[7] - NeoVim");
-        Console.WriteLine("[8] - Return to Main Menu");
+        Console.WriteLine("[8] - break to Main Menu");
 
         // Read user input
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -89,7 +89,7 @@ class MenuTextIDE
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
                 await ShowTextEditorsMenu();
                 break;
@@ -109,40 +109,40 @@ class MenuTextIDE
         Console.WriteLine("[5] - C++");
         Console.WriteLine("[6] - Ruby");
         Console.WriteLine("[7] - Go");
-        Console.WriteLine("[8] - Return to Main Menu");
+        Console.WriteLine("[8] - break to Main Menu");
 
         // Read user input
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
             case "1":
-                await ShowCSharpIDEMenu();
+                await ShowCSharpMenu();
                 break;
             case "2":
-                await ShowJavaIDEMenu();
+                await ShowJavaMenu();
                 break;
             case "3":
-                await ShowPythonIDEMenu();
+                await ShowPythonMenu();
                 break;
             case "4":
-                await ShowJavaScriptIDEMenu();
+                await ShowJavaScriptMenu();
                 break;
             case "5":
-                await ShowCppIDEMenu();
+                await ShowCppMenu();
                 break;
             case "6":
-                await ShowRubyIDEMenu();
+                await ShowRubyMenu();
                 break;
             case "7":
-                await ShowGoIDEMenu();
+                await ShowGoMenu();
                 break;
             case "8":
                 await ShowMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
-                System.Threading.Thread.Sleep(2500); // Add a delay of 2.5 seconds
+                Thread.Sleep(2500); // Add a delay of 2.5 seconds
                 Console.Clear();
                 await ShowPLMenu();
                 break;

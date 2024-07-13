@@ -21,7 +21,7 @@ class MenuStorage
         Console.WriteLine("[4] - Google Drive ");
         Console.WriteLine("[5] - OneDrive ");
         Console.WriteLine("[6] - Return to Main Menu ");
-        string option = Console.ReadLine();
+        var option = Console.ReadLine();
 
         switch (option)
         {
@@ -46,7 +46,7 @@ class MenuStorage
                 break;
 
             case "6":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
 
             default:
