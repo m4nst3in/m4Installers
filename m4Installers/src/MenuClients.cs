@@ -6,21 +6,26 @@ class MenuClients
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(@"
-  ____                         ____ _ _            _       
- / ___| __ _ _ __ ___   ___   / ___| (_) ___ _ __ | |_ ___ 
-| |  _ / _` | '_ ` _ \ / _ \ | |   | | |/ _ \ '_ \| __/ __|
-| |_| | (_| | | | | | |  __/ | |___| | |  __/ | | | |_\__ \
- \____|\__,_|_| |_| |_|\___|  \____|_|_|\___|_| |_|\__|___/
+              ____                         ____ _ _            _       
+             / ___| __ _ _ __ ___   ___   / ___| (_) ___ _ __ | |_ ___ 
+            | |  _ / _` | '_ ` _ \ / _ \ | |   | | |/ _ \ '_ \| __/ __|
+            | |_| | (_| | | | | | |  __/ | |___| | |  __/ | | | |_\__ \
+             \____|\__,_|_| |_| |_|\___|  \____|_|_|\___|_| |_|\__|___/
 
 
 
-");
+            ");
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine("[1] - Steam");
         Console.WriteLine("[2] - Epic Games Launcher");
         Console.WriteLine("[3] - EA App (Origin)");
         Console.WriteLine("[4] - GOG");
-        Console.WriteLine("[5] - Return to Main Menu");
+        Console.WriteLine("[5] - Ubisoft Connect");
+        Console.WriteLine("[6] - Battle.net");
+        Console.WriteLine("[7] - Xbox App");
+        Console.WriteLine("[8] - Itch.io");
+        Console.WriteLine("[9] - Rockstar Launcher");
+        Console.WriteLine("[10] - Return to Main Menu");
 
         string option = Console.ReadLine();
 
@@ -39,6 +44,21 @@ class MenuClients
                 await DownloadAndInstall("https://cdn.gog.com/open/galaxy/client/2.0.74.352/setup_galaxy_2.0.74.352.exe", "GOGSetup.exe", "GOG Galaxy");
                 break;
             case "5":
+                await DownloadAndInstall("https://ubi.li/4vxt9", "UbiConnectSetup.exe", "Ubisoft Connect");
+                break;
+            case "6":
+                await DownloadAndInstall("https://downloader.battle.net//download/getInstallerForGame?os=win&gameProgram=BATTLENET_APP&version=Live", "BattleNetSetup.exe", "Battle.net");
+                break;
+            case "7":
+                await DownloadAndInstall("https://assets.xbox.com/installer/20190628.8/anycpu/XboxInstaller.exe", "XboxAppSetup.exe", "Xbox App");
+                break;
+            case "8":
+                await DownloadAndInstall("https://www.dropbox.com/scl/fi/xz9f99o403o2i00gxdci7/itch-setup.exe?rlkey=5ri0faw8hr22qoykqvvscjhsr&st=wov1z2d6&dl=0", "ItchIOSetup.exe", "Itch.io");
+                break;
+            case "9":
+                await DownloadAndInstall("https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe", "RockstarLauncherSetup.exe", "Rockstar Launcher");
+                break;
+            case "10":
                 Installers.ReturnToMainMenu();
                 break;
             default:
@@ -85,34 +105,34 @@ class MenuClients
                         }
                     }
                 }
-            } 
+            }
         }
 
-                Console.WriteLine($"\n{clientName} was downloaded successfully!");
-                Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+        Console.WriteLine($"\n{clientName} was downloaded successfully!");
+        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
-                if (installerProcess != null && !installerProcess.HasExited)
-                {
-                    Console.WriteLine("Installing...");
-                    installerProcess.WaitForExit();
+        if (installerProcess != null && !installerProcess.HasExited)
+        {
+            Console.WriteLine("Installing...");
+            installerProcess.WaitForExit();
 
-                    if (installerProcess.ExitCode == 0)
-                    {
-                        Console.WriteLine("Installation was concluded with success!");
-                        Console.Clear();
-                        File.Delete(saveLocation); // Delete the setup file
+            if (installerProcess.ExitCode == 0)
+            {
+                Console.WriteLine("Installation was concluded with success!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
-                    else
-                    {
-                        Console.WriteLine("Installation has failed!");
-                        Console.Clear();
-                        File.Delete(saveLocation); // Delete the setup file
-            }
-                }
             else
             {
-                Console.WriteLine($"Failed to download {clientName}. Please try again later.");
+                Console.WriteLine("Installation has failed!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
             }
         }
+        else
+        {
+            Console.WriteLine($"Failed to download {clientName}. Please try again later.");
+        }
     }
+}
 

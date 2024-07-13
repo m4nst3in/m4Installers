@@ -24,7 +24,12 @@ class MenuBrowsers
         Console.WriteLine("[7] - Microsoft Edge");
         Console.WriteLine("[8] - Thorium");
         Console.WriteLine("[9] - Librewolf");
-        Console.WriteLine("[10] - Return to Main Menu");
+        Console.WriteLine("[10] - Floorp");
+        Console.WriteLine("[11] - Arc Browser");
+        Console.WriteLine("[12] - Waterfox");
+        Console.WriteLine("[13] - Tor Browser");
+        Console.WriteLine("[14] - Tempest Browser");
+        Console.WriteLine("[15] - Return to Main Menu");
 
         string option = Console.ReadLine();
 
@@ -67,6 +72,26 @@ class MenuBrowsers
                 break;
 
             case "10":
+                await DownloadAndInstall("https://github.com/Floorp-Projects/Floorp/releases/download/v11.15.0/floorp-win64.installer.exe", "FloorpSetup.exe", "Floorp");
+                break;
+
+            case "11":
+                await DownloadAndInstall("https://releases.arc.net/windows/ArcInstaller.exe", "ArcBrowserSetup.exe", "Arc Browser");
+                break;
+
+            case "12":
+                await DownloadAndInstall("https://cdn1.waterfox.net/waterfox/releases/G6.0.17/WINNT_x86_64/Waterfox%20Setup%20G6.0.17.exe", "WaterfoxSetup.exe", "Waterfox");
+                break;
+
+            case "13":
+                await DownloadAndInstall("https://www.torproject.org/dist/torbrowser/13.5.1/tor-browser-windows-x86_64-portable-13.5.1.exe", "TorSetup.exe", "Tor Browser");
+                break;
+
+            case "14":
+                await DownloadAndInstall("https://downloads.tempest.com/tempestinstaller.exe", "TempestBrowserSetup.exe", "Tempest Browser");
+                break;
+
+            case "15":
                 Installers.ReturnToMainMenu();
                 break;
 
