@@ -109,7 +109,7 @@ class MenuTextIDE
         Console.WriteLine("[5] - C++");
         Console.WriteLine("[6] - Ruby");
         Console.WriteLine("[7] - Go");
-        Console.WriteLine("[8] - break to Main Menu");
+        Console.WriteLine("[8] - Return to Main Menu");
 
         // Read user input
         var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
