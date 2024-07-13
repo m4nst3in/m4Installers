@@ -20,7 +20,8 @@ class MenuRuntimes
         Console.WriteLine("[2] - .NET Framework");
         Console.WriteLine("[3] - Visual C++");
         Console.WriteLine("[4] - DirectX");
-        Console.WriteLine("[5] - Return to Main Menu");
+        Console.WriteLine("[5] - OpenJDK");
+        Console.WriteLine("[6] - Return to Main Menu");
 
         string option = Console.ReadLine();
 
@@ -43,6 +44,10 @@ class MenuRuntimes
                 break;
 
             case "5":
+                await HandleOpenJDKInstallation();
+                break;
+
+            case "6":
                 Installers.ReturnToMainMenu();
                 break;
 
@@ -187,5 +192,118 @@ class MenuRuntimes
                 return;
         }
         await DownloadAndInstall(vcUrl, "VCRSetup.exe", "Visual C++ Redistributable");
+    }
+
+    private static async Task HandleOpenJDKInstallation()
+    {
+        Console.Clear();
+        Console.WriteLine("Choose the type of OpenJDK to install:");
+        Console.WriteLine("[1] - OpenJDK JRE");
+        Console.WriteLine("[2] - OpenJDK SDK");
+        Console.WriteLine("[3] - Return to main menu");
+
+        string OpenJDKTypeOption = Console.ReadLine();
+        string OpenJDKUrl = "";
+
+        switch (OpenJDKTypeOption)
+        {
+            case "1":
+                Console.Clear();
+                Console.WriteLine("Choose the version of OpenJDK JRE to install:");
+                Console.WriteLine("[1] - OpenJDK 8 JRE (x64)");
+                Console.WriteLine("[2] - OpenJDK 8 JRE (x86)");
+                Console.WriteLine("[3] - OpenJDK 11 JRE (x64)");
+                Console.WriteLine("[4] - OpenJDK 17 JRE (x64)");
+                Console.WriteLine("[5] - OpenJDK 21 JRE (x64)");
+                Console.WriteLine("[6] - Return to main menu");
+
+                string OpenJDKVersionOption = Console.ReadLine();
+
+                switch (OpenJDKVersionOption)
+                {
+                    case "1":
+                        OpenJDKUrl = "https://builds.openlogic.com/downloadJDK/openlogic-openjdk-jre/8u412-b08/openlogic-openjdk-jre-8u412-b08-windows-x64.msi";
+                        break;
+                    case "2":
+                        OpenJDKUrl = "https://builds.openlogic.com/downloadJDK/openlogic-openjdk-jre/8u412-b08/openlogic-openjdk-jre-8u412-b08-windows-x32.msi";
+                        break;
+                    case "3":
+                        OpenJDKUrl = "https://builds.openlogic.com/downloadJDK/openlogic-openjdk-jre/11.0.23+9/openlogic-openjdk-jre-11.0.23+9-windows-x64.msi";
+                        break;
+                    case "4":
+                        OpenJDKUrl = "https://builds.openlogic.com/downloadJDK/openlogic-openjdk-jre/17.0.11+9/openlogic-openjdk-jre-17.0.11+9-windows-x64.msi";
+                        break;
+                    case "5":
+                        OpenJDKUrl = "https://builds.openlogic.com/downloadJDK/openlogic-openjdk-jre/21.0.3+9/openlogic-openjdk-jre-21.0.3+9-windows-x64.msi";
+                        break;
+                    case "6":
+                        Console.Clear();
+                        await ShowMenu();
+                        return;
+                    default:
+                        Console.WriteLine("Invalid option. Try it again.");
+                        await Task.Delay(2500);
+                        Console.Clear();
+                        await ShowMenu();
+                        return;
+                }
+                await DownloadAndInstall(OpenJDKUrl, "OpenJDKSetup.msi", "OpenJDK JRE");
+                break;
+
+            case "2":
+                Console.Clear();
+                Console.WriteLine("Choose the version of OpenJDK JDK to install:");
+                Console.WriteLine("[1] - OpenJDK 8 JDK (x64)");
+                Console.WriteLine("[2] - OpenJDK 8 JDK (x86)");
+                Console.WriteLine("[3] - OpenJDK 11 JDK (x64)");
+                Console.WriteLine("[4] - OpenJDK 17 JDK (x64)");
+                Console.WriteLine("[5] - OpenJDK 21 JDK (x64)");
+                Console.WriteLine("[6] - Return to main menu");
+
+                string OpenJDKSdkVersionOption = Console.ReadLine();
+
+                switch (OpenJDKSdkVersionOption)
+                {
+                    case "1":
+                        OpenJDKUrl = "https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u412-b08/openlogic-openjdk-8u412-b08-windows-x64.msi";
+                        break;
+                    case "2":
+                        OpenJDKUrl = "https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u412-b08/openlogic-openjdk-8u412-b08-windows-x32.msi";
+                        break;
+                    case "3":
+                        OpenJDKUrl = "https://builds.openlogic.com/downloadJDK/openlogic-openjdk/11.0.23+9/openlogic-openjdk-11.0.23+9-windows-x64.msi";
+                        break;
+                    case "4":
+                        OpenJDKUrl = "https://builds.openlogic.com/downloadJDK/openlogic-openjdk/17.0.11+9/openlogic-openjdk-17.0.11+9-windows-x64.msi";
+                        break;
+                    case "5":
+                        OpenJDKUrl = "https://builds.openlogic.com/downloadJDK/openlogic-openjdk/21.0.3+9/openlogic-openjdk-21.0.3+9-windows-x64.msi";
+                        break;
+                    case "6":
+                        Console.Clear();
+                        await ShowMenu();
+                        return;
+                    default:
+                        Console.WriteLine("Invalid option. Try it again.");
+                        await Task.Delay(2500);
+                        Console.Clear();
+                        await ShowMenu();
+                        return;
+                }
+                await DownloadAndInstall(OpenJDKUrl, "OpenJDKSetup.msi", "OpenJDK JDK");
+                break;
+
+            case "3":
+                Console.Clear();
+                await ShowMenu();
+                return;
+
+            default:
+                Console.WriteLine("Invalid option. Try it again.");
+                await Task.Delay(2500);
+                Console.Clear();
+                await ShowMenu();
+                return;
+        }
     }
 }
