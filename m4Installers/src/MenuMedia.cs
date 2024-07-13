@@ -39,7 +39,7 @@ class MenuMedia
                 await DownloadAndInstall("Kodi", "kodiSetup.exe", "https://mirrors.kodi.tv/releases/windows/win64/kodi-21.0-Omega-x64.exe?https=1");
                 break;
             case "5":
-                Installers.ReturnToMainMenu();
+                await Installers.ReturnToMainMenu();
                 break;
             default:
                 Console.WriteLine("Invalid option. Try again.");
