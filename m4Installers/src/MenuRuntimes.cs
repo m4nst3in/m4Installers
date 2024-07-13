@@ -28,7 +28,7 @@ class MenuRuntimes
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://media.computerbase.de/s/GMGpZJyVj9vYs5IosY2y_w/1720764360/download/758/aio-runtimes_v2.5.0.exe", "AIOSetup.exe", "AllInOneRuntimes");
+                await DownloadAndInstall("https://www.dropbox.com/scl/fi/0ugbs3rdcxmqlo9ufgl0d/aio-runtimes_v2.5.0.exe?rlkey=sdq9n2k79eezegvd4u58v5tev&st=29r8wkzg&dl=1", "AIOSetup.exe", "AllInOneRuntimes");
                 break;
 
             case "2":
