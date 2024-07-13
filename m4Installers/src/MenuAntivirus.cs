@@ -18,7 +18,10 @@ class MenuAntivirus
         Console.WriteLine("[2] - Kaspersky");
         Console.WriteLine("[3] - MalwareBytes");
         Console.WriteLine("[4] - Bitdefender");
-        Console.WriteLine("[5] - Return to Main Menu");
+        Console.WriteLine("[5] - AVG");
+        Console.WriteLine("[6] - Avira");
+        Console.WriteLine("[7] - SUPERAntiSpyware");
+        Console.WriteLine("[8] - Return to Main Menu");
 
         string option = Console.ReadLine();
 
@@ -41,6 +44,18 @@ class MenuAntivirus
                 break;
 
             case "5":
+                await DownloadAndInstall("AVG", "https://bits.avcdn.net/productfamily_ANTIVIRUS/insttype_FREE/platform_WIN_AVG/installertype_ONLINE/build_RELEASE", "AVGSetup.exe");
+                break;
+
+            case "6":
+                await DownloadAndInstall("Avira", "https://package.avira.com/download/spotlight-windows-bootstrapper/avira_en_sptl1_316508c615bffe3f__ws-spotlight-release.exe", "AviraSetup.exe");
+                break;
+
+            case "7":
+                await DownloadAndInstall("SUPERAntiSpyware", "https://secure.superantispyware.com/SUPERAntiSpyware.exe", "SUPERAntiSpywareSetup.exe");
+                break;
+
+            case "8":
                 Installers.ReturnToMainMenu();
                 break;
 
