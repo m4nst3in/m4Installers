@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 class Installers
 {
@@ -130,60 +130,73 @@ class Installers
         Console.Clear();
         await Main(null);
     }
+
     public static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
     {
         Console.Clear();
-        string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
+        string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "m4Installers", fileName);
         Console.WriteLine($"Downloading {appName}...");
 
         using var client = new HttpClient();
         using var response = await client.GetAsync(downloadUrl);
         using var stream = await response.Content.ReadAsStreamAsync();
-        using var fs = new FileStream(saveLocation, FileMode.Create);
+        using (var fs = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None)) 
+        { 
+            byte[] buffer = new byte[8192]; 
+            int bytesRead;
+            long totalBytesRead = 0;
+            long totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-        byte[] buffer = new byte[8192];
-        int bytesRead;
-        long totalBytesRead = 0;
-        long totalBytes = response.Content.Headers.ContentLength ?? -1;
+            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+            { 
+                await fs.WriteAsync(buffer, 0, bytesRead);
+                totalBytesRead += bytesRead;
 
-        while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-        {
-            await fs.WriteAsync(buffer, 0, bytesRead);
-            totalBytesRead += bytesRead;
-
-            if (totalBytes > 0)
-            {
-                int progress = (int)((totalBytesRead * 100) / totalBytes);
-                Console.Write($"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                if (totalBytes > 0) 
+                { 
+                    int progress = (int)((totalBytesRead * 100) / totalBytes);
+                    Console.Write(
+                        $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
+                }
             }
         }
 
         Console.WriteLine($"\n{appName} was downloaded successfully!");
-        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
-        if (installerProcess != null && !installerProcess.HasExited)
+        // Ensure no instance of the installer is running
+        Process[] runningProcesses = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(fileName));
+        if (runningProcesses.Length == 0)
         {
-            Console.WriteLine("Installing...");
-            installerProcess.WaitForExit();
+            Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
 
-            if (installerProcess.ExitCode == 0)
+            if (installerProcess != null)
             {
-                Console.WriteLine("Installation was concluded with success!");
-                Console.Clear();
-                File.Delete(saveLocation); // Delete the setup file
+                Console.WriteLine("Installing...");
+                installerProcess.WaitForExit();
+
+                if (installerProcess.ExitCode == 0)
+                {
+                    Console.WriteLine("Installation was concluded with success!");
+                    Console.Clear();
+                    File.Delete(saveLocation); // Delete the setup file
+                }
+                else
+                {
+                    Console.WriteLine("Installation has failed!");
+                    Console.Clear();
+                    File.Delete(saveLocation); // Delete the setup file
+                }
+
             }
             else
             {
-                Console.WriteLine("Installation has failed!");
-                Console.Clear();
-                File.Delete(saveLocation); // Delete the setup file
+                Console.WriteLine($"Failed to start the installer for {appName}. Please try again later.");
             }
         }
         else
         {
-            Console.WriteLine($"Failed to download {appName}. Please try again later.");
-            await Task.Delay(2500);
-            Console.Clear();
+            Console.WriteLine($"An instance of {appName} is already running. Please close it and try again.");
         }
     }
 }
