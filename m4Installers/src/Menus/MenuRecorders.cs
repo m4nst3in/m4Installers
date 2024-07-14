@@ -19,7 +19,9 @@ class MenuRecorders
         Console.WriteLine("[2] - Streamlabs");
         Console.WriteLine("[3] - Fraps");
         Console.WriteLine("[4] - Bandicam");
-        Console.WriteLine("[5] - Return to Main Menu");
+        Console.WriteLine("[5] - ShareX");
+        Console.WriteLine("[6] - Monosnap");
+        Console.WriteLine("[7] - Return to Main Menu");
 
         var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
@@ -38,6 +40,12 @@ class MenuRecorders
                 await DownloadAndInstall("Bandicam", "BandicamSetup.exe", "https://dl.bandicam.com/bdcamsetup.exe");
                 break;
             case "5":
+                await DownloadAndInstall("ShareX", "ShareXSetup.exe", "https://github.com/ShareX/ShareX/releases/download/v16.1.0/ShareX-16.1.0-setup.exe");
+                break;
+            case "6":
+                await DownloadAndInstall("Monosnap", "MonosnapSetup.exe", "https://take.ms/download_monosnap_for_windows");
+                break;
+            case "7":
                 await Installers.ReturnToMainMenu();
                 break;
             default:
