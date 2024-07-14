@@ -29,7 +29,7 @@ class MenuRuntimes
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("https://www.dropbox.com/scl/fi/0ugbs3rdcxmqlo9ufgl0d/aio-runtimes_v2.5.0.exe?rlkey=sdq9n2k79eezegvd4u58v5tev&st=29r8wkzg&dl=1", "AIOSetup.exe", "AllInOneRuntimes");
+                await Installers.DownloadAndInstall("https://www.dropbox.com/scl/fi/0ugbs3rdcxmqlo9ufgl0d/aio-runtimes_v2.5.0.exe?rlkey=sdq9n2k79eezegvd4u58v5tev&st=29r8wkzg&dl=1", "AIOSetup.exe", "AllInOneRuntimes");
                 break;
 
             case "2":
@@ -41,7 +41,7 @@ class MenuRuntimes
                 break;
 
             case "4":
-                await DownloadAndInstall("https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe", "DXWebSetup.exe", "DirectX");
+                await Installers.DownloadAndInstall("https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe", "DXWebSetup.exe", "DirectX");
                 break;
 
             case "5":
@@ -61,65 +61,7 @@ class MenuRuntimes
         }
     }
 
-    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
-    {
-        Console.Clear();
-        string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
-        Console.WriteLine($"Downloading {appName}...");
-
-        using var client = new HttpClient();
-        using var response = await client.GetAsync(downloadUrl);
-        using var stream = await response.Content.ReadAsStreamAsync();
-        using var fs = new FileStream(saveLocation, FileMode.Create);
-
-        byte[] buffer = new byte[8192];
-        int bytesRead;
-        long totalBytesRead = 0;
-        long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-        while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-        {
-            await fs.WriteAsync(buffer, 0, bytesRead);
-            totalBytesRead += bytesRead;
-
-            if (totalBytes > 0)
-            {
-                int progress = (int)((totalBytesRead * 100) / totalBytes);
-                Console.Write($"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
-            }
-        }
-
-        Console.WriteLine($"\n{appName} was downloaded successfully!");
-        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
-
-        if (installerProcess != null && !installerProcess.HasExited)
-        {
-            Console.WriteLine("Installing...");
-            installerProcess.WaitForExit();
-
-            if (installerProcess.ExitCode == 0)
-            {
-                Console.WriteLine("Installation was concluded with success!");
-                Console.Clear();
-                File.Delete(saveLocation); // Delete the setup file
-            }
-            else
-            {
-                Console.WriteLine("Installation has failed!");
-                Console.Clear();
-                File.Delete(saveLocation); // Delete the setup file
-            }
-        }
-        else
-        {
-            Console.WriteLine($"Failed to download {appName}. Please try again later.");
-            await Task.Delay(2500);
-            Console.Clear();
-            await ShowMenu();
-        }
-    }
-
-private static async Task HandleDotNetFrameworkInstallation()
+    private static async Task HandleDotNetFrameworkInstallation()
     {
         Console.Clear();
         Console.WriteLine("Choose the version of .NET Framework to install:");
@@ -153,7 +95,7 @@ private static async Task HandleDotNetFrameworkInstallation()
                 await ShowMenu();
                 return;
         }
-        await DownloadAndInstall(dotnetUrl, "DotNetSetup.exe", ".NET Framework");
+        await Installers.DownloadAndInstall(dotnetUrl, "DotNetSetup.exe", ".NET Framework");
     }
 
     private static async Task HandleVisualCPlusPlusInstallation()
@@ -186,7 +128,7 @@ private static async Task HandleDotNetFrameworkInstallation()
                 await ShowMenu();
                 return;
         }
-        await DownloadAndInstall(vcUrl, "VCRSetup.exe", "Visual C++ Redistributable");
+        await Installers.DownloadAndInstall(vcUrl, "VCRSetup.exe", "Visual C++ Redistributable");
     }
 
     private static async Task HandleOpenJDKInstallation()
@@ -242,7 +184,7 @@ private static async Task HandleDotNetFrameworkInstallation()
                         await ShowMenu();
                         return;
                 }
-                await DownloadAndInstall(OpenJDKUrl, "OpenJDKSetup.msi", "OpenJDK JRE");
+                await Installers.DownloadAndInstall(OpenJDKUrl, "OpenJDKSetup.msi", "OpenJDK JRE");
                 break;
 
             case "2":
@@ -285,7 +227,7 @@ private static async Task HandleDotNetFrameworkInstallation()
                         await ShowMenu();
                         return;
                 }
-                await DownloadAndInstall(OpenJDKUrl, "OpenJDKSetup.msi", "OpenJDK JDK");
+                await Installers.DownloadAndInstall(OpenJDKUrl, "OpenJDKSetup.msi", "OpenJDK JDK");
                 break;
 
             case "3":

@@ -32,39 +32,39 @@ class MenuDownloaders
         switch (option)
         {
             case "1":
-                await DownloadAndInstall("uTorrent", "uTorrentSetup.exe", "https://download-hr.utorrent.com/track/beta/endpoint/utorrent/os/windows");
+                await Installers.DownloadAndInstall("uTorrent", "uTorrentSetup.exe", "https://download-hr.utorrent.com/track/beta/endpoint/utorrent/os/windows");
                 break;
 
             case "2":
-                await DownloadAndInstall("BitTorrent", "BitTorrentSetup.exe", "https://download-new.utorrent.com/endpoint/bittorrent/os/windows/track/stable/");
+                await Installers.DownloadAndInstall("BitTorrent", "BitTorrentSetup.exe", "https://download-new.utorrent.com/endpoint/bittorrent/os/windows/track/stable/");
                 break;
 
             case "3":
-                await DownloadAndInstall("qBittorrent", "qBittorrentSetup.exe", "https://www.dropbox.com/scl/fi/bbthely0e6m64nmmav0yj/qbittorrent_4.6.5_x64_setup.exe?rlkey=qg8wt0lll4l0ppda094todubk&st=7ee8soaw&dl=1");
+                await Installers.DownloadAndInstall("qBittorrent", "qBittorrentSetup.exe", "https://www.dropbox.com/scl/fi/bbthely0e6m64nmmav0yj/qbittorrent_4.6.5_x64_setup.exe?rlkey=qg8wt0lll4l0ppda094todubk&st=7ee8soaw&dl=1");
                 break;
 
             case "4":
-                await DownloadAndInstall("Transmission", "TransmissionSetup.msi", "https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6-x64.msi");
+                await Installers.DownloadAndInstall("Transmission", "TransmissionSetup.msi", "https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6-x64.msi");
                 break;
 
             case "5":
-                await DownloadAndInstall("Vuze", "VuzeSetup.exe", "https://cf1.vuze.com/installers/VuzeBittorrentClientInstaller.exe");
+                await Installers.DownloadAndInstall("Vuze", "VuzeSetup.exe", "https://cf1.vuze.com/installers/VuzeBittorrentClientInstaller.exe");
                 break;
 
             case "6":
-                await DownloadAndInstall("Deluge", "DelugeSetup.exe", "https://ftp.osuosl.org/pub/deluge/windows/deluge-2.1.1-win64-setup.exe");
+                await Installers.DownloadAndInstall("Deluge", "DelugeSetup.exe", "https://ftp.osuosl.org/pub/deluge/windows/deluge-2.1.1-win64-setup.exe");
                 break;
 
             case "7":
-                await DownloadAndInstall("Free Download Manager", "FDMSetup.exe", "https://files2.freedownloadmanager.org/6/latest/fdm_x64_setup.exe");
+                await Installers.DownloadAndInstall("Free Download Manager", "FDMSetup.exe", "https://files2.freedownloadmanager.org/6/latest/fdm_x64_setup.exe");
                 break;
 
             case "8":
-                await DownloadAndInstall("JDownloader", "JDownloaderSetup.exe", "https://sdl.adaware.com/?bundleid=JD003&savename=JDownloaderSetup.exe");
+                await Installers.DownloadAndInstall("JDownloader", "JDownloaderSetup.exe", "https://sdl.adaware.com/?bundleid=JD003&savename=JDownloaderSetup.exe");
                 break;
 
             case "9":
-                await DownloadAndInstall("Internet Download Manager", "IDMSetup.exe", "https://mirror2.internetdownloadmanager.com/idman642build14.exe?v=lt&filename=idman642build14.exe");
+                await Installers.DownloadAndInstall("Internet Download Manager", "IDMSetup.exe", "https://mirror2.internetdownloadmanager.com/idman642build14.exe?v=lt&filename=idman642build14.exe");
                 break;
 
             case "10":
@@ -77,64 +77,6 @@ class MenuDownloaders
                 Console.Clear();
                 await ShowMenu();
                 break;
-        }
-    }
-
-    private static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
-    {
-        Console.Clear();
-        string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
-        Console.WriteLine($"Downloading {appName}...");
-
-        using var client = new HttpClient();
-        using var response = await client.GetAsync(downloadUrl);
-        using var stream = await response.Content.ReadAsStreamAsync();
-        using var fs = new FileStream(saveLocation, FileMode.Create);
-
-        byte[] buffer = new byte[8192];
-        int bytesRead;
-        long totalBytesRead = 0;
-        long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-        while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-        {
-            await fs.WriteAsync(buffer, 0, bytesRead);
-            totalBytesRead += bytesRead;
-
-            if (totalBytes > 0)
-            {
-                int progress = (int)((totalBytesRead * 100) / totalBytes);
-                Console.Write($"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
-            }
-        }
-
-        Console.WriteLine($"\n{appName} was downloaded successfully!");
-        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
-
-        if (installerProcess != null && !installerProcess.HasExited)
-        {
-            Console.WriteLine("Installing...");
-            installerProcess.WaitForExit();
-
-            if (installerProcess.ExitCode == 0)
-            {
-                Console.WriteLine("Installation was concluded with success!");
-                Console.Clear();
-                File.Delete(saveLocation); // Delete the setup file
-            }
-            else
-            {
-                Console.WriteLine("Installation has failed!");
-                Console.Clear();
-                File.Delete(saveLocation); // Delete the setup file
-            }
-        }
-        else
-        {
-            Console.WriteLine($"Failed to download {appName}. Please try again later.");
-            await Task.Delay(2500);
-            Console.Clear();
-            await ShowMenu();
         }
     }
 }
