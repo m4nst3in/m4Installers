@@ -55,37 +55,25 @@ class MenuDocuments
         string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "m4Installers", fileName);
         Console.WriteLine($"Downloading {appName}...");
 
-        using (HttpClient client = new HttpClient())
+        using var client = new HttpClient();
+        using var response = await client.GetAsync(downloadUrl);
+        using var stream = await response.Content.ReadAsStreamAsync();
+        using var fs = new FileStream(saveLocation, FileMode.Create);
+
+        byte[] buffer = new byte[8192];
+        int bytesRead;
+        long totalBytesRead = 0;
+        long totalBytes = response.Content.Headers.ContentLength ?? -1;
+
+        while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
         {
-            using (HttpResponseMessage response = await client.GetAsync(downloadUrl))
+            await fs.WriteAsync(buffer, 0, bytesRead);
+            totalBytesRead += bytesRead;
+
+            if (totalBytes > 0)
             {
-                using (HttpContent content = response.Content)
-                {
-                    using (Stream stream = await content.ReadAsStreamAsync())
-                    {
-                        using (FileStream fileStream = new FileStream(saveLocation, FileMode.Create, FileAccess.Write,
-                                   FileShare.None))
-                        {
-                            byte[] buffer = new byte[8192];
-                            int bytesRead;
-                            long totalBytesRead = 0;
-                            long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-                            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                            {
-                                await fileStream.WriteAsync(buffer, 0, bytesRead);
-                                totalBytesRead += bytesRead;
-
-                                if (totalBytes > 0)
-                                {
-                                    int progress = (int)((totalBytesRead * 100) / totalBytes);
-                                    Console.Write(
-                                        $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
-                                }
-                            }
-                        }
-                    }
-                }
+                int progress = (int)((totalBytesRead * 100) / totalBytes);
+                Console.Write($"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
             }
         }
 
@@ -113,6 +101,9 @@ class MenuDocuments
         else
         {
             Console.WriteLine($"Failed to download {appName}. Please try again later.");
+            await Task.Delay(2500);
+            Console.Clear();
+            await ShowMenu();
         }
     }
 }
