@@ -20,7 +20,11 @@ class MenuMessaging
         Console.WriteLine("[2] - Telegram ");
         Console.WriteLine("[3] - TeamSpeak ");
         Console.WriteLine("[4] - Skype ");
-        Console.WriteLine("[5] - Return to Main Menu");
+        Console.WriteLine("[5] - Slack ");
+        Console.WriteLine("[6] - Signal ");
+        Console.WriteLine("[7] - Zoom ");
+        Console.WriteLine("[8] - Viber ");
+        Console.WriteLine("[9] - Return to Main Menu");
 
         var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
@@ -39,6 +43,18 @@ class MenuMessaging
                 await DownloadAndInstall("Skype", "SkypeSetup.exe", "https://www.dropbox.com/scl/fi/byuvi3phwpg5akdge54ze/Skype-8.123.0.203.exe?rlkey=gvybr84vzg85qprzwo2q28g37&st=bkk9jny8&dl=1");
                 break;
             case "5":
+                await DownloadAndInstall("Slack", "SlackSetup.exe", "https://slack.com/api/desktop.latestRelease?arch=x64&variant=exe&redirect=true");
+                break;
+            case "6":
+                await DownloadAndInstall("Signal", "SignalSetup.exe", "https://updates.signal.org/desktop/signal-desktop-win-7.15.0.exe");
+                break;
+            case "7":
+                await DownloadAndInstall("Zoom", "ZoomSetup.exe", "https://zoom.us/client/6.1.1.41705/ZoomInstallerFull.exe?archType=x64");
+                break;
+            case "8":
+                await DownloadAndInstall("Viber", "ViberSetup.exe", "https://download.cdn.viber.com/desktop/windows/ViberSetup.exe");
+                break;
+            case "9":
                 await Installers.ReturnToMainMenu();
                 break;
             default:
