@@ -19,7 +19,12 @@ class MenuTools
         Console.WriteLine("[2] - 7zip");
         Console.WriteLine("[3] - AIDA64");
         Console.WriteLine("[4] - CPU-Z");
-        Console.WriteLine("[5] - Return to Main Menu");
+        Console.WriteLine("[5] - GitHub Desktop");
+        Console.WriteLine("[6] - GitKraken");
+        Console.WriteLine("[7] - HWInfo");
+        Console.WriteLine("[8] - Lightshot");
+        Console.WriteLine("[9] - Docker");
+        Console.WriteLine("[10] - Return to Main Menu");
 
         var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
@@ -42,6 +47,26 @@ class MenuTools
                 break;
 
             case "5":
+                await DownloadAndInstall("GitHub Desktop", "GitHubDesktopSetup.exe", "https://central.github.com/deployments/desktop/desktop/latest/win32");
+                break;
+
+            case "6":
+                await DownloadAndInstall("GitKraken", "GitKrakenSetup.exe", "https://release.gitkraken.com/windows/GitKrakenSetup.exe");
+                break;
+
+            case "7":
+                await DownloadAndInstall("HWInfo", "HWInfoSetup.exe", "https://sinalbr.dl.sourceforge.net/project/hwinfo/Windows_Installer/hwi64_804.exe?viasf=1");
+                break;
+
+            case "8":
+                await DownloadAndInstall("Lightshot", "LightshotSetup.exe", "https://app.prntscr.com/build/setup-lightshot.exe");
+                break;
+
+            case "9":
+                await DownloadAndInstall("Docker", "DockerSetup.exe", "https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe");
+                break;
+
+            case "10":
                 await Installers.ReturnToMainMenu();
                 break;
 
