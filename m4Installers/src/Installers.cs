@@ -173,7 +173,7 @@ class Installers
             if (installerProcess != null)
             {
                 Console.WriteLine("Installing...");
-                installerProcess.WaitForExit();
+                installerProcess.WaitForExitAsync();
 
                 if (installerProcess.ExitCode == 0)
                 {
