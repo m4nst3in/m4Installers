@@ -29,7 +29,8 @@ class MenuBrowsers
         Console.WriteLine("[12] - Waterfox");
         Console.WriteLine("[13] - Tor Browser");
         Console.WriteLine("[14] - Tempest Browser");
-        Console.WriteLine("[15] - Return to Main Menu");
+        Console.WriteLine("[15] - Ungoogled Chromium");
+        Console.WriteLine("[16] - Return to Main Menu");
 
         var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
@@ -90,8 +91,12 @@ class MenuBrowsers
             case "14":
                 await Installers.DownloadAndInstall("Tempest Browser", "TempestBrowserSetup.exe", "https://downloads.tempest.com/tempestinstaller.exe");
                 break;
-
+            
             case "15":
+                await Installers.DownloadAndInstall("Ungoogled Chromium", "UnChromium.exe", "https://github.com/ungoogled-software/ungoogled-chromium-windows/releases/download/127.0.6533.72-1.1/ungoogled-chromium_127.0.6533.72-1.1_installer_x64.exe");
+                break;
+            
+            case "16":
                 await Installers.ReturnToMainMenu();
                 break;
 
