@@ -21,7 +21,7 @@ This C# simple console application is designed to simplify the process of instal
 ### Steps
 
 **Linux/Terminal**
-
+Not ready yet!
 1. **Clone the Repository:**
 
    ```bash
