@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+
 class MenuStorage
 {
     public static async Task ShowMenu()

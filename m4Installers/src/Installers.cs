@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 
-class Installers
+static class Installers
 {
-    static async Task Main(string[]? args)
+    private static async Task Main(string[]? args)
     {
         Console.Title =
             "m4Installers - Install your essential programs with ease!"; // Set the console title to "m4Installers"
@@ -202,12 +202,5 @@ public static async Task DownloadAndInstall(string appName, string fileName, str
     {
         Console.WriteLine($"An instance of {appName} is already running. Please close it and try again.");
     }
-    CleanPohAndLoh();
 }
-    public static void CleanPohAndLoh()
-    {
-        GC.Collect();
-        GC.WaitForPendingFinalizers();
-        GC.Collect();
-    }
 }

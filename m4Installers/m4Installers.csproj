@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	  <PublishSingleFile>true</PublishSingleFile>
-	  <ApplicationIcon>src\icon\icon.ico</ApplicationIcon>
+	  <ApplicationIcon>icon\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

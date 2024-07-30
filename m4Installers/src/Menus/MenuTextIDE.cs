@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using static MenuIDEs;
+
 class MenuTextIDE
 {
     public static async Task ShowMenu()
