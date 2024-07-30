@@ -7,7 +7,7 @@ class Installers
         Console.Title =
             "m4Installers - Install your essential programs with ease!"; // Set the console title to "m4Installers"
 
-        bool exit = false;
+        var exit = false;
 
         // Method to clear the console
         static void ClearConsole()
@@ -16,7 +16,7 @@ class Installers
         }
 
         // Create a directory if it doesn't exist
-        string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             "m4Installers");
         Directory.CreateDirectory(appDataPath);
 
@@ -131,72 +131,83 @@ class Installers
         await Main(null);
     }
 
-    public static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
+public static async Task DownloadAndInstall(string appName, string fileName, string downloadUrl)
+{
+    Console.Clear();
+    var saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        "m4Installers", fileName);
+    Console.WriteLine($"Downloading {appName}...");
+
+    using var client = new HttpClient();
+    using var response = await client.GetAsync(downloadUrl);
+    await using var stream = await response.Content.ReadAsStreamAsync();
+    await using (var fs = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None))
     {
-        Console.Clear();
-        string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "m4Installers", fileName);
-        Console.WriteLine($"Downloading {appName}...");
+        byte[] buffer = new byte[8192];
+        int bytesRead;
+        long totalBytesRead = 0;
+        var totalBytes = response.Content.Headers.ContentLength ?? -1;
 
-        using var client = new HttpClient();
-        using var response = await client.GetAsync(downloadUrl);
-        using var stream = await response.Content.ReadAsStreamAsync();
-        using (var fs = new FileStream(saveLocation, FileMode.Create, FileAccess.Write, FileShare.None)) 
-        { 
-            byte[] buffer = new byte[8192]; 
-            int bytesRead;
-            long totalBytesRead = 0;
-            long totalBytes = response.Content.Headers.ContentLength ?? -1;
-
-            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-            { 
-                await fs.WriteAsync(buffer, 0, bytesRead);
-                totalBytesRead += bytesRead;
-
-                if (totalBytes > 0) 
-                { 
-                    int progress = (int)((totalBytesRead * 100) / totalBytes);
-                    Console.Write(
-                        $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
-                }
-            }
-        }
-
-        Console.WriteLine($"\n{appName} was downloaded successfully!");
-
-        // Ensure no instance of the installer is running
-        Process[] runningProcesses = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(fileName));
-        if (runningProcesses.Length == 0)
+        while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
         {
-            Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+            await fs.WriteAsync(buffer, 0, bytesRead);
+            totalBytesRead += bytesRead;
 
-            if (installerProcess != null)
+            if (totalBytes <= 0)
             {
-                Console.WriteLine("Installing...");
-                installerProcess.WaitForExitAsync();
-
-                if (installerProcess.ExitCode == 0)
-                {
-                    Console.WriteLine("Installation was concluded with success!");
-                    Console.Clear();
-                    File.Delete(saveLocation); // Delete the setup file
-                }
-                else
-                {
-                    Console.WriteLine("Installation has failed!");
-                    Console.Clear();
-                    File.Delete(saveLocation); // Delete the setup file
-                }
-
+                Console.WriteLine("Error downloading the program!");
             }
             else
             {
-                Console.WriteLine($"Failed to start the installer for {appName}. Please try again later.");
+                int progress = (int)((totalBytesRead * 100) / totalBytes);
+                Console.Write(
+                    $"\rDownloading... {progress}% ({totalBytesRead / 1024} KB of {totalBytes / 1024} KB)");
             }
+        }
+    }
+
+    Console.WriteLine($"\n{appName} was downloaded successfully!");
+
+    // Ensure no instance of the installer is running
+    Process[] runningProcesses = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(fileName));
+    if (runningProcesses.Length == 0)
+    {
+        Process? installerProcess = Process.Start(new ProcessStartInfo(saveLocation) { UseShellExecute = true });
+
+        if (installerProcess != null)
+        {
+            Console.WriteLine("Installing...");
+            await installerProcess.WaitForExitAsync();
+
+            if (installerProcess.ExitCode == 0)
+            {
+                Console.WriteLine("Installation was concluded with success!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
+            }
+            else
+            {
+                Console.WriteLine("Installation has failed!");
+                Console.Clear();
+                File.Delete(saveLocation); // Delete the setup file
+            }
+
         }
         else
         {
-            Console.WriteLine($"An instance of {appName} is already running. Please close it and try again.");
+            Console.WriteLine($"Failed to start the installer for {appName}. Please try again later.");
         }
+    }
+    else
+    {
+        Console.WriteLine($"An instance of {appName} is already running. Please close it and try again.");
+    }
+    CleanPohAndLoh();
+}
+    public static void CleanPohAndLoh()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
     }
 }
