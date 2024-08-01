@@ -39,13 +39,10 @@ static class Installers
             Console.WriteLine("                              [1] - Browsers                  [9]  - Messaging");
             Console.WriteLine("                              [2] - Tools                     [10] - Media");
             Console.WriteLine("                              [3] - Game Clients              [11] - Documents");
-            Console.WriteLine(
-                "                              [4] - Runtimes                  [12] - Downloader Clients");
+            Console.WriteLine("                              [4] - Runtimes                  [12] - Downloader Clients");
             Console.WriteLine("                              [5] - Text Editors/IDE          [13] - File Storage");
-            Console.WriteLine(
-                "                              [6] - Anti-Virus                [14] - Recorders/Live Software");
-            Console.WriteLine(
-                "                              [7] - Utilities                 [15] - Photo/Video Editors");
+            Console.WriteLine("                              [6] - Anti-Virus                [14] - Recorders/Live Software");
+            Console.WriteLine("                              [7] - Utilities                 [15] - Photo/Video Editors");
             Console.WriteLine("                              [8] - Games                     [16] - Exit");
 
             var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
