@@ -20,14 +20,15 @@ class MenuMedia
         Console.WriteLine("[2] - Deezer ");
         Console.WriteLine("[3] - VLC Media Player ");
         Console.WriteLine("[4] - Kodi ");
-        Console.WriteLine("[5] - Return to Main Menu");
+        Console.WriteLine("[5] - Plex ");
+        Console.WriteLine("[6] - Return to Main Menu");
 
         var option = Console.ReadLine()?.Trim(); // Trim any leading or trailing spaces
 
         switch (option)
         {
             case "1":
-                await Installers.DownloadAndInstall("Spotify", "SpotifySetup.exe", "https://download.scdn.co/SpotifySetup.exe");
+                await Installers.DownloadAndInstall("Spotify", "spotifySetup.exe", "https://download.scdn.co/SpotifySetup.exe");
                 break;
             case "2":
                 await Installers.DownloadAndInstall("Deezer", "deezerSetup.exe", "https://www.deezer.com/desktop/download?platform=win32&architecture=x86");
@@ -39,6 +40,9 @@ class MenuMedia
                 await Installers.DownloadAndInstall("Kodi", "kodiSetup.exe", "https://mirrors.kodi.tv/releases/windows/win64/kodi-21.0-Omega-x64.exe?https=1");
                 break;
             case "5":
+                await Installers.DownloadAndInstall("Plex", "plexSetup.exe", "https://downloads.plex.tv/plex-media-server-new/1.40.4.8679-424562606/windows/PlexMediaServer-1.40.4.8679-424562606-x86_64.exe");
+                break;
+            case "6":
                 await Installers.ReturnToMainMenu();
                 break;
             default:
